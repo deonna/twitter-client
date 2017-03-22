@@ -1,6 +1,6 @@
 package com.deonna.twitterclient;
 
-import com.deonna.twitterclient.network.TwitterClient;
+import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowLog;
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -13,7 +13,7 @@ import android.content.Context;
  * including the image cache in memory and on disk. This also adds a singleton
  * for accessing the relevant rest client.
  *
- *     TwitterClient client = TwitterApplication.getRestClient();
+ *     TwitterOauthClient client = TwitterApplication.getRestClient();
  *     // use client to send requests to API
  *
  */
@@ -32,8 +32,8 @@ public class TwitterApplication extends Application {
 		TwitterApplication.context = this;
 	}
 
-	public static TwitterClient getRestClient() {
+	public static TwitterOauthClient getRestClient() {
 
-		return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, TwitterApplication.context);
+		return (TwitterOauthClient) TwitterOauthClient.getInstance(TwitterOauthClient.class, TwitterApplication.context);
 	}
 }

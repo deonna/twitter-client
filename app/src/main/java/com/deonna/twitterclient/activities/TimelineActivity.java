@@ -9,12 +9,14 @@ import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.TwitterApplication;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.network.TwitterApiClient;
 import com.deonna.twitterclient.viewmodels.TimelineViewModel;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -40,20 +42,35 @@ public class TimelineActivity extends AppCompatActivity {
         rvTimeline.setAdapter(tweetsAdapter);
         rvTimeline.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
 
-        timelineViewModel = new TimelineViewModel(TimelineActivity.this, TwitterApplication.getRestClient());
+        timelineViewModel = new TimelineViewModel(TimelineActivity.this, TwitterApiClient.getInstance());
 
-        Disposable disposable = timelineViewModel
-                .getHomeTimeline()
-                .subscribe(new Consumer<List<Tweet>>() {
-
-                    @Override
-                    public void accept(List<Tweet> tweets) throws Exception {
-
-                        tweetsAdapter.getTweets().addAll(tweets);
-                        tweetsAdapter.notifyDataSetChanged();
-                    }
-                });
-
-        subscriptions.add(disposable);
+        timelineViewModel.getTimeline();
+//        subscriptions = new CompositeDisposable();
+//
+//        Disposable disposable = timelineViewModel
+//                .getHomeTimeline()
+//                .subscribe(new Observer<List<Tweet>>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<Tweet> value) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+//
+//        subscriptions.add(disposable);
     }
 }
