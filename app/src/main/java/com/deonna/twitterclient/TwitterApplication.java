@@ -1,5 +1,6 @@
 package com.deonna.twitterclient;
 
+import com.deonna.twitterclient.network.TwitterClient;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowLog;
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -17,10 +18,12 @@ import android.content.Context;
  *
  */
 public class TwitterApplication extends Application {
+
 	private static Context context;
 
 	@Override
 	public void onCreate() {
+
 		super.onCreate();
 
 		FlowManager.init(new FlowConfig.Builder(this).build());
@@ -30,6 +33,7 @@ public class TwitterApplication extends Application {
 	}
 
 	public static TwitterClient getRestClient() {
+
 		return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, TwitterApplication.context);
 	}
 }

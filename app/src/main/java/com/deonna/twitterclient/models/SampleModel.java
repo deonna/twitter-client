@@ -1,6 +1,6 @@
 package com.deonna.twitterclient.models;
 
-import com.deonna.twitterclient.MyDatabase;
+import com.deonna.twitterclient.database.MyDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;

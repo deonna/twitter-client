@@ -1,4 +1,4 @@
-package com.deonna.twitterclient;
+package com.deonna.twitterclient.database;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 
