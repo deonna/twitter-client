@@ -96,7 +96,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             binding.tvRetweets.setTypeface(Fonts.fontRegular);
 
             binding.tvScreenName.setTypeface(Fonts.fontRegular);
-            binding.tvDate.setTypeface(Fonts.fontRegular);
+            binding.tvTimestamp.setTypeface(Fonts.fontRegular);
             binding.tvName.setTypeface(Fonts.fontBold);
             binding.tvTweet.setTypeface(Fonts.fontRegular);
         }
