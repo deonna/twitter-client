@@ -7,6 +7,12 @@ import com.deonna.twitterclient.models.Tweet;
 
 public class TweetViewModel {
 
+    private static final int IMAGE_SIZE = 96;
+
+    private static final String SCREEN_NAME_FORMAT = "@%s";
+
+    private static final String SMALL_IMAGE_TEXT = "_normal";
+
     private Context context;
     private Tweet tweet;
 
@@ -33,7 +39,7 @@ public class TweetViewModel {
 
     public String getScreenName() {
 
-        return String.format("@%s", tweet.user.screenName);
+        return String.format(SCREEN_NAME_FORMAT, tweet.user.screenName);
     }
 
     public String getTweetText() {
@@ -49,5 +55,15 @@ public class TweetViewModel {
     public String getFavoriteCount() {
 
         return tweet.favoriteCount;
+    }
+
+    public String getLargeProfileImageUrl() {
+
+        return  tweet.user.profileImageUrl.replaceAll(SMALL_IMAGE_TEXT, "");
+    }
+
+    public static int getProfileImageSize() {
+
+        return IMAGE_SIZE;
     }
 }

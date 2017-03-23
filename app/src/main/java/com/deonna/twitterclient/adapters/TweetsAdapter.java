@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -12,11 +11,12 @@ import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.ItemTweetBinding;
 import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.TweetViewModel;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -50,11 +50,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         TweetViewHolder tweetHolder = (TweetViewHolder) holder;
         ItemTweetBinding tweetBinding = tweetHolder.binding;
+        TweetViewModel tweetViewModel = new TweetViewModel(context, tweet);
 
-        tweetBinding.setTweetViewModel(new TweetViewModel(context, tweet));
+        tweetBinding.setTweetViewModel(tweetViewModel);
         tweetBinding.executePendingBindings();
 
-        loadProfileImage(tweet.user.profileImageUrl, tweetBinding.ivProfileImage);
+        loadProfileImage(
+                tweetViewModel.getLargeProfileImageUrl(),
+                tweetBinding.ivProfileImage,
+                TweetViewModel.getProfileImageSize()
+        );
     }
 
     @Override
@@ -63,10 +68,12 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return tweets.size();
     }
 
-    private void loadProfileImage(String url, ImageView ivProfileImage) {
+    private void loadProfileImage(String url, ImageView ivProfileImage, int size) {
 
-        Picasso.with(context)
+        Glide.with(context)
                 .load(url)
+                .override(size, size)
+                .bitmapTransform(new RoundedCornersTransformation(context, 10, 2))
                 .into(ivProfileImage);
     }
 
@@ -79,6 +86,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(itemView.getRoot());
 
             binding = itemView;
+            setTypefaces();
+        }
+
+        private void setTypefaces() {
+
+            binding.tvFavorites.setTypeface(Fonts.fontRegular);
+            binding.tvReplies.setTypeface(Fonts.fontRegular);
+            binding.tvRetweets.setTypeface(Fonts.fontRegular);
+
+            binding.tvScreenName.setTypeface(Fonts.fontRegular);
+            binding.tvDate.setTypeface(Fonts.fontRegular);
+            binding.tvName.setTypeface(Fonts.fontBold);
+            binding.tvTweet.setTypeface(Fonts.fontRegular);
         }
     }
 }
