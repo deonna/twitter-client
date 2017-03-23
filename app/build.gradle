@@ -38,7 +38,9 @@ android {
         it.buildConfigField 'String', 'API_SECRET', apiKeyProperties['API_SECRET']
     }
 
-    dataBinding.enabled = true
+    dataBinding {
+        enabled true
+    }
 }
 
 repositories {

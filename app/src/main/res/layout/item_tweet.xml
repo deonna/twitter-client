@@ -7,19 +7,21 @@
 
     <data>
         <variable
-            name="tweetViewModel"
-            type="com.deonna.twitterclient.viewmodels.TweetViewModel"/>
+            name="tweet"
+            type="com.deonna.twitterclient.models.Tweet"/>
     </data>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvTweet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@{tweet.text}"
+            tools:text="I am a tweet."/>
 
     </LinearLayout>
 

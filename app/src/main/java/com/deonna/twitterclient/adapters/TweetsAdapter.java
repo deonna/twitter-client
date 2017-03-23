@@ -17,12 +17,13 @@ import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Tweet> tweets = new ArrayList<>();
+    private List<Tweet> tweets;
     private Context context;
 
-    public TweetsAdapter(Context context) {
+    public TweetsAdapter(Context context, List<Tweet> tweets) {
 
         this.context = context;
+        this.tweets = tweets;
     }
 
     @Override
@@ -47,7 +48,9 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         TweetViewHolder tweetHolder = (TweetViewHolder) holder;
         ItemTweetBinding tweetBinding = tweetHolder.binding;
-        tweetHolder.binding.setTweetViewModel(new TweetViewModel(context, tweet));
+
+        TweetViewModel tweetViewModel = new TweetViewModel(context, tweet);
+        tweetHolder.binding.setTweet(tweetViewModel.getTweet());
         tweetHolder.binding.executePendingBindings();
 
 //        Tweet tweet = tweets.get(position);

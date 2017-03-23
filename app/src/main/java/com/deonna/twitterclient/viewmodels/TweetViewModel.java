@@ -14,4 +14,9 @@ public class TweetViewModel {
         this.context = context;
         this.tweet = tweet;
     }
+
+    public Tweet getTweet() {
+
+        return tweet;
+    }
 }
