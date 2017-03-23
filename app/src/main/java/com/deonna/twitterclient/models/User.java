@@ -16,4 +16,12 @@ public class User {
     @SerializedName("profile_image_url_https")
     @Expose
     public String profileImageUrl = null;
+
+    @SerializedName("verified")
+    @Expose
+    public Boolean isVerified = null;
+
+    @SerializedName("screen_name")
+    @Expose
+    public String screenName = null;
 }

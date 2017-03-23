@@ -13,4 +13,7 @@ public class Tweet {
     @Expose
     public User user = null;
 
+    @SerializedName("created_at")
+    @Expose
+    public String createdAt = null;
 }

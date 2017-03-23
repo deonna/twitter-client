@@ -11,18 +11,128 @@
             type="com.deonna.twitterclient.viewmodels.TweetViewModel"/>
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvTweet"
+        <RelativeLayout
+            android:id="@+id/rlProfileImage"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivProfileImageUrl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                tools:src="@drawable/ic_launcher"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTweet"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{tweetViewModel.getTweetText()}"
-            tools:text="I am a tweet."/>
+            android:layout_toEndOf="@+id/rlProfileImage"
+            android:layout_toRightOf="@+id/rlProfileImage">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                tools:text="James Altucher"
+                tools:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/ivIsVerfied"
+                android:layout_width="12.4444dp"
+                android:layout_height="14dp"
+                android:layout_toEndOf="@id/tvName"
+                android:layout_toRightOf="@id/tvName"
+                android:src="@drawable/ic_verified"/>
+
+            <TextView
+                android:id="@+id/tvScreenName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/ivIsVerfied"
+                android:layout_toRightOf="@+id/ivIsVerfied"
+                tools:text="\@jaltucher"/>
+
+            <TextView
+                android:id="@+id/tvTweet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvName"
+                android:text="@{tweetViewModel.getTweetText()}"
+                tools:text="I am a tweet."/>
+
+
+            <RelativeLayout
+                android:id="@+id/llOptions"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTweet">
+
+                <ImageView
+                    android:id="@+id/ivReplies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_reply"/>
+
+                <TextView
+                    android:id="@+id/tvReplies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/ivReplies"
+                    android:layout_toRightOf="@+id/ivReplies"
+                    android:layout_centerVertical="true"
+                    tools:text="4,999"/>
+
+                <ImageView
+                    android:id="@+id/ivRetweets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/tvReplies"
+                    android:layout_toRightOf="@+id/tvReplies"
+                    android:src="@drawable/ic_retweet"/>
+
+                <TextView
+                    android:id="@+id/tvRetweets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/ivRetweets"
+                    android:layout_toRightOf="@+id/ivRetweets"
+                    android:layout_centerVertical="true"
+                    tools:text="4,999"/>
+
+                <ImageView
+                    android:id="@+id/ivFavorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/tvRetweets"
+                    android:layout_toRightOf="@id/tvRetweets"
+                    android:src="@drawable/ic_favorite"/>
+
+                <TextView
+                    android:id="@+id/tvFavorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/ivFavorites"
+                    android:layout_toRightOf="@+id/ivFavorites"
+                    android:layout_centerVertical="true"
+                    tools:text="4,999"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </layout>

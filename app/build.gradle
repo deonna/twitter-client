@@ -85,6 +85,10 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.0.0-RC1'
     compile 'oauth.signpost:signpost-core:1.2.1.2'
 
+    compile('com.twitter.sdk.android:tweet-composer:2.3.1@aar') {
+        transitive = true;
+    }
+
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
