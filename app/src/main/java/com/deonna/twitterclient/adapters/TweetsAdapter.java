@@ -6,11 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.ItemTweetBinding;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.viewmodels.TweetViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,12 +53,21 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         tweetBinding.setTweetViewModel(new TweetViewModel(context, tweet));
         tweetBinding.executePendingBindings();
+
+        loadProfileImage(tweet.user.profileImageUrl, tweetBinding.ivProfileImage);
     }
 
     @Override
     public int getItemCount() {
 
         return tweets.size();
+    }
+
+    private void loadProfileImage(String url, ImageView ivProfileImage) {
+
+        Picasso.with(context)
+                .load(url)
+                .into(ivProfileImage);
     }
 
     public static class TweetViewHolder extends RecyclerView.ViewHolder {
