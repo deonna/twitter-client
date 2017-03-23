@@ -44,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textSize="14sp"
                 tools:text="James Altucher"
                 tools:textStyle="bold"/>
 
@@ -61,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/ivIsVerfied"
                 android:layout_toRightOf="@+id/ivIsVerfied"
+                android:textSize="12sp"
                 tools:text="\@jaltucher"/>
 
             <TextView
@@ -81,8 +83,8 @@
 
                 <ImageView
                     android:id="@+id/ivReplies"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="13.777dp"
+                    android:layout_height="16dp"
                     android:src="@drawable/ic_reply"/>
 
                 <TextView
@@ -92,12 +94,13 @@
                     android:layout_toEndOf="@+id/ivReplies"
                     android:layout_toRightOf="@+id/ivReplies"
                     android:layout_centerVertical="true"
+                    android:textSize="10sp"
                     tools:text="4,999"/>
 
                 <ImageView
                     android:id="@+id/ivRetweets"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="16.444dp"
+                    android:layout_height="16dp"
                     android:layout_toEndOf="@+id/tvReplies"
                     android:layout_toRightOf="@+id/tvReplies"
                     android:src="@drawable/ic_retweet"/>
@@ -109,12 +112,13 @@
                     android:layout_toEndOf="@+id/ivRetweets"
                     android:layout_toRightOf="@+id/ivRetweets"
                     android:layout_centerVertical="true"
+                    android:textSize="10sp"
                     tools:text="4,999"/>
 
                 <ImageView
                     android:id="@+id/ivFavorites"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="12dp"
+                    android:layout_height="16dp"
                     android:layout_toEndOf="@id/tvRetweets"
                     android:layout_toRightOf="@id/tvRetweets"
                     android:src="@drawable/ic_favorite"/>
@@ -126,6 +130,7 @@
                     android:layout_toEndOf="@+id/ivFavorites"
                     android:layout_toRightOf="@+id/ivFavorites"
                     android:layout_centerVertical="true"
+                    android:textSize="10sp"
                     tools:text="4,999"/>
 
             </RelativeLayout>
