@@ -41,33 +41,6 @@ public class TimelineActivity extends AppCompatActivity {
 
         timelineViewModel = new TimelineViewModel(TimelineActivity.this);
 
-//        timelineViewModel.getHomeTimeline();
-        subscriptions = new CompositeDisposable();
-
-        Disposable disposable = timelineViewModel
-                .getHomeTimeline()
-                .subscribe(new Observer<List<Tweet>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<Tweet> value) {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-        subscriptions.add(disposable);
+        timelineViewModel.getHomeTimeline();
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
+import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,7 +38,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}
 
-	public Observable<List<Tweet>> getHomeTimeline() {
+	public void getHomeTimeline(TweetsCallback callback) {
 		String apiUrl = getApiUrl("statuses/home_timeline.json");
 
 		RequestParams params = new RequestParams();
@@ -55,7 +56,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
                         new TypeToken<ArrayList<Tweet>>() {
                         }.getType());
 
-                //callback.onTweetsReceived(tweets);
+                callback.onTweetsReceived(tweets);
             }
 
             @Override

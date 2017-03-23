@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.deonna.twitterclient.TwitterApplication;
+import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.SchedulerProvider;
 
@@ -24,30 +25,20 @@ public class TimelineViewModel {
         this.context = context;
     }
 
-    public Observable<List<Tweet>> getHomeTimeline() {
+    public void getHomeTimeline() {
 
-        return TwitterApplication.getRestClient()
-                .getHomeTimeline()
-                .subscribeOn(SchedulerProvider.io())
-                .observeOn(SchedulerProvider.ui())
-                .doOnNext(tweets -> Log.d(TAG, "Success! " + tweets.toString()))
-                .doOnError(error -> Log.e(TAG, "Error! " + error.toString()));
+        TwitterApplication.getRestClient().getHomeTimeline(new TweetsCallback() {
+
+            @Override
+            public void onTweetsReceived(List<Tweet> tweets) {
+                Log.d(TAG, tweets.toString());
+
+            }
+
+            @Override
+            public void onTweetsError() {
+
+            }
+        });
     }
-
-//    public void getHomeTimeline() {
-//
-//        TwitterApplication.getRestClient().getHomeTimeline(new TweetsCallback() {
-//
-//            @Override
-//            public void onTweetsReceived(List<Tweet> tweets) {
-//                Log.d(TAG, tweets.toString());
-//
-//            }
-//
-//            @Override
-//            public void onTweetsError() {
-//
-//            }
-//        });
-//    }
 }
