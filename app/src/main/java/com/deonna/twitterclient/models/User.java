@@ -12,4 +12,8 @@ public class User {
     @SerializedName("location")
     @Expose
     public String location = null;
+
+    @SerializedName("profile_image_url_https")
+    @Expose
+    public String profileImageUrl = null;
 }

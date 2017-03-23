@@ -12,4 +12,5 @@ public class Tweet {
     @SerializedName("user")
     @Expose
     public User user = null;
+
 }
