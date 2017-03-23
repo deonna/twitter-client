@@ -1,20 +1,15 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
-import android.databinding.ObservableArrayList;
 import android.util.Log;
 
-import com.deonna.twitterclient.TwitterApplication;
-import com.deonna.twitterclient.activities.TimelineActivity;
+import com.deonna.twitterclient.utilities.TwitterApplication;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.models.Tweet;
-import com.deonna.twitterclient.network.SchedulerProvider;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Observable;
 
 
 public class TimelineViewModel implements ViewModel {

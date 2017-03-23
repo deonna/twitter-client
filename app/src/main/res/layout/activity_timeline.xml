@@ -55,7 +55,7 @@
             app:fabSize="mini"
             app:backgroundTint="@color/twitterBlue"
             app:layout_anchor="@+id/tbMain"
-            app:layout_anchorGravity="bottom|right|end" />
+            app:layout_anchorGravity="bottom|right|end"/>
 
     </android.support.design.widget.CoordinatorLayout>
     

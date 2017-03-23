@@ -1,4 +1,4 @@
-package com.deonna.twitterclient;
+package com.deonna.twitterclient.utilities;
 
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.raizlabs.android.dbflow.config.FlowConfig;
