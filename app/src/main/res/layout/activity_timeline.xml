@@ -14,34 +14,49 @@
 
     </data>
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.deonna.twitterclient.activities.TimelineActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tbMain"
-            android:minHeight="?attr/actionBarSize"
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tbMain"
+                android:minHeight="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:titleTextColor="@android:color/white"
+                android:background="?attr/colorPrimary">
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_logo"/>
+
+            </android.support.v7.widget.Toolbar>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvTimeline"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tbMain"/>
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:titleTextColor="@android:color/white"
-            android:background="?attr/colorPrimary">
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_compose"
+            app:fabSize="mini"
+            app:backgroundTint="@color/twitterBlue"
+            app:layout_anchor="@+id/tbMain"
+            app:layout_anchorGravity="bottom|right|end" />
 
-            <ImageView
-                android:id="@+id/ivLogo"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_logo"/>
-
-        </android.support.v7.widget.Toolbar>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvTimeline"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/tbMain"/>
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
     
 </layout>
