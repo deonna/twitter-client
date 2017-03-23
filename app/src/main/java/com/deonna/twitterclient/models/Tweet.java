@@ -13,6 +13,14 @@ public class Tweet {
     @Expose
     public User user = null;
 
+    @SerializedName("retweet_count")
+    @Expose
+    public String retweetCount = null;
+
+    @SerializedName("favorite_count")
+    @Expose
+    public String favoriteCount = null;
+
     @SerializedName("created_at")
     @Expose
     public String createdAt = null;
