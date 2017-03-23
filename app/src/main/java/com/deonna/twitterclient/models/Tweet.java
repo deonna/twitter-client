@@ -1,11 +1,15 @@
 package com.deonna.twitterclient.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Tweet {
 
-    public String text = "hello";
+    @SerializedName("text")
+    @Expose
+    public String text = null;
 
-
-    public Tweet() {
-
-    }
+    @SerializedName("user")
+    @Expose
+    public User user = null;
 }
