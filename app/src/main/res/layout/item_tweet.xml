@@ -43,6 +43,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{tweetViewModel.getName()}"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 tools:text="James Altucher"
@@ -50,10 +51,14 @@
 
             <ImageView
                 android:id="@+id/ivIsVerfied"
-                android:layout_width="12.4444dp"
-                android:layout_height="14dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:layout_toEndOf="@id/tvName"
                 android:layout_toRightOf="@id/tvName"
+                android:visibility="@{tweetViewModel.getIsVerifiedVisibility()}"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_verified"/>
 
             <TextView
@@ -62,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/ivIsVerfied"
                 android:layout_toRightOf="@+id/ivIsVerfied"
+                android:text="@{tweetViewModel.getScreenName()}"
                 android:textSize="12sp"
                 tools:text="\@jaltucher"/>
 
@@ -83,8 +89,11 @@
 
                 <ImageView
                     android:id="@+id/ivReplies"
-                    android:layout_width="13.777dp"
+                    android:layout_width="16dp"
                     android:layout_height="16dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginRight="2dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_reply"/>
 
                 <TextView
@@ -94,15 +103,20 @@
                     android:layout_toEndOf="@+id/ivReplies"
                     android:layout_toRightOf="@+id/ivReplies"
                     android:layout_centerVertical="true"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
                     android:textSize="10sp"
                     tools:text="4,999"/>
 
                 <ImageView
                     android:id="@+id/ivRetweets"
-                    android:layout_width="16.444dp"
+                    android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_toEndOf="@+id/tvReplies"
                     android:layout_toRightOf="@+id/tvReplies"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginRight="2dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_retweet"/>
 
                 <TextView
@@ -112,15 +126,21 @@
                     android:layout_toEndOf="@+id/ivRetweets"
                     android:layout_toRightOf="@+id/ivRetweets"
                     android:layout_centerVertical="true"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
+                    android:text="@{tweetViewModel.getRetweetCount()}"
                     android:textSize="10sp"
                     tools:text="4,999"/>
 
                 <ImageView
                     android:id="@+id/ivFavorites"
-                    android:layout_width="12dp"
+                    android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_toEndOf="@id/tvRetweets"
                     android:layout_toRightOf="@id/tvRetweets"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginRight="2dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_favorite"/>
 
                 <TextView
@@ -130,6 +150,7 @@
                     android:layout_toEndOf="@+id/ivFavorites"
                     android:layout_toRightOf="@+id/ivFavorites"
                     android:layout_centerVertical="true"
+                    android:text="@{tweetViewModel.getFavoriteCount()}"
                     android:textSize="10sp"
                     tools:text="4,999"/>
 
