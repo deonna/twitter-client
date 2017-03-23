@@ -15,8 +15,8 @@ public class TweetViewModel {
         this.tweet = tweet;
     }
 
-    public Tweet getTweet() {
+    public String getTweetText() {
 
-        return tweet;
+        return tweet.text;
     }
 }

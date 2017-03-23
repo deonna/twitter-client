@@ -43,32 +43,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-
         Tweet tweet = tweets.get(position);
 
         TweetViewHolder tweetHolder = (TweetViewHolder) holder;
         ItemTweetBinding tweetBinding = tweetHolder.binding;
 
-        TweetViewModel tweetViewModel = new TweetViewModel(context, tweet);
-        tweetHolder.binding.setTweet(tweetViewModel.getTweet());
-        tweetHolder.binding.executePendingBindings();
-
-//        Tweet tweet = tweets.get(position);
-//
-//        TweetViewHolder tweetHolder = (TweetViewHolder) holder;
-//        tweetHolder.binding.setTweet(tweet);
-//        tweetHolder.binding.executePendingBindings();
+        tweetBinding.setTweetViewModel(new TweetViewModel(context, tweet));
+        tweetBinding.executePendingBindings();
     }
 
     @Override
     public int getItemCount() {
 
         return tweets.size();
-    }
-
-    public List<Tweet> getTweets() {
-
-        return tweets;
     }
 
     public static class TweetViewHolder extends RecyclerView.ViewHolder {

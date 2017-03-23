@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="tweet"
-            type="com.deonna.twitterclient.models.Tweet"/>
+            name="tweetViewModel"
+            type="com.deonna.twitterclient.viewmodels.TweetViewModel"/>
     </data>
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:id="@+id/tvTweet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{tweet.text}"
+            android:text="@{tweetViewModel.getTweetText()}"
             tools:text="I am a tweet."/>
 
     </LinearLayout>
