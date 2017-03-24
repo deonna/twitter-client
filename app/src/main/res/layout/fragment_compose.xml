@@ -68,11 +68,17 @@
             app:titleTextColor="@android:color/white"
             android:background="?attr/colorPrimary">
 
+            <RelativeLayout
+                android:id="@+id/rlComposeFooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/btSendTweet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
                 android:minHeight="0dp"
                 android:minWidth="0dp"
@@ -84,8 +90,21 @@
                 android:textColor="@android:color/white"
                 android:textAllCaps="false"
                 android:textSize="10sp"
-                android:text="Tweet"
-                />
+                android:text="Tweet" />
+
+            <TextView
+                android:id="@+id/tvCharacterCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/btSendTweet"
+                android:layout_toStartOf="@+id/btSendTweet"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:textSize="10sp"
+                android:text="140"
+                tools:text="140"/>
+
+            </RelativeLayout>
 
         </android.support.v7.widget.Toolbar>
 
