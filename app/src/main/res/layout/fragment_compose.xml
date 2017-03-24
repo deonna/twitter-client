@@ -1,69 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tbCompose"
-        android:minHeight="?attr/actionBarSize"
+    <data>
+        <variable
+            name="composeViewModel"
+            type="com.deonna.twitterclient.viewmodels.ComposeViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        app:titleTextColor="@android:color/white"
-        >
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
-        <ImageView
-            android:id="@+id/ivUserProfileUrl"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_logo"/>
-
-    </android.support.v7.widget.Toolbar>
-
-    <EditText
-        android:id="@+id/etNewTweet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tbCompose"
-        android:layout_marginLeft="8dp"
-        android:hint="What's happening?"
-        android:background="@android:color/transparent"
-        android:textCursorDrawable="@drawable/color_cursor"
-        android:minLines="4"/>
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tbComposeOptions"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tbComposeOptions"
-        android:layout_alignParentBottom="true"
-        app:titleTextColor="@android:color/white"
-        android:background="?attr/colorPrimary">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tbCompose"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="6dp"
-            android:paddingTop="6dp"
-            android:paddingBottom="6dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:background="@drawable/rounded_corner_button"
-            android:textColor="@android:color/white"
-            android:textSize="10sp"
-            android:text="Tweet" />
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="@android:color/white"
+            >
 
-    </android.support.v7.widget.Toolbar>
+            <ImageView
+                android:id="@+id/ivUserProfileUrl"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_logo"/>
 
-</RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <EditText
+            android:id="@+id/etNewTweet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tbCompose"
+            android:layout_marginLeft="8dp"
+            android:hint="What's happening?"
+            android:background="@android:color/transparent"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:minLines="4"/>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tbComposeOptions"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tbComposeOptions"
+            android:layout_alignParentBottom="true"
+            app:titleTextColor="@android:color/white"
+            android:background="?attr/colorPrimary">
+
+            <TextView
+                android:id="@+id/tvSendTweet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="6dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/rounded_corner_button"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:text="Tweet" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </RelativeLayout>
+</layout>

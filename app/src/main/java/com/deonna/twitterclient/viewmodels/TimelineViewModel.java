@@ -3,6 +3,9 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.util.Log;
 
+import com.deonna.twitterclient.callbacks.UserInfoCallback;
+import com.deonna.twitterclient.models.User;
+import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.TweetsCallback;
@@ -22,18 +25,25 @@ public class TimelineViewModel implements ViewModel {
     private final List<Tweet> tweets;
     private final TweetsAdapter tweetsAdapter;
 
+    private final TwitterOauthClient client;
+
+    private User currentUser;
+
     public TimelineViewModel(Context context) {
 
         this.context = context;
 
         tweets = new ArrayList<>();
         tweetsAdapter = new TweetsAdapter(context, tweets);
+
+        client = TwitterApplication.getRestClient();
     }
 
     @Override
     public void onCreate() {
 
         getHomeTimeline();
+        getLoggedInUserInfo();
     }
 
     @Override
@@ -58,7 +68,7 @@ public class TimelineViewModel implements ViewModel {
 
     public void getHomeTimeline() {
 
-        TwitterApplication.getRestClient().getHomeTimeline(new TweetsCallback() {
+        client.getHomeTimeline(new TweetsCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -69,6 +79,23 @@ public class TimelineViewModel implements ViewModel {
 
             @Override
             public void onTweetsError() {
+
+            }
+        });
+    }
+
+    private void getLoggedInUserInfo() {
+
+        client.getLoggedInUserInfo(new UserInfoCallback() {
+            @Override
+            public void onUserInfoReceived(User user) {
+
+                Log.d(TAG, user.toString());
+                currentUser = user;
+            }
+
+            @Override
+            public void onUserInfoError() {
 
             }
         });
