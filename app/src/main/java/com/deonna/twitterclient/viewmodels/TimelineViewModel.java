@@ -16,6 +16,8 @@ import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -32,6 +34,7 @@ public class TimelineViewModel implements ViewModel {
     private final TwitterOauthClient client;
 
     private User currentUser;
+    private Long maxId;
 
     public TimelineViewModel(Context context) {
 
@@ -70,7 +73,9 @@ public class TimelineViewModel implements ViewModel {
         return new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                //TODO: Load and properly paginate new artles
+                //TODO: Load and properly paginate new articles
+
+                getNextOldestTweets();
             }
         };
     }
@@ -89,6 +94,8 @@ public class TimelineViewModel implements ViewModel {
                 Log.d(TAG, newTweets.toString());
                 tweets.addAll(newTweets);
                 tweetsAdapter.notifyDataSetChanged();
+
+                maxId = getMaxId(newTweets);
             }
 
             @Override
@@ -102,6 +109,25 @@ public class TimelineViewModel implements ViewModel {
     public User getCurrentUser() {
 
         return currentUser;
+    }
+
+    private void getNextOldestTweets() {
+
+        client.getNextOldestTweets(maxId, new TweetsCallback() {
+
+            @Override
+            public void onTweetsReceived(List<Tweet> tweets) {
+
+                //TODO: Get and set max id based on tweets returned
+                //TODO: Add new tweets
+                //TODO: Notify adapter
+            }
+
+            @Override
+            public void onTweetsError() {
+
+            }
+        });
     }
 
     private void getLoggedInUserInfo() {
@@ -119,5 +145,28 @@ public class TimelineViewModel implements ViewModel {
 
             }
         });
+    }
+
+    private Long getMaxId(List<Tweet> tweets) {
+
+        Comparator idAscendingOrder = new Comparator<Tweet>() {
+
+            @Override
+            public int compare(Tweet tweet1, Tweet tweet2) {
+
+                Long idDifference = tweet1.id - tweet2.id;
+                if (idDifference > 1) {
+                    return 1;
+                } else if (idDifference < 1) {
+                    return -1;
+                }
+
+                return 0;
+            }
+        };
+
+        Tweet tweetWithMaxId = Collections.max(tweets, idAscendingOrder);
+
+        return tweetWithMaxId.id;
     }
 }

@@ -37,6 +37,8 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String KEY_MAX_ID = "max_id";
     private static final String KEY_SINCE_ID = "since_id";
 
+    private static final int NUM_TWEETS_PER_FETCH = 25;
+
     private static Gson gson;
 
 	public TwitterOauthClient(Context context) {
@@ -47,13 +49,22 @@ public class TwitterOauthClient extends OAuthBaseClient {
 	public void getHomeTimeline(final TweetsCallback callback) {
 
 		RequestParams params = new RequestParams();
-		params.put(KEY_COUNT, 25);
+		params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
 		params.put(KEY_SINCE_ID, 1);
 
-        fetchTimeline(params, callback, null);
+        fetchTimeline(params, null, callback);
 	}
 
-	private void fetchTimeline(RequestParams params, final TweetsCallback callback, Long maxId) {
+	public void getNextOldestTweets(Long maxId, final TweetsCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
+        params.put(KEY_SINCE_ID, 1);
+
+        fetchTimeline(params, maxId, callback);
+    }
+
+	private void fetchTimeline(RequestParams params, Long maxId, final TweetsCallback callback) {
 
         String apiUrl = getApiUrl("statuses/home_timeline.json");
 
