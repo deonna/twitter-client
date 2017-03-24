@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 
+import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
@@ -36,14 +37,19 @@ public class TimelineViewModel implements ViewModel {
     private User currentUser;
     private Long maxId;
 
+    private TweetsRefreshListener refreshListener;
+
     public TimelineViewModel(Context context) {
 
         this.context = context;
+
+        refreshListener = (TweetsRefreshListener) context;
 
         tweets = new ArrayList<>();
         tweetsAdapter = new TweetsAdapter(context, tweets);
 
         client = TwitterApplication.getRestClient();
+
     }
 
     @Override
@@ -173,16 +179,16 @@ public class TimelineViewModel implements ViewModel {
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
 
-                //TODO: put in beginning of tweets list
                 tweets.addAll(0, newTweets);
-                //TODO: item range refresh
-
                 tweetsAdapter.notifyItemRangeChanged(0, newTweets.size());
+
+                refreshListener.finishRefreshing();
             }
 
             @Override
             public void onTweetsError() {
 
+                refreshListener.finishRefreshing();
             }
         });
     }

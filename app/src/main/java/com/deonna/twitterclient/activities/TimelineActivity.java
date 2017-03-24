@@ -38,6 +38,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
 
         setupTimelineView();
         setupToolbar();
+        setupSwipeToRefresh();
 
         timelineViewModel.onCreate();
 
@@ -67,6 +68,14 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
+    private void setupSwipeToRefresh() {
+
+        binding.srlTimeline.setOnRefreshListener(() -> {
+
+            timelineViewModel.getNewestTweets();
+        });
+    }
+
     @OnClick(R.id.fabCompose)
     public void openNewTweetDialog() {
 
@@ -85,5 +94,11 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
     public void getNewestTweets() {
 
         timelineViewModel.getNewestTweets();
+    }
+
+    @Override
+    public void finishRefreshing() {
+
+        binding.srlTimeline.setRefreshing(false);
     }
 }

@@ -7,4 +7,5 @@ package com.deonna.twitterclient.callbacks;
 public interface TweetsRefreshListener {
 
     void getNewestTweets();
+    void finishRefreshing();
 }
