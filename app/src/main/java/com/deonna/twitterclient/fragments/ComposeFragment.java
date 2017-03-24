@@ -10,26 +10,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.FragmentComposeBinding;
+import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.ComposeViewModel;
+
+import org.parceler.Parcels;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 public class ComposeFragment extends DialogFragment {
 
     public static final String LAYOUT_NAME = "fragment_compose";
+    private static final String KEY_CURRENT_USER = "current_user";
 
     private FragmentComposeBinding binding;
 
-    public static ComposeFragment newInstance() {
+    public static ComposeFragment newInstance(User currentUser) {
 
         ComposeFragment composeFragment = new ComposeFragment();
 
-//        Bundle args = new Bundle();
+        Bundle args = new Bundle();
+        args.putParcelable(KEY_CURRENT_USER, Parcels.wrap(currentUser));
 
-//        composeFragment.setArguments(args);
+        composeFragment.setArguments(args);
 
         return composeFragment;
     }
@@ -40,16 +49,22 @@ public class ComposeFragment extends DialogFragment {
 
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        ComposeViewModel composeViewModel = new ComposeViewModel();
+        User currentUser = (User) Parcels.unwrap(getArguments().getParcelable(KEY_CURRENT_USER));
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_compose, container, false);
 
         View fragmentView = binding.getRoot();
 
+        ComposeViewModel composeViewModel = new ComposeViewModel(currentUser);
         binding.setComposeViewModel(composeViewModel);
         binding.executePendingBindings();
 
         setupFonts();
+        setProfilePicture(
+                currentUser.getLargeProfileImageUrl(),
+                binding.ivUserProfile,
+                ComposeViewModel.getImageSize()
+        );
 
         return fragmentView;
     }
@@ -61,6 +76,15 @@ public class ComposeFragment extends DialogFragment {
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, height);
 
         super.onResume();
+    }
+
+    private void setProfilePicture(String url, ImageView ivProfileImage, int size) {
+
+        Glide.with(getActivity())
+                .load(url)
+                .override(size, size)
+                .bitmapTransform(new RoundedCornersTransformation(getActivity(), 10, 2))
+                .into(ivProfileImage);
     }
 
     private void setupFonts() {

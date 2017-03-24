@@ -56,7 +56,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         tweetBinding.executePendingBindings();
 
         loadProfileImage(
-                tweetViewModel.getLargeProfileImageUrl(),
+                tweet.user.getLargeProfileImageUrl(),
                 tweetBinding.ivProfileImage,
                 TweetViewModel.getProfileImageSize()
         );

@@ -18,8 +18,6 @@ public class TweetViewModel {
 
     private static final String DATE_PATTERN = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
-    private static final String SMALL_IMAGE_TEXT = "_normal";
-
     private Context context;
     private Tweet tweet;
 
@@ -80,11 +78,6 @@ public class TweetViewModel {
     public String getFavoriteCount() {
 
         return tweet.favoriteCount;
-    }
-
-    public String getLargeProfileImageUrl() {
-
-        return  tweet.user.profileImageUrl.replaceAll(SMALL_IMAGE_TEXT, "");
     }
 
     public static int getProfileImageSize() {

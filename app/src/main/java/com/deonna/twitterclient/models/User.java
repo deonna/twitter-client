@@ -3,7 +3,12 @@ package com.deonna.twitterclient.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class User {
+
+    private static final String SMALL_IMAGE_TEXT = "_normal";
 
     @SerializedName("name")
     @Expose
@@ -24,4 +29,9 @@ public class User {
     @SerializedName("screen_name")
     @Expose
     public String screenName = null;
+
+    public String getLargeProfileImageUrl() {
+
+        return  profileImageUrl.replaceAll(SMALL_IMAGE_TEXT, "");
+    }
 }

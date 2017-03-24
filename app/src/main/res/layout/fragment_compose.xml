@@ -23,17 +23,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:paddingRight="8dp"
             android:background="?attr/colorPrimary"
-            app:titleTextColor="@android:color/white"
-            >
+            app:titleTextColor="@android:color/white">
 
             <ImageView
-                android:id="@+id/ivUserProfileUrl"
+                android:id="@+id/ivUserProfile"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_logo"/>
+                tools:src="@drawable/ic_logo"/>
+
+            <ImageView
+                android:id="@+id/ivCloseDialog"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_close_dialog"/>
+
 
         </android.support.v7.widget.Toolbar>
 
@@ -42,11 +51,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tbCompose"
-            android:layout_marginLeft="8dp"
-            android:hint="What's happening?"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="10dp"
             android:background="@android:color/transparent"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:minLines="4"/>
+            android:hint="What's happening?"
+            android:minLines="4"
+            android:textCursorDrawable="@drawable/color_cursor" />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tbComposeOptions"
@@ -63,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="8dp"
                 android:paddingTop="6dp"
                 android:paddingBottom="6dp"
                 android:paddingLeft="10dp"

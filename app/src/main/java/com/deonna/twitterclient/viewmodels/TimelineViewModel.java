@@ -84,6 +84,12 @@ public class TimelineViewModel implements ViewModel {
         });
     }
 
+
+    public User getCurrentUser() {
+
+        return currentUser;
+    }
+
     private void getLoggedInUserInfo() {
 
         client.getLoggedInUserInfo(new UserInfoCallback() {

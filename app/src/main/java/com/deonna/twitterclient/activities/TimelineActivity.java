@@ -62,9 +62,7 @@ public class TimelineActivity extends AppCompatActivity {
     public void openNewTweetDialog() {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        ComposeFragment composeFragment = ComposeFragment.newInstance();
+        ComposeFragment composeFragment = ComposeFragment.newInstance(timelineViewModel.getCurrentUser());
         composeFragment.show(fragmentManager, ComposeFragment.LAYOUT_NAME);
-
-        Toast.makeText(this, "Opening new tweet dialog!", Toast.LENGTH_SHORT).show();
     }
 }
