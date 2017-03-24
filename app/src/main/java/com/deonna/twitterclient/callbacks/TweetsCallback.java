@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface TweetsCallback {
 
-    void onTweetsReceived(List<Tweet> tweets);
+    void onTweetsReceived(List<Tweet> newTweets);
     void onTweetsError();
 }

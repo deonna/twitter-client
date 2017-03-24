@@ -157,4 +157,33 @@ public class TimelineViewModel implements ViewModel {
 
         return null;
     }
+
+    public void getNewestTweets() {
+
+        Long sinceId = null;
+
+        if (!tweets.isEmpty()) {
+            sinceId = tweets.get(0).id - 1;
+        } else {
+            sinceId = 1L;
+        }
+
+        client.getNewestTweets(sinceId, new TweetsCallback() {
+
+            @Override
+            public void onTweetsReceived(List<Tweet> newTweets) {
+
+                //TODO: put in beginning of tweets list
+                tweets.addAll(0, newTweets);
+                //TODO: item range refresh
+
+                tweetsAdapter.notifyItemRangeChanged(0, newTweets.size());
+            }
+
+            @Override
+            public void onTweetsError() {
+
+            }
+        });
+    }
 }

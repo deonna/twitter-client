@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.deonna.twitterclient.callbacks.TweetSentCallback;
+import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;
@@ -19,9 +20,13 @@ public class ComposeViewModel {
     private Context context;
     private User currentUser;
 
+    private TweetsRefreshListener refreshListener;
+
     public ComposeViewModel(Context context, User user) {
 
         currentUser = user;
+        refreshListener = (TweetsRefreshListener) context;
+
         this.context = context;
     }
 
@@ -43,6 +48,7 @@ public class ComposeViewModel {
             public void onTweetSent(String newTweet) {
 
                 //TODO: Need to refresh timeline
+                refreshListener.getNewestTweets();
             }
 
             @Override

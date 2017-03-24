@@ -64,6 +64,15 @@ public class TwitterOauthClient extends OAuthBaseClient {
         fetchTimeline(params, maxId, callback);
     }
 
+    public void getNewestTweets(Long sinceId, TweetsCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
+        params.put(KEY_SINCE_ID, sinceId);
+
+        fetchTimeline(params, null, callback);
+    }
+
 	private void fetchTimeline(RequestParams params, Long maxId, final TweetsCallback callback) {
 
         String apiUrl = getApiUrl("statuses/home_timeline.json");
@@ -147,6 +156,5 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 callback.onTweetSentFailed();
             }
         });
-
     }
 }
