@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Tweet {
 
+    @SerializedName("id")
+    @Expose
+    public Long id;
+
     @SerializedName("text")
     @Expose
     public String text = null;

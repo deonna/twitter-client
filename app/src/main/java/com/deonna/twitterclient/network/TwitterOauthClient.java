@@ -33,6 +33,10 @@ public class TwitterOauthClient extends OAuthBaseClient {
 	public static final String REST_CONSUMER_SECRET = BuildConfig.API_SECRET; // Change this
 	public static final String REST_CALLBACK_URL = "oauth://deonnatwitterclient"; // Change this (here and in manifest)
 
+    private static final String KEY_COUNT = "count";
+    private static final String KEY_MAX_ID = "max_id";
+    private static final String KEY_SINCE_ID = "since_id";
+
     private static Gson gson;
 
 	public TwitterOauthClient(Context context) {
@@ -40,15 +44,24 @@ public class TwitterOauthClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
 
-	public void getHomeTimeline(TweetsCallback callback) {
-
-		String apiUrl = getApiUrl("statuses/home_timeline.json");
+	public void getHomeTimeline(final TweetsCallback callback) {
 
 		RequestParams params = new RequestParams();
-		params.put("count", 25);
-		params.put("since_id", 1);
+		params.put(KEY_COUNT, 25);
+		params.put(KEY_SINCE_ID, 1);
 
-		getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+        fetchTimeline(params, callback, null);
+	}
+
+	private void fetchTimeline(RequestParams params, final TweetsCallback callback, Long maxId) {
+
+        String apiUrl = getApiUrl("statuses/home_timeline.json");
+
+        if (maxId != null) {
+            params.put(KEY_MAX_ID, maxId);
+        }
+
+        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -69,7 +82,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 callback.onTweetsError();
             }
         });
-	}
+    }
 
 	public void getLoggedInUserInfo(UserInfoCallback callback ) {
 
