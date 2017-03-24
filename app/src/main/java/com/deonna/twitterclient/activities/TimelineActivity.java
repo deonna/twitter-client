@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.ActivityTimelineBinding;
 import com.deonna.twitterclient.fragments.ComposeFragment;
+import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.TimelineViewModel;
 
@@ -48,8 +49,14 @@ public class TimelineActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         binding.rvTimeline.addItemDecoration(itemDecoration);
 
-        binding.rvTimeline.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(TimelineActivity.this);
+
+        binding.rvTimeline.setLayoutManager(layoutManager);
         binding.rvTimeline.setAdapter(timelineViewModel.getAdapter());
+
+        EndlessRecyclerViewScrollListener scrollListener = timelineViewModel.initializeEndlessScrollListener(layoutManager);
+
+        binding.rvTimeline.addOnScrollListener(scrollListener);
     }
 
     private void setupToolbar() {
@@ -64,5 +71,11 @@ public class TimelineActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         ComposeFragment composeFragment = ComposeFragment.newInstance(timelineViewModel.getCurrentUser());
         composeFragment.show(fragmentManager, ComposeFragment.LAYOUT_NAME);
+    }
+
+    @OnClick(R.id.ivLogo)
+    public void scrollToTop() {
+
+        binding.rvTimeline.scrollToPosition(0);
     }
 }

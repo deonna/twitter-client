@@ -95,7 +95,7 @@ public class TimelineViewModel implements ViewModel {
                 tweets.addAll(newTweets);
                 tweetsAdapter.notifyDataSetChanged();
 
-                maxId = getMaxId(newTweets);
+                maxId = getMaxIdForNextFetch(newTweets);
             }
 
             @Override
@@ -116,11 +116,12 @@ public class TimelineViewModel implements ViewModel {
         client.getNextOldestTweets(maxId, new TweetsCallback() {
 
             @Override
-            public void onTweetsReceived(List<Tweet> tweets) {
+            public void onTweetsReceived(List<Tweet> newTweets) {
 
-                //TODO: Get and set max id based on tweets returned
-                //TODO: Add new tweets
-                //TODO: Notify adapter
+                tweets.addAll(newTweets);
+                tweetsAdapter.notifyDataSetChanged();
+
+                maxId = getMaxIdForNextFetch(newTweets);
             }
 
             @Override
@@ -147,26 +148,13 @@ public class TimelineViewModel implements ViewModel {
         });
     }
 
-    private Long getMaxId(List<Tweet> tweets) {
+    private Long getMaxIdForNextFetch(List<Tweet> tweets) {
 
-        Comparator idAscendingOrder = new Comparator<Tweet>() {
+        if (!tweets.isEmpty()) {
+            //want to get the lowest number
+            return tweets.get(tweets.size() - 1).id;
+        }
 
-            @Override
-            public int compare(Tweet tweet1, Tweet tweet2) {
-
-                Long idDifference = tweet1.id - tweet2.id;
-                if (idDifference > 1) {
-                    return 1;
-                } else if (idDifference < 1) {
-                    return -1;
-                }
-
-                return 0;
-            }
-        };
-
-        Tweet tweetWithMaxId = Collections.max(tweets, idAscendingOrder);
-
-        return tweetWithMaxId.id;
+        return null;
     }
 }
