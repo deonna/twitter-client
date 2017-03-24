@@ -94,12 +94,12 @@ public class ComposeFragment extends DialogFragment {
     private void setupFonts() {
 
         binding.etNewTweet.setTypeface(Fonts.fontRegular);
-        binding.tvSendTweet.setTypeface(Fonts.fontExtraBold);
+        binding.btSendTweet.setTypeface(Fonts.fontExtraBold);
     }
 
     private void setupClickEvents(final ComposeViewModel composeViewModel) {
 
-        binding.tvSendTweet.setOnClickListener((view) -> {
+        binding.btSendTweet.setOnClickListener((view) -> {
 
             String newTweet = binding.etNewTweet.getText().toString();
             composeViewModel.sendNewTweet(newTweet);
