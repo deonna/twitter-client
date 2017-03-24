@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
+import com.deonna.twitterclient.callbacks.TweetSentCallback;
 import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
@@ -99,5 +100,29 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 callback.onUserInfoError();
             }
         });
+    }
+
+    public void sendNewTweet(String newTweet, TweetSentCallback callback) {
+
+        String apiUrl = getApiUrl("statuses/update.json");
+
+        RequestParams params = new RequestParams();
+        params.put("status", newTweet);
+
+        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                callback.onTweetSent(newTweet);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                callback.onTweetSentFailed();
+            }
+        });
+
     }
 }

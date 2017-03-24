@@ -48,23 +48,27 @@ public class ComposeFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getDialog().setCanceledOnTouchOutside(false);
 
         User currentUser = (User) Parcels.unwrap(getArguments().getParcelable(KEY_CURRENT_USER));
 
+        // Setup bindings
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_compose, container, false);
 
         View fragmentView = binding.getRoot();
 
-        ComposeViewModel composeViewModel = new ComposeViewModel(currentUser);
+        ComposeViewModel composeViewModel = new ComposeViewModel(getActivity(), currentUser);
         binding.setComposeViewModel(composeViewModel);
         binding.executePendingBindings();
 
+        // Add content
         setupFonts();
         setProfilePicture(
                 currentUser.getLargeProfileImageUrl(),
                 binding.ivUserProfile,
                 ComposeViewModel.getImageSize()
         );
+        setupClickEvents(composeViewModel);
 
         return fragmentView;
     }
@@ -91,5 +95,28 @@ public class ComposeFragment extends DialogFragment {
 
         binding.etNewTweet.setTypeface(Fonts.fontRegular);
         binding.tvSendTweet.setTypeface(Fonts.fontExtraBold);
+    }
+
+    private void setupClickEvents(final ComposeViewModel composeViewModel) {
+
+        binding.tvSendTweet.setOnClickListener((view) -> {
+
+            String newTweet = binding.etNewTweet.getText().toString();
+            composeViewModel.sendNewTweet(newTweet);
+
+            dismiss();
+        });
+
+        binding.ivCloseDialog.setOnClickListener((view) -> {
+
+            String newTweet = binding.etNewTweet.getText().toString();
+
+            if (newTweet.isEmpty()) {
+                dismiss();
+            } else {
+                //TODO: Prompt to save draft
+                //Load this draft afterward
+            }
+        });
     }
 }
