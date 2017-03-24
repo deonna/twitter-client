@@ -11,8 +11,10 @@ import com.deonna.twitterclient.utilities.TwitterApplication;
 public class ComposeViewModel {
 
     private static final int IMAGE_SIZE = 36;
+    private static final int INITIAL_CHARACTER_COUNT = 140;
 
     private static final TwitterOauthClient client = TwitterApplication.getRestClient();
+
 
     private Context context;
     private User currentUser;
@@ -26,6 +28,11 @@ public class ComposeViewModel {
     public static int getImageSize() {
 
         return IMAGE_SIZE;
+    }
+
+    public int getCharacterCount(int count) {
+
+        return INITIAL_CHARACTER_COUNT - count;
     }
 
     public void sendNewTweet(String newTweet) {

@@ -6,11 +6,14 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
@@ -95,6 +98,7 @@ public class ComposeFragment extends DialogFragment {
 
         binding.etNewTweet.setTypeface(Fonts.fontRegular);
         binding.btSendTweet.setTypeface(Fonts.fontExtraBold);
+        binding.tvCharacterCount.setTypeface(Fonts.fontRegular);
     }
 
     private void setupClickEvents(final ComposeViewModel composeViewModel) {
@@ -118,5 +122,30 @@ public class ComposeFragment extends DialogFragment {
                 //Load this draft afterward
             }
         });
+
+        final TextWatcher characterCountWatcher = getCharacterCountWatcher(composeViewModel);
+
+        binding.etNewTweet.addTextChangedListener(characterCountWatcher);
+    }
+
+    private TextWatcher getCharacterCountWatcher(final ComposeViewModel composeViewModel) {
+
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                binding.tvCharacterCount.setText(String.valueOf(composeViewModel.getCharacterCount(s.length())));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
     }
 }

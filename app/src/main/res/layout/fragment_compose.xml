@@ -53,6 +53,7 @@
             android:layout_below="@id/tbCompose"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="10dp"
+            android:paddingTop="8dp"
             android:background="@android:color/transparent"
             android:hint="What's happening?"
             android:minLines="4"
