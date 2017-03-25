@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 
+import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.User;
@@ -16,6 +17,7 @@ import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.models.Tweet;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,7 +29,7 @@ public class TimelineViewModel implements ViewModel {
     private static final String TAG = TimelineViewModel.class.getSimpleName();
     private static final String ERROR = "Error loading Tweets!";
 
-    private final Context context;
+    private final TimelineActivity context;
 
     private final List<Tweet> tweets;
     private final TweetsAdapter tweetsAdapter;
@@ -39,7 +41,7 @@ public class TimelineViewModel implements ViewModel {
 
     private TweetsRefreshListener refreshListener;
 
-    public TimelineViewModel(Context context) {
+    public TimelineViewModel(TimelineActivity context) {
 
         this.context = context;
 

@@ -3,6 +3,7 @@ package com.deonna.twitterclient.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.activities.TweetDetailActivity;
 import com.deonna.twitterclient.databinding.ItemTweetBinding;
+import com.deonna.twitterclient.fragments.ReplyFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.TweetViewModel;
@@ -20,14 +23,15 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Tweet> tweets;
-    private Context context;
+    private TimelineActivity context;
 
-    public TweetsAdapter(Context context, List<Tweet> tweets) {
+    public TweetsAdapter(TimelineActivity context, List<Tweet> tweets) {
 
         this.context = context;
         this.tweets = tweets;
@@ -65,6 +69,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             intent.putExtra(TweetDetailActivity.KEY_TWEET, Parcels.wrap(tweet));
 
             context.startActivity(intent);
+        });
+
+        tweetBinding.ivReplies.setOnClickListener((view) -> {
+
+            FragmentManager fragmentManager = context.getSupportFragmentManager();
+            ReplyFragment replyFragment = ReplyFragment.newInstance(tweet.user);
+            replyFragment.show(fragmentManager, ReplyFragment.LAYOUT_NAME);
         });
 
         loadProfileImage(
