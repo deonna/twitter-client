@@ -1,6 +1,7 @@
 package com.deonna.twitterclient.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +10,13 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.activities.TweetDetailActivity;
 import com.deonna.twitterclient.databinding.ItemTweetBinding;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.TweetViewModel;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -55,6 +59,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         tweetBinding.setTweetViewModel(tweetViewModel);
         tweetBinding.executePendingBindings();
 
+        tweetBinding.rlTweetLayout.setOnClickListener((view) -> {
+
+            Intent intent = new Intent(context, TweetDetailActivity.class);
+            intent.putExtra(TweetDetailActivity.KEY_TWEET, Parcels.wrap(tweet));
+
+            context.startActivity(intent);
+        });
+
         loadProfileImage(
                 tweet.user.getLargeProfileImageUrl(),
                 tweetBinding.ivProfileImage,
@@ -86,19 +98,20 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(itemView.getRoot());
 
             binding = itemView;
+
             setTypefaces();
         }
 
         private void setTypefaces() {
 
-            binding.tvFavorites.setTypeface(Fonts.fontRegular);
-            binding.tvReplies.setTypeface(Fonts.fontRegular);
-            binding.tvRetweets.setTypeface(Fonts.fontRegular);
-
-            binding.tvScreenName.setTypeface(Fonts.fontRegular);
-            binding.tvTimestamp.setTypeface(Fonts.fontRegular);
-            binding.tvName.setTypeface(Fonts.fontBold);
-            binding.tvTweet.setTypeface(Fonts.fontRegular);
+//            binding.tvFavorites.setTypeface(Fonts.fontRegular);
+//            binding.tvReplies.setTypeface(Fonts.fontRegular);
+//            binding.tvRetweets.setTypeface(Fonts.fontRegular);
+//
+//            binding.tvScreenName.setTypeface(Fonts.fontRegular);
+//            binding.tvTimestamp.setTypeface(Fonts.fontRegular);
+//            binding.tvName.setTypeface(Fonts.fontBold);
+//            binding.tvTweet.setTypeface(Fonts.fontRegular);
         }
     }
 }

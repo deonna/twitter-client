@@ -22,10 +22,10 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 * [x] User can **see a counter with total number of characters left for tweet** on compose tweet page
-* [ ] User can **click a link within a tweet body** on tweet details view. The click will launch the web browser with relevant page opened.
+* [x] User can **click a link within a tweet body** on tweet details view. The click will launch the web browser with relevant page opened.
 * [x] User can **pull down to refresh tweets timeline**
 * [ ] User can **open the twitter app offline and see last loaded tweets**. Persisted in SQLite tweets are refreshed on every application launch. While "live data" is displayed when app can get it from Twitter API, it is also saved for use in offline mode.
-* [ ] User can tap a tweet to **open a detailed tweet view**
+* [x] User can tap a tweet to **open a detailed tweet view**
 * [ ] User can **select "reply" from detail view to respond to a tweet**
 
 The following **bonus** features are implemented:
@@ -50,6 +50,44 @@ The following **additional** features are implemented:
 * [ ] Retrolambda
 * [ ] Butterknife
 * [ ] Added link to scroll to top by clicking on Twitter logo for better UX (don’t want to have the user manually scroll to the top to pulll to refresh, for example.
+* [ ] Added LinkifiedTextView to solve problem with click propogation when list item is slected
+* [ ] Added custom fonts
+
+---
+
+# Project 4 - *Name of App Here*
+
+
+* [x] The app includes **all required user stories** from Week 3 Twitter Client
+* [ ] User can **switch between Timeline and Mention views using tabs**
+  * [ ] User can view their home timeline tweets.
+  * [ ] User can view the recent mentions of their username.
+* [ ] User can navigate to **view their own profile**
+  * [ ] User can see picture, tagline, # of followers, # of following, and tweets on their profile.
+* [ ] User can **click on the profile image** in any tweet to see **another user's** profile.
+ * [ ] User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
+ * [ ] Profile view includes that user's timeline
+* [x] User can [infinitely paginate](http://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView) any of these timelines (home, mentions, user) by scrolling to the bottom
+
+The following **optional** features are implemented:
+
+* [ ] User can view following / followers list through the profile
+* [ ] Implements robust error handling, [check if internet is available](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#checking-for-network-connectivity), handle error cases, network failures
+* [ ] When a network request is sent, user sees an [indeterminate progress indicator](http://guides.codepath.com/android/Handling-ProgressBars#progress-within-actionbar)
+* [ ] User can **"reply" to any tweet on their home timeline**
+  * [ ] The user that wrote the original tweet is automatically "@" replied in compose
+* [ ] User can click on a tweet to be **taken to a "detail view"** of that tweet
+ * [ ] User can take favorite (and unfavorite) or retweet actions on a tweet
+* [ ] User can **search for tweets matching a particular query** and see results
+* [ ] Usernames and hashtags are styled and clickable within tweets [using clickable spans](http://guides.codepath.com/android/Working-with-the-TextView#creating-clickable-styled-spans)
+
+The following **bonus** features are implemented:
+
+* [x] Use Parcelable instead of Serializable using the popular [Parceler library](http://guides.codepath.com/android/Using-Parceler).
+* [x] Leverages the [data binding support module](http://guides.codepath.com/android/Applying-Data-Binding-for-Views) to bind data into layout templates.
+* [ ] On the profile screen, leverage the [CoordinatorLayout](http://guides.codepath.com/android/Handling-Scrolls-with-CoordinatorLayout#responding-to-scroll-events) to [apply scrolling behavior](https://hackmd.io/s/SJyDOCgU) as the user scrolls through the profile timeline.
+* [ ] User can view their direct messages (or send new ones)
+
 
 ## Video Walkthrough
 
@@ -63,6 +101,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 - Wasted a lot of time on GSON and Retrofit and OkHttp
 - Databinding compilation: be careful about access modifiers on methods
+- Rate limiting is a PITA
+- Twitter API clean in comparision to NYT API
+- Very tempting to use Twitter Kit
 
 ## Open-source libraries used
 

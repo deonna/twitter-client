@@ -12,6 +12,7 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/rlTweetLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="6dp"
@@ -102,13 +103,15 @@
 
             </RelativeLayout>
 
-            <TextView
+            <com.deonna.twitterclient.components.LinkifiedTextView
                 android:id="@+id/tvTweet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlHeader"
                 android:layout_marginBottom="2dp"
                 android:lineSpacingMultiplier="1.2"
+                android:autoLink="all"
+                android:linksClickable="true"
                 android:text="@{tweetViewModel.getTweetText()}"
                 android:textSize="12sp"
                 tools:text="I am a tweet."/>

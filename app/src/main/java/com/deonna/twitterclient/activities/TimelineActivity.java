@@ -1,5 +1,6 @@
 package com.deonna.twitterclient.activities;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +22,7 @@ import com.deonna.twitterclient.viewmodels.TimelineViewModel;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 public class TimelineActivity extends AppCompatActivity implements TweetsRefreshListener {
 
@@ -45,6 +47,18 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
         Fonts.setupFonts(getAssets()); //TODO: Move to SplashActivity when created
 
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void getNewestTweets() {
+
+        timelineViewModel.getNewestTweets();
+    }
+
+    @Override
+    public void finishRefreshing() {
+
+        binding.srlTimeline.setRefreshing(false);
     }
 
     private void setupTimelineView() {
@@ -88,17 +102,5 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
     public void scrollToTop() {
 
         binding.rvTimeline.scrollToPosition(0);
-    }
-
-    @Override
-    public void getNewestTweets() {
-
-        timelineViewModel.getNewestTweets();
-    }
-
-    @Override
-    public void finishRefreshing() {
-
-        binding.srlTimeline.setRefreshing(false);
     }
 }
