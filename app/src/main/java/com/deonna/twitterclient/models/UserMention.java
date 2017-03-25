@@ -5,14 +5,16 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import java.util.List;
+
 @Parcel
-public class Medium {
+public class UserMention {
 
-    @SerializedName("id")
+    @SerializedName("screen_name")
     @Expose
-    public Long mediaId;
+    public String screenName;
 
-    @SerializedName("expanded_url") //can get video - only "photo" for now restirction on "type"
+    @SerializedName("indices")
     @Expose
-    public String expandedUrl;
+    public List<Integer> indicies;
 }

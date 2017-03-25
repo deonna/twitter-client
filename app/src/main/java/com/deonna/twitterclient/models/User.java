@@ -20,23 +20,23 @@ public class User {
 
     @SerializedName("name")
     @Expose
-    public String name = null;
+    public String name;
 
     @SerializedName("location")
     @Expose
-    public String location = null;
+    public String location;
 
     @SerializedName("profile_image_url_https")
     @Expose
-    public String profileImageUrl = null;
+    public String profileImageUrl;
 
     @SerializedName("verified")
     @Expose
-    public Boolean isVerified = null;
+    public Boolean isVerified;
 
     @SerializedName("screen_name")
     @Expose
-    public String screenName = null;
+    public String screenName;
 
     public String getLargeProfileImageUrl() {
 
