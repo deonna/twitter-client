@@ -91,11 +91,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 
-                Gson gson = new GsonBuilder().create();
-                List<Tweet> tweets = gson.fromJson(
-                        response.toString(),
-                        new TypeToken<ArrayList<Tweet>>() {
-                        }.getType());
+                List<Tweet> tweets = Tweet.fromJson(response);
 
                 callback.onTweetsReceived(tweets);
             }
@@ -122,11 +118,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                Gson gson = new GsonBuilder().create();
-                User user = gson.fromJson(
-                        response.toString(),
-                        new TypeToken<User>() {
-                        }.getType());
+                User user = User.fromJson(response);
 
                 callback.onUserInfoReceived(user);
             }

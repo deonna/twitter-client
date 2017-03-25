@@ -1,9 +1,17 @@
 package com.deonna.twitterclient.models;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.parceler.Parcel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Parcel
 public class User {
@@ -33,5 +41,17 @@ public class User {
     public String getLargeProfileImageUrl() {
 
         return  profileImageUrl.replaceAll(SMALL_IMAGE_TEXT, "");
+    }
+
+    public static Gson gson = new GsonBuilder().create();
+
+    public static User fromJson(JSONObject userJson) {
+
+        User user = gson.fromJson(
+                userJson.toString(),
+                new TypeToken<User>() {
+                }.getType());
+
+        return user;
     }
 }
