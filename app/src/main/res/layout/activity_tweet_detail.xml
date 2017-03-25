@@ -213,7 +213,8 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:scaleType="fitCenter"
-                android:src="@{tweetDetailViewModel.getRetweetedDrawable()}"/>
+                android:src="@{tweetDetailViewModel.getRetweetedDrawable()}"
+                tools:src="@drawable/ic_retweet_selected"/>
 
 
             <ImageView
@@ -225,7 +226,8 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:scaleType="fitCenter"
-                android:src="@{tweetDetailViewModel.getFavoritedDrawable()}"/>
+                android:src="@{tweetDetailViewModel.getFavoritedDrawable()}"
+                tools:src="@drawable/ic_favorite_selected"/>
 
         </RelativeLayout>
 

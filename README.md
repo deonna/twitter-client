@@ -54,6 +54,8 @@ The following **additional** features are implemented:
 * [x] Added custom fonts
 * [x] Different icons for retweeted
 * [x] Different icons for favorited
+* [x] Added dividers for better visual separation of tweets
+
 
 ---
 
