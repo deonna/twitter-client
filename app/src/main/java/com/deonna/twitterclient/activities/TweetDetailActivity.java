@@ -42,6 +42,7 @@ public class TweetDetailActivity extends AppCompatActivity {
 
         int size = TweetDetailViewModel.getProfileImageSize();
 
+
         Glide.with(this)
                 .load(url)
                 .override(size, size)

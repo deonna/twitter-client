@@ -36,6 +36,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String KEY_COUNT = "count";
     private static final String KEY_MAX_ID = "max_id";
     private static final String KEY_SINCE_ID = "since_id";
+    private static final String KEY_ENTITIES = "include_entities";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
 
@@ -51,6 +52,8 @@ public class TwitterOauthClient extends OAuthBaseClient {
 		RequestParams params = new RequestParams();
 		params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
 		params.put(KEY_SINCE_ID, 1);
+        params.put(KEY_ENTITIES, true);
+
 
         fetchTimeline(params, null, callback);
 	}
@@ -60,6 +63,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
         RequestParams params = new RequestParams();
         params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
         params.put(KEY_SINCE_ID, 1);
+        params.put(KEY_ENTITIES, true);
 
         fetchTimeline(params, maxId, callback);
     }
@@ -69,6 +73,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
         RequestParams params = new RequestParams();
         params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
         params.put(KEY_SINCE_ID, sinceId);
+        params.put(KEY_ENTITIES, true);
 
         fetchTimeline(params, null, callback);
     }

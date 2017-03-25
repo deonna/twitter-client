@@ -45,13 +45,13 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] MVVM with data binding
-* [ ] Custom Toolbar
-* [ ] Retrolambda
-* [ ] Butterknife
-* [ ] Added link to scroll to top by clicking on Twitter logo for better UX (don’t want to have the user manually scroll to the top to pulll to refresh, for example.
-* [ ] Added LinkifiedTextView to solve problem with click propogation when list item is slected
-* [ ] Added custom fonts
+* [x] MVVM with data binding
+* [x] Custom Toolbar
+* [x] Retrolambda
+* [x] Butterknife
+* [x] Added link to scroll to top by clicking on Twitter logo for better UX (don’t want to have the user manually scroll to the top to pulll to refresh, for example.
+* [x] Added LinkifiedTextView to solve problem with click propogation when list item is selected
+* [x] Added custom fonts
 
 ---
 
