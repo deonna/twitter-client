@@ -1,9 +1,13 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.format.DateUtils;
 import android.view.View;
 
+import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.text.ParseException;
@@ -83,5 +87,25 @@ public class TweetViewModel {
     public static int getProfileImageSize() {
 
         return IMAGE_SIZE;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public Drawable getRetweetedDrawable() {
+
+        if (tweet.retweeted) {
+            return context.getDrawable(R.drawable.ic_retweet_selected);
+        } else {
+            return context.getDrawable(R.drawable.ic_retweet);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public Drawable getFavoritedDrawable() {
+
+        if (tweet.retweeted) {
+            return context.getDrawable(R.drawable.ic_favorite_selected);
+        } else {
+            return context.getDrawable(R.drawable.ic_favorite);
+        }
     }
 }

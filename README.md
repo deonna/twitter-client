@@ -52,6 +52,8 @@ The following **additional** features are implemented:
 * [x] Added link to scroll to top by clicking on Twitter logo for better UX (don’t want to have the user manually scroll to the top to pulll to refresh, for example.
 * [x] Added LinkifiedTextView to solve problem with click propogation when list item is selected
 * [x] Added custom fonts
+* [x] Different icons for retweeted
+* [x] Different icons for favorited
 
 ---
 
