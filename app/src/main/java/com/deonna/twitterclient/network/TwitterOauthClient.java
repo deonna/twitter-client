@@ -43,8 +43,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final int NUM_TWEETS_PER_FETCH = 25;
     private static final int DEFAULT_SINCE_ID = 1;
 
-    private static Gson gson;
-
 	public TwitterOauthClient(Context context) {
 
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);

@@ -81,7 +81,7 @@ public class ProfileViewModel implements ViewModel {
 
     public int getLocationVisibility() {
 
-        return user.location.isEmpty() ? View.GONE : View.VISIBLE;
+        return (user.url == null || user.location.isEmpty()) ? View.GONE : View.VISIBLE;
     }
 
     public String getLocation() {
@@ -91,7 +91,7 @@ public class ProfileViewModel implements ViewModel {
 
     public int getLinkVisibility() {
 
-        return user.url.isEmpty() ? View.GONE : View.VISIBLE;
+        return (user.url == null || user.url.isEmpty()) ? View.GONE : View.VISIBLE;
     }
 
     public String getUrl() {
@@ -124,9 +124,10 @@ public class ProfileViewModel implements ViewModel {
         if (!tweets.isEmpty()) {
             //want to get the lowest number
             return tweets.get(tweets.size() - 1).id;
-        }
+        } else {
 
-        return null;
+            return maxId - 1;
+        }
     }
 
     public void getUserTimeline() {
@@ -158,7 +159,7 @@ public class ProfileViewModel implements ViewModel {
                 tweets.addAll(newTweets);
                 userTimelineAdapter.notifyDataSetChanged();
 
-                maxId = getMaxIdForNextFetch(newTweets);
+                maxId = getMaxIdForNextFetch(newTweets) - 1;
             }
 
             @Override

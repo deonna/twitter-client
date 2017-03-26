@@ -1,5 +1,6 @@
 package com.deonna.twitterclient.utilities;
 
+import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowLog;
@@ -20,8 +21,13 @@ import android.content.Context;
 public class TwitterApplication extends Application {
 
 	private static Context context;
+    private static User currentUser;
 
-	@Override
+    public static void setCurrentUser(User currentUser) {
+        TwitterApplication.currentUser = currentUser;
+    }
+
+    @Override
 	public void onCreate() {
 
 		super.onCreate();

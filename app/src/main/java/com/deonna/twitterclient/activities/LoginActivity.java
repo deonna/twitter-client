@@ -2,12 +2,16 @@ package com.deonna.twitterclient.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.callbacks.UserInfoCallback;
+import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
+import com.deonna.twitterclient.utilities.TwitterApplication;
 
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterOauthClient> {
 
@@ -44,7 +48,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterOauthClien
 	// Uses the client to initiate OAuth authorization
 	// This should be tied to a button used to login
 	public void logIn(View view) {
-//		TwitterApplication.getRestClient().connect();
+
         getClient().connect();
 	}
 }

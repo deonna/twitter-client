@@ -113,6 +113,11 @@ public class TimelineViewModel implements ViewModel {
         return currentUser;
     }
 
+    public String getCurrentUserProfileImageUrl() {
+
+        return currentUser.getLargeProfileImageUrl();
+    }
+
     private void getNextOldestTweets() {
 
         client.getNextOldestTweets(maxId, new TweetsCallback() {
@@ -139,8 +144,9 @@ public class TimelineViewModel implements ViewModel {
             @Override
             public void onUserInfoReceived(User user) {
 
-                Log.d(TAG, user.toString());
+                TwitterApplication.setCurrentUser(user);
                 currentUser = user;
+                context.loadCurrentUserProfileImage(currentUser.getLargeProfileImageUrl());
             }
 
             @Override
