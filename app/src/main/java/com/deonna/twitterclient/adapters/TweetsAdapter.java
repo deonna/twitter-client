@@ -1,6 +1,5 @@
 package com.deonna.twitterclient.adapters;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.FragmentManager;
@@ -11,19 +10,18 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.activities.ProfileActivity;
 import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.activities.TweetDetailActivity;
 import com.deonna.twitterclient.databinding.ItemTweetBinding;
 import com.deonna.twitterclient.fragments.ReplyFragment;
 import com.deonna.twitterclient.models.Tweet;
-import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.TweetViewModel;
 
 import org.parceler.Parcels;
 
 import java.util.List;
 
-import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -78,6 +76,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             replyFragment.show(fragmentManager, ReplyFragment.LAYOUT_NAME);
         });
 
+        tweetBinding.ivProfileImage.setOnClickListener((view) -> {
+
+            Intent intent = new Intent(context, ProfileActivity.class);
+            intent.putExtra(ProfileActivity.KEY_USER, Parcels.wrap(tweet.user));
+
+            context.startActivity(intent);
+        });
+
         loadProfileImage(
                 tweet.user.getLargeProfileImageUrl(),
                 tweetBinding.ivProfileImage,
@@ -91,6 +97,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return tweets.size();
     }
 
+    // TODO: Make this a utlitiy function
     private void loadProfileImage(String url, ImageView ivProfileImage, int size) {
 
         Glide.with(context)

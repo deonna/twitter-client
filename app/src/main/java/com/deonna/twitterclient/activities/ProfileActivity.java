@@ -38,10 +38,9 @@ public class ProfileActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(ProfileActivity.this, R.layout.activity_profile);
 
         binding.setProfileViewModel(profileViewModel);
-        binding.executePendingBindings();
 
-        loadImage(user.getLargeProfileImageUrl(), binding.ivProfileImage);
-        loadImage(user.getBackgroundImageUrl(), binding.ivBackgroundImage)
+        loadImage(profileViewModel.getLargeProfileImageUrl(), binding.ivProfileImage);
+        loadImage(profileViewModel.getBackgroundImageUrl(), binding.ivBackgroundImage);
     }
 
     private void loadImage(String url, ImageView ivImage) {

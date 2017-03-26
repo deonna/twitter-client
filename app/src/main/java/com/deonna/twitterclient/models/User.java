@@ -48,7 +48,7 @@ public class User {
 
     @SerializedName("url")
     @Expose
-    public int url;
+    public String url;
 
     @SerializedName("description")
     @Expose
