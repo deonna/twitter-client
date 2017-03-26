@@ -5,22 +5,14 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
-import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.databinding.ActivityTimelineBinding;
 import com.deonna.twitterclient.fragments.ComposeFragment;
-import com.deonna.twitterclient.fragments.ReplyFragment;
-import com.deonna.twitterclient.models.User;
-import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
+import com.deonna.twitterclient.fragments.TweetsListFragment;
 import com.deonna.twitterclient.utilities.Fonts;
-import com.deonna.twitterclient.utilities.TwitterApplication;
 import com.deonna.twitterclient.viewmodels.TimelineViewModel;
 import com.deonna.twitterclient.viewmodels.TweetDetailViewModel;
 
@@ -34,6 +26,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
 
     private TimelineViewModel timelineViewModel;
     private ActivityTimelineBinding binding;
+    private TweetsListFragment fragmentTweetsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +42,13 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
 
         timelineViewModel.onCreate();
 
-        Fonts.setupFonts(getAssets()); //TODO: Move to SplashActivity when created
+        Fonts.setupFonts(getAssets()); //TODO: Move to SplashActivity/LoginActivity when created
 
         ButterKnife.bind(this);
+
+        if (savedInstanceState == null) {
+            fragmentTweetsList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_tweets_list); //TODO: can I use Butterknife?
+        }
     }
 
     @Override
@@ -91,7 +88,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
     @OnClick(R.id.ivLogo)
     public void scrollToTop() {
 
-        //binding.rvTimeline.scrollToPosition(0);
+        fragmentTweetsList.scrollToTop();
     }
 
     public void loadCurrentUserProfileImage(String url) {

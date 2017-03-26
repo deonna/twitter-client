@@ -48,6 +48,11 @@ public class TweetsListFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    public void scrollToTop() {
+
+        binding.rvTimeline.scrollToPosition(0);
+    }
+
     private void setupTimelineView() {
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);

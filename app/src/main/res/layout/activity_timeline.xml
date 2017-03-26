@@ -62,7 +62,7 @@
                     <!--android:layout_below="@id/tbMain"/>-->
 
                 <fragment
-                    android:id="@+id/fragment"
+                    android:id="@+id/fragment_tweets_list"
                     android:name="com.deonna.twitterclient.fragments.TweetsListFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

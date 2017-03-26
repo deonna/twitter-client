@@ -41,6 +41,27 @@ public class TweetsListViewModel implements ViewModel {
         client = TwitterApplication.getRestClient();
     }
 
+    @Override
+    public void onCreate() {
+
+        getHomeTimeline();
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
+    }
+
     public TweetsAdapter getAdapter() {
 
         return tweetsAdapter;
@@ -105,27 +126,5 @@ public class TweetsListViewModel implements ViewModel {
         }
 
         return null;
-    }
-
-
-    @Override
-    public void onCreate() {
-
-        getHomeTimeline();
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
     }
 }
