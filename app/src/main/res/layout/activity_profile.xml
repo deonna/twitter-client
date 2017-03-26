@@ -215,14 +215,25 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvUserTimeline"
+            <fragment
+                android:id="@+id/fragment_tweets_list"
+                android:name="com.deonna.twitterclient.fragments.UserTimelineFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/rlStats"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                tools:layout="@layout/fragment_tweets_list" />
 
-            </android.support.v7.widget.RecyclerView>
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/rvUserTimeline"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_below="@+id/rlStats"-->
+                <!--android:layout_marginTop="8dp">-->
+
+            <!--</android.support.v7.widget.RecyclerView>-->
         </RelativeLayout>
 
     </RelativeLayout>

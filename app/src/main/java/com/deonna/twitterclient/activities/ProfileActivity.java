@@ -33,7 +33,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
 
         User user = (User) Parcels.unwrap(getIntent().getParcelableExtra(KEY_USER));
 
@@ -44,27 +43,27 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.setProfileViewModel(profileViewModel);
 
-        setupUserTimelineView();
+//        setupUserTimelineView();
 
         loadImage(profileViewModel.getLargeProfileImageUrl(), binding.ivProfileImage);
         loadImage(profileViewModel.getBackgroundImageUrl(), binding.ivBackgroundImage);
 
     }
 
-    private void setupUserTimelineView() {
-
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        binding.rvUserTimeline.addItemDecoration(itemDecoration);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(ProfileActivity.this);
-
-        binding.rvUserTimeline.setLayoutManager(layoutManager);
-        binding.rvUserTimeline.setAdapter(profileViewModel.getAdapter());
-
-        EndlessRecyclerViewScrollListener scrollListener = profileViewModel.initializeEndlessScrollListener(layoutManager);
-
-        binding.rvUserTimeline.addOnScrollListener(scrollListener);
-    }
+//    private void setupUserTimelineView() {
+//
+//        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+//        binding.rvUserTimeline.addItemDecoration(itemDecoration);
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(ProfileActivity.this);
+//
+//        binding.rvUserTimeline.setLayoutManager(layoutManager);
+//        binding.rvUserTimeline.setAdapter(profileViewModel.getAdapter());
+//
+//        EndlessRecyclerViewScrollListener scrollListener = profileViewModel.initializeEndlessScrollListener(layoutManager);
+//
+//        binding.rvUserTimeline.addOnScrollListener(scrollListener);
+//    }
 
     private void loadImage(String url, ImageView ivImage) {
 

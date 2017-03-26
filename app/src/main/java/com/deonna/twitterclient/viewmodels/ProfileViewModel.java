@@ -41,7 +41,7 @@ public class ProfileViewModel implements ViewModel {
     @Override
     public void onCreate() {
 
-        getUserTimeline();
+//        getUserTimeline();
     }
 
     @Override
