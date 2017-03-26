@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.deonna.twitterclient.activities.ProfileActivity">
+
+    <ImageView
+        android:id="@+id/ivBackgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher"/>
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBackgroundImage"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        tools:src="@drawable/ic_launcher"/>
+
+    <RelativeLayout
+        android:id="@+id/rlName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivProfileImage">
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="The Verge"/>
+
+    <ImageView
+        android:id="@+id/idIsVerified"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_toRightOf="@+id/tvName"
+        android:layout_toEndOf="@+id/tvName"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_verified"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlName"
+        tools:text="\@verge"/>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvScreenName"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        tools:text="theverge.com covers life in the future."/>
+
+    <RelativeLayout
+        android:id="@+id/rlUserInfo"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDescription"
+        android:layout_marginBottom="6dp">
+
+        <ImageView
+            android:id="@+id/ivLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:alpha=".5"
+            android:src="@drawable/ic_location"/>
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivLocation"
+            android:layout_toEndOf="@+id/ivLocation"
+            android:layout_centerVertical="true"
+            tools:text="New York"/>
+
+        <ImageView
+            android:id="@+id/ivLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvLocation"
+            android:layout_toEndOf="@+id/tvLocation"
+            android:layout_centerVertical="true"
+            android:alpha=".5"
+            android:src="@drawable/ic_link"/>
+
+        <TextView
+            android:id="@+id/tvLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivLink"
+            android:layout_toEndOf="@+id/ivLink"
+            android:layout_centerVertical="true"
+            tools:text="theverge.com"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlUserInfo">
+
+        <TextView
+            android:id="@+id/tvNumFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            tools:text="4,999"/>
+
+        <TextView
+            android:id="@+id/tvFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvNumFollowing"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:text="FOLLOWING"
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tvNumFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_toRightOf="@+id/tvFollowing"
+            android:layout_toEndOf="@+id/tvFollowing"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            tools:text="4,999"/>
+
+        <TextView
+            android:id="@+id/tvFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvNumFollowers"
+            android:layout_toEndOf="@+id/tvNumFollowers"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:text="FOLLOWERS"
+            android:textSize="10sp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

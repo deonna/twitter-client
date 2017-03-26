@@ -6,12 +6,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.parceler.Parcel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Parcel
 public class User {
@@ -37,6 +33,26 @@ public class User {
     @SerializedName("screen_name")
     @Expose
     public String screenName;
+
+    @SerializedName("profile_background_image_url")
+    @Expose
+    public String profileBackgroundImage;
+
+    @SerializedName("friends_count")
+    @Expose
+    public int numFollowing;
+
+    @SerializedName("followers_count")
+    @Expose
+    public int numFollowers;
+
+    @SerializedName("url")
+    @Expose
+    public int url;
+
+    @SerializedName("description")
+    @Expose
+    public String description;
 
     public String getLargeProfileImageUrl() {
 
