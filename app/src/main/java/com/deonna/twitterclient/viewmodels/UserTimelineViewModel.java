@@ -12,6 +12,7 @@ import java.util.List;
 public class UserTimelineViewModel extends TweetsListViewModel {
 
     private String screenName;
+
     public UserTimelineViewModel(Context context, FragmentManager fragmentManager) {
 
         super(context, fragmentManager);
@@ -19,13 +20,6 @@ public class UserTimelineViewModel extends TweetsListViewModel {
 
     public void setScreenName(String screenName) {
         this.screenName = screenName;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        getUserTimeline();
     }
 
     public void getUserTimeline() {
