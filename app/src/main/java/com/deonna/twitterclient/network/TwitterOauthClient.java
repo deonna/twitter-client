@@ -37,7 +37,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String KEY_SCREEN_NAME = "screen_name";
 
     private static final String HOME_TIMELINE_PATH = "statuses/home_timeline.json";
-    private static final String MENTIONS_TIMELINE_PATH = "";
+    private static final String MENTIONS_TIMELINE_PATH = "statuses/mentions_timeline.json";
     private static final String USER_TIMELINE_PATH = "statuses/user_timeline.json";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
@@ -53,6 +53,11 @@ public class TwitterOauthClient extends OAuthBaseClient {
         fetchTimeline(HOME_TIMELINE_PATH, null, null, null, true, callback);
 	}
 
+	public void getMentionsTimeline(final TweetsCallback callback) {
+
+        fetchTimeline(MENTIONS_TIMELINE_PATH, null, null, null, true, callback);
+    }
+
 	public void getUserTimeline(String screenName, final TweetsCallback callback) {
 
         fetchTimeline(USER_TIMELINE_PATH, screenName, null, null, true, callback);
@@ -61,6 +66,11 @@ public class TwitterOauthClient extends OAuthBaseClient {
 	public void getNextOldestTweets(Long maxId, final TweetsCallback callback) {
 
         fetchTimeline(HOME_TIMELINE_PATH, null, maxId, null, true, callback);
+    }
+
+    public void getNextOldestMentions(Long maxId, final TweetsCallback callback) {
+
+        fetchTimeline(MENTIONS_TIMELINE_PATH, null, maxId, null, true, callback);
     }
 
     public void getNextOldestUserTimelineTweets(String screenName, Long maxId, TweetsCallback

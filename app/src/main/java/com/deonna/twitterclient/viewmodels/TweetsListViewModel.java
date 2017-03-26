@@ -78,26 +78,6 @@ public class TweetsListViewModel implements ViewModel {
         };
     }
 
-//    public void getHomeTimeline() {
-//
-//        client.getHomeTimeline(new TweetsCallback() {
-//
-//            @Override
-//            public void onTweetsReceived(List<Tweet> newTweets) {
-//                Log.d(TAG, newTweets.toString());
-//                tweets.addAll(newTweets);
-//                tweetsAdapter.notifyDataSetChanged();
-//
-//                maxId = getMaxIdForNextFetch(newTweets);
-//            }
-//
-//            @Override
-//            public void onTweetsError() {
-//
-//            }
-//        });
-//    }
-
     protected void getNextOldestTweets() {
 
         client.getNextOldestTweets(maxId, new TweetsCallback() {
@@ -122,9 +102,9 @@ public class TweetsListViewModel implements ViewModel {
 
         if (!tweets.isEmpty()) {
             //want to get the lowest number
-            return tweets.get(tweets.size() - 1).id;
+            return tweets.get(tweets.size() - 1).id - 1;
+        } else {
+            return maxId - 1;
         }
-
-        return null;
     }
 }
