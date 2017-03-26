@@ -15,6 +15,10 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@android:color/white">
 
         <android.support.v7.widget.Toolbar
@@ -28,14 +32,6 @@
             app:titleTextColor="@android:color/white">
 
             <ImageView
-                android:id="@+id/ivUserProfile"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="left"
-                android:scaleType="fitCenter"
-                tools:src="@drawable/ic_logo"/>
-
-            <ImageView
                 android:id="@+id/ivCloseDialog"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -43,27 +39,73 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_close_dialog"/>
 
+            <ImageView
+                android:id="@+id/ivUserProfile"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="left"
+                android:scaleType="fitCenter"
+                tools:src="@drawable/ic_logo"
+                android:layout_alignTop="@+id/ivCloseDialog"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
+
 
         </android.support.v7.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/tvInReplyTo"
+        <RelativeLayout
+            android:id="@+id/rlInReplyTo"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tbCompose"
+            android:layout_alignLeft="@id/tbCompose"
+            android:layout_marginTop="4dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginRight="16dp"
-            tools:text="In reply to Tech Crunch"/>
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/ivInReplyTo"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_centerVertical="true"
+                android:scaleType="fitCenter"
+                android:alpha=".5"
+                android:src="@drawable/ic_down_arrow"/>
+
+            <TextView
+                android:id="@+id/tvInReplyTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="16dp"
+                android:layout_centerVertical="true"
+                android:textSize="10sp"
+                android:text="@{replyViewModel.getInReplyToString()}"
+                tools:text="In reply to Tech Crunch"/>
+
+        </RelativeLayout>
+
 
         <EditText
             android:id="@+id/etNewTweet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tbCompose"
-            android:layout_alignLeft="@+id/tvInReplyTo"
-            android:paddingTop="8dp"
+            android:layout_alignLeft="@+id/rlInReplyTo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rlInReplyTo"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
             android:minLines="4"
+            android:paddingTop="2dp"
+            android:text="@{replyViewModel.getScreenName()}"
             android:textCursorDrawable="@drawable/color_cursor"
             tools:text="\@TechCrunch"/>
 

@@ -14,11 +14,11 @@ public class ComposeViewModel {
     private static final int IMAGE_SIZE = 36;
     private static final int INITIAL_CHARACTER_COUNT = 140;
 
-    private static final TwitterOauthClient client = TwitterApplication.getRestClient();
+    protected static final TwitterOauthClient client = TwitterApplication.getRestClient();
 
 
-    private Context context;
-    private User currentUser;
+    protected Context context;
+    protected User currentUser;
 
     private TweetsRefreshListener refreshListener;
 
@@ -47,7 +47,6 @@ public class ComposeViewModel {
             @Override
             public void onTweetSent(String newTweet) {
 
-                //TODO: Need to refresh timeline
                 refreshListener.getNewestTweets();
             }
 
