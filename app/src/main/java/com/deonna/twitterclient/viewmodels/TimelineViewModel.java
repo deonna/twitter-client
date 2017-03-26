@@ -1,9 +1,6 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
@@ -13,7 +10,6 @@ import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
-import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
 import com.deonna.twitterclient.utilities.TwitterApplication;
 
 import java.util.ArrayList;
@@ -53,7 +49,6 @@ public class TimelineViewModel implements ViewModel {
     @Override
     public void onCreate() {
 
-//        getHomeTimeline();
         getLoggedInUserInfo();
     }
 
@@ -72,72 +67,15 @@ public class TimelineViewModel implements ViewModel {
 
     }
 
-//    public EndlessRecyclerViewScrollListener initializeEndlessScrollListener(LinearLayoutManager layoutManager) {
-//
-//        return new EndlessRecyclerViewScrollListener(layoutManager) {
-//            @Override
-//            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-//
-//                getNextOldestTweets();
-//            }
-//        };
-//    }
-
     public TweetsAdapter getAdapter() {
 
         return tweetsAdapter;
     }
 
-//    public void getHomeTimeline() {
-//
-//        client.getHomeTimeline(new TweetsCallback() {
-//
-//            @Override
-//            public void onTweetsReceived(List<Tweet> newTweets) {
-//                Log.d(TAG, newTweets.toString());
-//                tweets.addAll(newTweets);
-//                tweetsAdapter.notifyDataSetChanged();
-//
-//                maxId = getMaxIdForNextFetch(newTweets);
-//            }
-//
-//            @Override
-//            public void onTweetsError() {
-//
-//            }
-//        });
-//    }
-
-
     public User getCurrentUser() {
 
         return currentUser;
     }
-
-    public String getCurrentUserProfileImageUrl() {
-
-        return currentUser.getLargeProfileImageUrl();
-    }
-
-//    private void getNextOldestTweets() {
-//
-//        client.getNextOldestTweets(maxId, new TweetsCallback() {
-//
-//            @Override
-//            public void onTweetsReceived(List<Tweet> newTweets) {
-//
-//                tweets.addAll(newTweets);
-//                tweetsAdapter.notifyDataSetChanged();
-//
-//                maxId = getMaxIdForNextFetch(newTweets);
-//            }
-//
-//            @Override
-//            public void onTweetsError() {
-//
-//            }
-//        });
-//    }
 
     private void getLoggedInUserInfo() {
 
@@ -156,16 +94,6 @@ public class TimelineViewModel implements ViewModel {
             }
         });
     }
-
-//    private Long getMaxIdForNextFetch(List<Tweet> tweets) {
-//
-//        if (!tweets.isEmpty()) {
-//            //want to get the lowest number
-//            return tweets.get(tweets.size() - 1).id;
-//        }
-//
-//        return null;
-//    }
 
     public void getNewestTweets() {
 
