@@ -39,12 +39,11 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        timelineViewModel = new TimelineViewModel(TimelineActivity.this);
+        timelineViewModel = new TimelineViewModel(TimelineActivity.this, getSupportFragmentManager());
 
         binding = DataBindingUtil.setContentView(TimelineActivity.this, R.layout.activity_timeline);
         binding.setTimelineViewModel(timelineViewModel);
 
-        setupTimelineView();
         setupToolbar();
         setupSwipeToRefresh();
 
@@ -65,21 +64,6 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
     public void finishRefreshing() {
 
         binding.srlTimeline.setRefreshing(false);
-    }
-
-    private void setupTimelineView() {
-
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        binding.rvTimeline.addItemDecoration(itemDecoration);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(TimelineActivity.this);
-
-        binding.rvTimeline.setLayoutManager(layoutManager);
-        binding.rvTimeline.setAdapter(timelineViewModel.getAdapter());
-
-        EndlessRecyclerViewScrollListener scrollListener = timelineViewModel.initializeEndlessScrollListener(layoutManager);
-
-        binding.rvTimeline.addOnScrollListener(scrollListener);
     }
 
     private void setupToolbar() {
@@ -107,7 +91,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
     @OnClick(R.id.ivLogo)
     public void scrollToTop() {
 
-        binding.rvTimeline.scrollToPosition(0);
+        //binding.rvTimeline.scrollToPosition(0);
     }
 
     public void loadCurrentUserProfileImage(String url) {

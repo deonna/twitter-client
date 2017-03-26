@@ -55,11 +55,21 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/tbMain">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvTimeline"
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/rvTimeline"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_below="@id/tbMain"/>-->
+
+                <fragment
+                    android:id="@+id/fragment"
+                    android:name="com.deonna.twitterclient.fragments.TweetsListFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/tbMain"/>
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tbMain"
+                    tools:layout="@layout/fragment_tweets_list" />
 
             </android.support.v4.widget.SwipeRefreshLayout>
 

@@ -1,5 +1,6 @@
 package com.deonna.twitterclient.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.FragmentManager;
@@ -27,9 +28,10 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Tweet> tweets;
-    private TimelineActivity context;
+    private Context context;
+    private FragmentManager fragmentManager;
 
-    public TweetsAdapter(TimelineActivity context, List<Tweet> tweets) {
+    public TweetsAdapter(Context context, List<Tweet> tweets, FragmentManager fragmentManger) {
 
         this.context = context;
         this.tweets = tweets;
@@ -76,7 +78,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         tweetBinding.ivReplies.setOnClickListener((view) -> {
 
-            FragmentManager fragmentManager = context.getSupportFragmentManager();
             ReplyFragment replyFragment = ReplyFragment.newInstance(tweet.user);
             replyFragment.show(fragmentManager, ReplyFragment.LAYOUT_NAME);
         });
