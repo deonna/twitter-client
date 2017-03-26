@@ -19,17 +19,17 @@ import java.util.List;
 
 public class TweetsListViewModel implements ViewModel {
 
-    private static final String TAG = TimelineViewModel.class.getSimpleName();
-    private static final String ERROR = "Error loading Tweets!";
+    protected static final String TAG = TweetsListViewModel.class.getSimpleName();
+    protected static final String ERROR = "Error loading Tweets!";
 
-    private final Context context;
+    protected final Context context;
 
-    private final List<Tweet> tweets;
-    private final TweetsAdapter tweetsAdapter;
+    protected final List<Tweet> tweets;
+    protected final TweetsAdapter tweetsAdapter;
 
-    private final TwitterOauthClient client;
+    protected final TwitterOauthClient client;
 
-    private Long maxId;
+    protected Long maxId;
 
     public TweetsListViewModel(Context context, FragmentManager fragmentManager) {
 
@@ -44,7 +44,7 @@ public class TweetsListViewModel implements ViewModel {
     @Override
     public void onCreate() {
 
-        getHomeTimeline();
+//        getHomeTimeline();
     }
 
     @Override
@@ -78,27 +78,27 @@ public class TweetsListViewModel implements ViewModel {
         };
     }
 
-    public void getHomeTimeline() {
+//    public void getHomeTimeline() {
+//
+//        client.getHomeTimeline(new TweetsCallback() {
+//
+//            @Override
+//            public void onTweetsReceived(List<Tweet> newTweets) {
+//                Log.d(TAG, newTweets.toString());
+//                tweets.addAll(newTweets);
+//                tweetsAdapter.notifyDataSetChanged();
+//
+//                maxId = getMaxIdForNextFetch(newTweets);
+//            }
+//
+//            @Override
+//            public void onTweetsError() {
+//
+//            }
+//        });
+//    }
 
-        client.getHomeTimeline(new TweetsCallback() {
-
-            @Override
-            public void onTweetsReceived(List<Tweet> newTweets) {
-                Log.d(TAG, newTweets.toString());
-                tweets.addAll(newTweets);
-                tweetsAdapter.notifyDataSetChanged();
-
-                maxId = getMaxIdForNextFetch(newTweets);
-            }
-
-            @Override
-            public void onTweetsError() {
-
-            }
-        });
-    }
-
-    private void getNextOldestTweets() {
+    protected void getNextOldestTweets() {
 
         client.getNextOldestTweets(maxId, new TweetsCallback() {
 
@@ -118,7 +118,7 @@ public class TweetsListViewModel implements ViewModel {
         });
     }
 
-    private Long getMaxIdForNextFetch(List<Tweet> tweets) {
+    protected Long getMaxIdForNextFetch(List<Tweet> tweets) {
 
         if (!tweets.isEmpty()) {
             //want to get the lowest number

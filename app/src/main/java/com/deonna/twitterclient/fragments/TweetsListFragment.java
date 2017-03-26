@@ -13,34 +13,40 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.databinding.FragmentTweetsListBinding;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
 import com.deonna.twitterclient.viewmodels.TweetsListViewModel;
 
 public class TweetsListFragment extends Fragment {
 
-    private TweetsListViewModel tweetsListViewModel;
-    private FragmentTweetsListBinding binding;
+    protected TweetsListViewModel tweetsListViewModel;
+    protected FragmentTweetsListBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
-        tweetsListViewModel = new TweetsListViewModel(getContext(), getFragmentManager());
+        setupViewModel(new TweetsListViewModel(getContext(), getFragmentManager()));
+        setupBindings(inflater, parent);
+
+        setupTimelineView();
+
+        return binding.getRoot();
+    }
+
+    public void setupViewModel(TweetsListViewModel viewModel) {
+
+        tweetsListViewModel = viewModel;
+        tweetsListViewModel.onCreate();
+    }
+
+    public void setupBindings(LayoutInflater inflater, @Nullable ViewGroup parent) {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tweets_list, parent, false);
-
-        View fragmentView = binding.getRoot();
 
         binding.setTweetsListViewModel(tweetsListViewModel);
         binding.executePendingBindings();
 
-        setupTimelineView();
-
-        tweetsListViewModel.onCreate();
-
-        return fragmentView;
     }
 
     @Override
@@ -53,7 +59,7 @@ public class TweetsListFragment extends Fragment {
         binding.rvTimeline.scrollToPosition(0);
     }
 
-    private void setupTimelineView() {
+    protected void setupTimelineView() {
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         binding.rvTimeline.addItemDecoration(itemDecoration);
