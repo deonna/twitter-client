@@ -35,6 +35,11 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.tweets = tweets;
     }
 
+    public TweetsAdapter(ProfileActivity profileContext, List<Tweet> tweets) {
+
+        this.tweets = tweets;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 

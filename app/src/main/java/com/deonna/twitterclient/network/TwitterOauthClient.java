@@ -78,6 +78,20 @@ public class TwitterOauthClient extends OAuthBaseClient {
         fetchTimeline(params, maxId, callback);
     }
 
+
+
+    public void getNextOldestUserTimelineTweets(String screenName, Long maxId, TweetsCallback
+            callback) {
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
+        params.put(KEY_SINCE_ID, 1);
+        params.put(KEY_ENTITIES, true);
+        params.put(KEY_SCREEN_NAME, screenName);
+
+        fetchUserTimeline(params, maxId, callback);
+    }
+
     public void getNewestTweets(Long sinceId, TweetsCallback callback) {
 
         RequestParams params = new RequestParams();

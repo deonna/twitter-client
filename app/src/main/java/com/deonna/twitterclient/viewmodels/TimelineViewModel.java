@@ -1,26 +1,21 @@
 package com.deonna.twitterclient.viewmodels;
 
-import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.LinearLayout;
 
 import com.deonna.twitterclient.activities.TimelineActivity;
+import com.deonna.twitterclient.adapters.TweetsAdapter;
+import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
+import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
 import com.deonna.twitterclient.utilities.TwitterApplication;
-import com.deonna.twitterclient.adapters.TweetsAdapter;
-import com.deonna.twitterclient.callbacks.TweetsCallback;
-import com.deonna.twitterclient.models.Tweet;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -81,7 +76,6 @@ public class TimelineViewModel implements ViewModel {
         return new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                //TODO: Load and properly paginate new articles
 
                 getNextOldestTweets();
             }

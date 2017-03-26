@@ -1,19 +1,62 @@
 package com.deonna.twitterclient.viewmodels;
 
-import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.deonna.twitterclient.activities.ProfileActivity;
+import com.deonna.twitterclient.adapters.UserTimelineAdapter;
+import com.deonna.twitterclient.callbacks.TweetsCallback;
+import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
+import com.deonna.twitterclient.network.TwitterOauthClient;
+import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
+import com.deonna.twitterclient.utilities.TwitterApplication;
 
-public class ProfileViewModel {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Context context;
+public class ProfileViewModel implements ViewModel {
+
+    private final TwitterOauthClient client;
+
+
+    private ProfileActivity context;
     private User user;
+    private List<Tweet> tweets;
+    private UserTimelineAdapter userTimelineAdapter;
+    private Long maxId;
 
-    public ProfileViewModel(Context context, User user) {
+    public ProfileViewModel(ProfileActivity context, User user) {
 
         this.context = context;
         this.user = user;
+        this.tweets = new ArrayList<>();
+        this.userTimelineAdapter = new UserTimelineAdapter(this.context, tweets);
+
+        client = TwitterApplication.getRestClient();
+
+    }
+
+    @Override
+    public void onCreate() {
+
+        getUserTimeline();
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 
     public String getName() {
@@ -74,5 +117,71 @@ public class ProfileViewModel {
     public String getBackgroundImageUrl() {
 
         return user.getBackgroundImageUrl();
+    }
+
+    private Long getMaxIdForNextFetch(List<Tweet> tweets) {
+
+        if (!tweets.isEmpty()) {
+            //want to get the lowest number
+            return tweets.get(tweets.size() - 1).id;
+        }
+
+        return null;
+    }
+
+    public void getUserTimeline() {
+
+        client.getUserTimeline(user.screenName, new TweetsCallback() {
+
+            @Override
+            public void onTweetsReceived(List<Tweet> newTweets) {
+                tweets.addAll(newTweets);
+                userTimelineAdapter.notifyDataSetChanged();
+
+                maxId = getMaxIdForNextFetch(newTweets);
+            }
+
+            @Override
+            public void onTweetsError() {
+
+            }
+        });
+    }
+
+    private void getNextOldestTweets() {
+
+        client.getNextOldestUserTimelineTweets(user.screenName, maxId, new TweetsCallback() {
+
+            @Override
+            public void onTweetsReceived(List<Tweet> newTweets) {
+
+                tweets.addAll(newTweets);
+                userTimelineAdapter.notifyDataSetChanged();
+
+                maxId = getMaxIdForNextFetch(newTweets);
+            }
+
+            @Override
+            public void onTweetsError() {
+
+            }
+        });
+    }
+
+    public EndlessRecyclerViewScrollListener initializeEndlessScrollListener(LinearLayoutManager layoutManager) {
+
+        return new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+
+                getNextOldestTweets();
+            }
+        };
+    }
+
+
+    public RecyclerView.Adapter getAdapter() {
+
+        return userTimelineAdapter;
     }
 }
