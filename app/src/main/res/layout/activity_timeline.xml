@@ -49,27 +49,29 @@
 
             </android.support.v7.widget.Toolbar>
 
+
+
+            <com.astuetz.PagerSlidingTabStrip
+                android:id="@+id/pstsTimelines"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/tbMain"
+                app:pstsIndicatorColor="@color/twitterBlueLight"
+                app:pstsUnderlineColor="@color/twitterBlueLight"
+                app:pstsShouldExpand="true"
+                app:pstsTextAllCaps="true"/>
+
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/srlTimeline"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/tbMain">
+                android:layout_below="@+id/pstsTimelines">
 
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:id="@+id/rvTimeline"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_below="@id/tbMain"/>-->
-
-                <fragment
-                    android:id="@+id/fragment_tweets_list"
-                    android:name="com.deonna.twitterclient.fragments.MentionsTimelineFragment"
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vpTimelines"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tbMain"
-                    tools:layout="@layout/fragment_tweets_list" />
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"/>
 
             </android.support.v4.widget.SwipeRefreshLayout>
 

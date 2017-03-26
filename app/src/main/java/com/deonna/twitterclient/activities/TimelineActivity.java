@@ -3,14 +3,20 @@ package com.deonna.twitterclient.activities;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
 import com.deonna.twitterclient.databinding.ActivityTimelineBinding;
 import com.deonna.twitterclient.fragments.ComposeFragment;
+import com.deonna.twitterclient.fragments.HomeTimelineFragment;
+import com.deonna.twitterclient.fragments.MentionsTimelineFragment;
 import com.deonna.twitterclient.fragments.TweetsListFragment;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.TimelineViewModel;
@@ -46,9 +52,15 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
 
         ButterKnife.bind(this);
 
-        if (savedInstanceState == null) {
-            fragmentTweetsList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_tweets_list); //TODO: can I use Butterknife?
-        }
+//        if (savedInstanceState == null) {
+//            fragmentTweetsList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_tweets_list); //TODO: can I use Butterknife?
+//        }
+
+        ViewPager vpTimelines = (ViewPager) findViewById(R.id.vpTimelines);
+        vpTimelines.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
+
+        PagerSlidingTabStrip pstsTimelines = (PagerSlidingTabStrip) findViewById(R.id.pstsTimelines);
+        pstsTimelines.setViewPager(vpTimelines);
     }
 
     @Override
@@ -88,7 +100,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
     @OnClick(R.id.ivLogo)
     public void scrollToTop() {
 
-        fragmentTweetsList.scrollToTop();
+//        fragmentTweetsList.scrollToTop();
     }
 
     public void loadCurrentUserProfileImage(String url) {
@@ -112,5 +124,44 @@ public class TimelineActivity extends AppCompatActivity implements TweetsRefresh
 
             startActivity(intent);
         });
+    }
+
+    public class TweetsPagerAdapter extends FragmentPagerAdapter {
+
+        final int HOME_POSITION = 0;
+        final int MENTIONS_POSITION = 1;
+
+        final String[] tabTitles = { "Home", "Mentions" };
+
+        public TweetsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position) {
+
+                case HOME_POSITION:
+                    return new HomeTimelineFragment();
+
+                case MENTIONS_POSITION:
+                    return new MentionsTimelineFragment();
+
+                default:
+                    return new HomeTimelineFragment();
+
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return tabTitles.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
     }
 }
