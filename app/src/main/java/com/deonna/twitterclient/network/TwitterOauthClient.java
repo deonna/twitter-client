@@ -36,7 +36,12 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String KEY_ENTITIES = "include_entities";
     private static final String KEY_SCREEN_NAME = "screen_name";
 
+    private static final String HOME_TIMELINE_PATH = "statuses/home_timeline.json";
+    private static final String MENTIONS_TIMELINE_PATH = "";
+    private static final String USER_TIMELINE_PATH = "statuses/user_timeline.json";
+
     private static final int NUM_TWEETS_PER_FETCH = 25;
+    private static final int DEFAULT_SINCE_ID = 1;
 
     private static Gson gson;
 
@@ -47,98 +52,54 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
 	public void getHomeTimeline(final TweetsCallback callback) {
 
-		RequestParams params = new RequestParams();
-		params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-		params.put(KEY_SINCE_ID, 1);
-        params.put(KEY_ENTITIES, true);
-
-
-        fetchTimeline(params, null, callback);
+        fetchTimeline(HOME_TIMELINE_PATH, null, null, null, true, callback);
 	}
 
 	public void getUserTimeline(String screenName, final TweetsCallback callback) {
 
-		RequestParams params = new RequestParams();
-		params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-		params.put(KEY_SINCE_ID, 1);
-        params.put(KEY_ENTITIES, true);
-        params.put(KEY_SCREEN_NAME, screenName);
-
-
-        fetchUserTimeline(params, null, callback);
+        fetchTimeline(USER_TIMELINE_PATH, screenName, null, null, true, callback);
 	}
 
 	public void getNextOldestTweets(Long maxId, final TweetsCallback callback) {
 
-        RequestParams params = new RequestParams();
-        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-        params.put(KEY_SINCE_ID, 1);
-        params.put(KEY_ENTITIES, true);
-
-        fetchTimeline(params, maxId, callback);
+        fetchTimeline(HOME_TIMELINE_PATH, null, maxId, null, true, callback);
     }
-
-
 
     public void getNextOldestUserTimelineTweets(String screenName, Long maxId, TweetsCallback
             callback) {
 
-        RequestParams params = new RequestParams();
-        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-        params.put(KEY_SINCE_ID, 1);
-        params.put(KEY_ENTITIES, true);
-        params.put(KEY_SCREEN_NAME, screenName);
-
-        fetchUserTimeline(params, maxId, callback);
+        fetchTimeline(USER_TIMELINE_PATH, screenName, maxId, null, true, callback);
     }
 
     public void getNewestTweets(Long sinceId, TweetsCallback callback) {
 
+        fetchTimeline(HOME_TIMELINE_PATH, null, null, sinceId, true, callback);
+    }
+
+	private void fetchTimeline(String apiUrl, String screenName, Long maxId, Long sinceId, Boolean entities, final TweetsCallback callback) {
+
         RequestParams params = new RequestParams();
         params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-        params.put(KEY_SINCE_ID, sinceId);
-        params.put(KEY_ENTITIES, true);
 
-        fetchTimeline(params, null, callback);
-    }
-
-	private void fetchTimeline(RequestParams params, Long maxId, final TweetsCallback callback) {
-
-        String apiUrl = getApiUrl("statuses/home_timeline.json");
+        if (screenName != null) {
+            params.put(KEY_SCREEN_NAME, screenName);
+        }
 
         if (maxId != null) {
             params.put(KEY_MAX_ID, maxId);
         }
 
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                List<Tweet> tweets = Tweet.fromJson(response);
-
-                callback.onTweetsReceived(tweets);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onTweetsError();
-            }
-        });
-    }
-
-    private void fetchUserTimeline(RequestParams params, Long maxId, final TweetsCallback
-            callback) {
-
-        String apiUrl = getApiUrl("statuses/user_timeline.json");
-
-        if (maxId != null) {
-            params.put(KEY_MAX_ID, maxId);
+        if (sinceId != null) {
+            params.put(KEY_SINCE_ID, sinceId);
+        } else {
+            params.put(KEY_SINCE_ID, DEFAULT_SINCE_ID);
         }
 
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+        if (entities != null) {
+            params.put(KEY_ENTITIES, entities);
+        }
+
+        getClient().get(getApiUrl(apiUrl), params, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -178,6 +139,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
                 callback.onUserInfoError();
@@ -202,6 +164,8 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                super.onFailure(statusCode, headers, throwable, errorResponse);
 
                 callback.onTweetSentFailed();
             }
