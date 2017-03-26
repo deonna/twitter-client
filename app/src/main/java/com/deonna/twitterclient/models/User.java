@@ -36,7 +36,7 @@ public class User {
 
     @SerializedName("profile_background_image_url")
     @Expose
-    public String profileBackgroundImage;
+    public String profileBackgroundImageUrl;
 
     @SerializedName("friends_count")
     @Expose
@@ -69,5 +69,10 @@ public class User {
                 }.getType());
 
         return user;
+    }
+
+    public String getBackgroundImageUrl() {
+
+        return profileBackgroundImageUrl;
     }
 }
