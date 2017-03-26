@@ -74,6 +74,11 @@ public class ProfileViewModel implements ViewModel {
         return  "@" + user.screenName;
     }
 
+    public int getDescriptionVisibility() {
+
+        return (user.description == null || user.description.isEmpty()) ? View.GONE : View.VISIBLE;
+    }
+
     public String getDescription() {
 
         return user.description;

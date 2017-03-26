@@ -87,10 +87,12 @@
                 android:layout_below="@+id/tvScreenName"
                 android:layout_marginBottom="6dp"
                 android:layout_marginTop="6dp"
-                android:text="@{profileViewModel.getDescription()}"
-                android:lineSpacingMultiplier="1.2"
+                android:visibility="@{profileViewModel.getDescriptionVisibility()}"
                 android:autoLink="all"
                 android:linksClickable="true"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@{profileViewModel.getDescription()}"
+                android:textSize="11sp"
                 tools:text="theverge.com covers life in the future."/>
 
             <RelativeLayout
