@@ -109,6 +109,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 - Rate limiting is a PITA
 - Twitter API clean in comparision to NYT API
 - Very tempting to use Twitter Kit
+- Code reuse / good MVVM architecture + inheritance scheme made adding features much easier
 
 ## Open-source libraries used
 
