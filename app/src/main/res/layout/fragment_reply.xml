@@ -152,7 +152,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
                     android:textSize="10sp"
-                    android:text="140"
+                    android:text="@{replyViewModel.getCharacterCount()}"
                     tools:text="140"/>
 
             </RelativeLayout>

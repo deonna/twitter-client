@@ -12,7 +12,7 @@ import com.deonna.twitterclient.utilities.TwitterApplication;
 public class ComposeViewModel {
 
     private static final int IMAGE_SIZE = 36;
-    private static final int INITIAL_CHARACTER_COUNT = 140;
+    public static final int INITIAL_CHARACTER_COUNT = 140;
 
     protected static final TwitterOauthClient client = TwitterApplication.getRestClient();
 

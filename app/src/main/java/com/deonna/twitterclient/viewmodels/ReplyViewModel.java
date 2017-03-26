@@ -19,4 +19,9 @@ public class ReplyViewModel extends ComposeViewModel {
 
         return "@" + currentUser.screenName + " ";
     }
+
+    public String getCharacterCount() {
+
+        return String.valueOf(ComposeViewModel.INITIAL_CHARACTER_COUNT - getScreenName().length());
+    }
 }

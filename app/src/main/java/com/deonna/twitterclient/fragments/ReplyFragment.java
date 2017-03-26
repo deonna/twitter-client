@@ -58,10 +58,7 @@ public class ReplyFragment extends DialogFragment {
 
         ReplyViewModel replyViewModel = new ReplyViewModel(getActivity(), currentUser);
         binding.setReplyViewModel(replyViewModel);
-        binding.executePendingBindings();
 
-        int selectionPosition = binding.etNewTweet.getText().length();
-        binding.etNewTweet.setSelection(selectionPosition);
         // Add content
         setupFonts();
         setProfilePicture(
@@ -70,6 +67,11 @@ public class ReplyFragment extends DialogFragment {
                 ReplyViewModel.getImageSize()
         );
         setupClickEvents(replyViewModel);
+
+        binding.executePendingBindings();
+
+        int selectionPosition = replyViewModel.getScreenName().length() ;
+        binding.etNewTweet.setSelection(selectionPosition);
 
         return fragmentView;
     }
