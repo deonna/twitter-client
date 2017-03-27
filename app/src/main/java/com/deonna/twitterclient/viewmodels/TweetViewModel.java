@@ -140,7 +140,7 @@ public class TweetViewModel {
 
             }
         });
-    }r
+    }
 
     public void favorite(long id) {
 

@@ -220,7 +220,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void retweet(long id, RetweetCallback callback) {
 
-        String apiUrl = getApiUrl("favorites/create.json");
+        String apiUrl = getApiUrl("statuses/retweet/" + id + ".json");
 
         RequestParams params = new RequestParams();
         params.put("id", id);
