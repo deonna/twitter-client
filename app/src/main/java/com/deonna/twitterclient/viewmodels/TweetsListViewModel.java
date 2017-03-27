@@ -140,4 +140,15 @@ public class TweetsListViewModel implements ViewModel {
             }
         });
     }
+
+    public void loadTweetsFromDb() {
+
+        tweets.addAll(Tweet.getAll());
+        tweetsAdapter.notifyDataSetChanged();
+    }
+
+    public void clearDb() {
+
+        Tweet.deleteAll();
+    }
 }

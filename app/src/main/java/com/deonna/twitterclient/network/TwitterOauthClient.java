@@ -115,6 +115,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 List<Tweet> tweets = Tweet.fromJson(response);
 
                 callback.onTweetsReceived(tweets);
+                Tweet.saveAll(tweets);
             }
 
             @Override

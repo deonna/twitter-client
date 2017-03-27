@@ -13,6 +13,7 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
@@ -97,7 +98,7 @@ public class Tweet extends BaseModel {
     }
 
     public static void saveAll(List<Tweet> tweets) {
-        
+
         for (Tweet tweet : tweets) {
             save(tweet);
         }
@@ -111,5 +112,10 @@ public class Tweet extends BaseModel {
             }
             tweet.save();
         }
+    }
+
+    public static void deleteAll() {
+
+        Delete.tables(Tweet.class, User.class);
     }
 }

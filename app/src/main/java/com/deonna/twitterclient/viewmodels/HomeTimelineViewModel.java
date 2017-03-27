@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.network.NetworkStatus;
 
 import java.util.List;
 
@@ -20,7 +21,12 @@ public class HomeTimelineViewModel extends TweetsListViewModel {
     public void onCreate() {
         super.onCreate();
 
-        getHomeTimeline();
+        if (NetworkStatus.isNetworkAvailable(context)) {
+            super.clearDb();
+            getHomeTimeline();
+        } else {
+            super.loadTweetsFromDb();
+        }
     }
 
     public void getHomeTimeline() {
