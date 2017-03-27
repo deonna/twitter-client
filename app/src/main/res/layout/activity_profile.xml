@@ -30,16 +30,9 @@
             android:layout_marginStart="16dp">
 
             <ImageView
-                android:id="@+id/ivBackgroundImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:src="@drawable/ic_launcher"/>
-
-            <ImageView
                 android:id="@+id/ivProfileImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ivBackgroundImage"
                 android:layout_marginBottom="6dp"
                 android:layout_marginTop="6dp"
                 tools:src="@drawable/ic_launcher"/>
@@ -226,14 +219,6 @@
                 android:layout_marginTop="8dp"
                 tools:layout="@layout/fragment_tweets_list" />
 
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:id="@+id/rvUserTimeline"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_below="@+id/rlStats"-->
-                <!--android:layout_marginTop="8dp">-->
-
-            <!--</android.support.v7.widget.RecyclerView>-->
         </RelativeLayout>
 
     </RelativeLayout>

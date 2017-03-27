@@ -2,6 +2,7 @@ package com.deonna.twitterclient.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;
+
+import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterOauthClient> {
 

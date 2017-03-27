@@ -38,7 +38,6 @@ public class ProfileActivity extends AppCompatActivity {
         binding.setProfileViewModel(profileViewModel);
 
         loadImage(profileViewModel.getLargeProfileImageUrl(), binding.ivProfileImage);
-        loadImage(profileViewModel.getBackgroundImageUrl(), binding.ivBackgroundImage);
 
     }
 

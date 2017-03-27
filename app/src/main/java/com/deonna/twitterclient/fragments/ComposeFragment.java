@@ -30,6 +30,8 @@ public class ComposeFragment extends DialogFragment {
 
     public static final String LAYOUT_NAME = "fragment_compose";
     private static final String KEY_CURRENT_USER = "current_user";
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_URL = "url";
 
     private FragmentComposeBinding binding;
 
@@ -39,11 +41,28 @@ public class ComposeFragment extends DialogFragment {
 
         Bundle args = new Bundle();
         args.putParcelable(KEY_CURRENT_USER, Parcels.wrap(currentUser));
+        args.putString(KEY_TITLE, "");
+        args.putString(KEY_URL, "");
 
         composeFragment.setArguments(args);
 
         return composeFragment;
     }
+
+    public static ComposeFragment newInstance(User currentUser, String title, String url) {
+
+        ComposeFragment composeFragment = new ComposeFragment();
+
+        Bundle args = new Bundle();
+        args.putParcelable(KEY_CURRENT_USER, Parcels.wrap(currentUser));
+        args.putString(KEY_TITLE, title);
+        args.putString(KEY_URL, url);
+
+        composeFragment.setArguments(args);
+
+        return composeFragment;
+    }
+
 
     @Nullable
     @Override
@@ -53,6 +72,9 @@ public class ComposeFragment extends DialogFragment {
         getDialog().setCanceledOnTouchOutside(false);
 
         User currentUser = (User) Parcels.unwrap(getArguments().getParcelable(KEY_CURRENT_USER));
+
+        String title = getArguments().getString(KEY_TITLE);
+        String url = getArguments().getString(KEY_URL);
 
         // Setup bindings
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_compose, container, false);
@@ -74,7 +96,11 @@ public class ComposeFragment extends DialogFragment {
 
         setupSaveDraft();
 
-        setDraftIfExists();
+        if (title.isEmpty() && url.isEmpty()) {
+            setDraftIfExists();
+        } else {
+            prefillTweet(title, url);
+        }
 
         return fragmentView;
     }
@@ -142,14 +168,7 @@ public class ComposeFragment extends DialogFragment {
 
         binding.ivCloseDialog.setOnClickListener((view) -> {
 
-            String newTweet = binding.etNewTweet.getText().toString();
-
-            if (newTweet.isEmpty()) {
-                dismiss();
-            } else {
-                //TODO: Prompt to save draft
-                //Load this draft afterward
-            }
+            dismiss();
         });
 
         final TextWatcher characterCountWatcher = getCharacterCountWatcher(composeViewModel);
@@ -187,5 +206,10 @@ public class ComposeFragment extends DialogFragment {
 
             }
         };
+    }
+
+    public void prefillTweet(String title, String url) {
+
+        binding.etNewTweet.setText(title + " " + url);
     }
 }

@@ -27,6 +27,10 @@ public class TwitterApplication extends Application {
         TwitterApplication.currentUser = currentUser;
     }
 
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
     @Override
 	public void onCreate() {
 
