@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.activities.ProfileActivity;
-import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.activities.TweetDetailActivity;
 import com.deonna.twitterclient.databinding.ItemTweetBinding;
 import com.deonna.twitterclient.fragments.ReplyFragment;
@@ -96,6 +95,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 tweetBinding.ivProfileImage,
                 TweetViewModel.getProfileImageSize()
         );
+
+        loadMedia(tweet.getMediaUrl(), tweetBinding.ivMedia);
     }
 
     @Override
@@ -114,6 +115,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 .into(ivProfileImage);
     }
 
+    private void loadMedia(String url, ImageView ivImage) {
+
+        Glide.with(context)
+                .load(url)
+                .bitmapTransform(new RoundedCornersTransformation(context, 10, 2))
+                .into(ivImage);
+    }
+
     public static class TweetViewHolder extends RecyclerView.ViewHolder {
 
         final ItemTweetBinding binding;
@@ -123,20 +132,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(itemView.getRoot());
 
             binding = itemView;
-
-            setTypefaces();
-        }
-
-        private void setTypefaces() {
-
-//            binding.tvFavorites.setTypeface(Fonts.fontRegular);
-//            binding.tvReplies.setTypeface(Fonts.fontRegular);
-//            binding.tvRetweets.setTypeface(Fonts.fontRegular);
-//
-//            binding.tvScreenName.setTypeface(Fonts.fontRegular);
-//            binding.tvTimestamp.setTypeface(Fonts.fontRegular);
-//            binding.tvName.setTypeface(Fonts.fontBold);
-//            binding.tvTweet.setTypeface(Fonts.fontRegular);
         }
     }
 }

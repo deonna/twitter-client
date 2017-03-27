@@ -118,4 +118,17 @@ public class Tweet extends BaseModel {
 
         Delete.tables(Tweet.class, User.class);
     }
+
+    public String getMediaUrl() {
+
+        String candidateUrl = "";
+
+        if (entities.media == null || entities.media.isEmpty()) {
+            return candidateUrl;
+        }
+
+        candidateUrl = entities.media.get(0).mediaUrl;
+
+        return candidateUrl;
+    }
 }

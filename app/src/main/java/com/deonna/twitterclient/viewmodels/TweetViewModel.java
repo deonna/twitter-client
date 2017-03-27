@@ -46,6 +46,16 @@ public class TweetViewModel {
         return View.GONE;
     }
 
+    public int getMediaVisibility() {
+
+        return tweet.getMediaUrl().isEmpty() ? View.GONE : View.VISIBLE;
+    }
+
+    public String getMediaUrl() {
+
+        return tweet.getMediaUrl();
+    }
+
     public String getScreenName() {
 
         return String.format(SCREEN_NAME_FORMAT, tweet.user.screenName);

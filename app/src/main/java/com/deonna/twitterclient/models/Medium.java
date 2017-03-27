@@ -12,7 +12,7 @@ public class Medium {
     @Expose
     public Long mediaId;
 
-    @SerializedName("expanded_url") //can get video - only "photo" for now restirction on "type"
+    @SerializedName("media_url") //can get video - only "photo" for now restirction on "type"
     @Expose
-    public String expandedUrl;
+    public String mediaUrl;
 }
