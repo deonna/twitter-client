@@ -136,6 +136,7 @@ public class ComposeFragment extends DialogFragment {
             String newTweet = binding.etNewTweet.getText().toString();
             composeViewModel.sendNewTweet(newTweet);
 
+            Draft.deleteAll(); //clear draft
             dismiss();
         });
 

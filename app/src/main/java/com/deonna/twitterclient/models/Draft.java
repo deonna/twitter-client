@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
@@ -52,5 +53,10 @@ public class Draft extends BaseModel {
         }
 
         return null;
+    }
+
+    public static void deleteAll() {
+
+        Delete.tables(Draft.class);
     }
 }
