@@ -2,7 +2,7 @@
 
 **Twitter Client** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **X** hours spent in total
+Time spent: **18** hours spent in total
 
 ## User Stories
 
@@ -40,27 +40,12 @@ The following **bonus** features are implemented:
 * [x] Replace all icon drawables and other static image assets with [vector drawables](http://guides.codepath.com/android/Drawables#vector-drawables) where appropriate.
 * [x] Leverages the [data binding support module](http://guides.codepath.com/android/Applying-Data-Binding-for-Views) to bind data into layout templates.
 * [x] Replace Picasso with [Glide](http://inthecheesefactory.com/blog/get-to-know-glide-recommended-by-google/en) for more efficient image rendering.
-* [ ] Enable your app to [receive implicit intents](http://guides.codepath.com/android/Using-Intents-to-Create-Flows#receiving-implicit-intents) from other apps.  When a link is shared from a web browser, it should pre-fill the text and title of the web page when composing a tweet.
+* [x] Enable your app to [receive implicit intents](http://guides.codepath.com/android/Using-Intents-to-Create-Flows#receiving-implicit-intents) from other apps.  When a link is shared from a web browser, it should pre-fill the text and title of the web page when composing a tweet.
 * [x] When a user leaves the compose view without publishing and there is existing text, prompt to save or delete the draft.  The draft can be resumed from the compose view.
 
 The following **additional** features are implemented:
 
-* [x] MVVM with data binding
-* [x] Custom Toolbar
-* [x] Retrolambda
-* [x] Butterknife
-* [x] Gson
-* [x] Added link to scroll to top by clicking on Twitter logo for better UX (don’t want to have the user manually scroll to the top to pulll to refresh, for example.
-* [x] Added LinkifiedTextView to solve problem with click propogation when list item is selected
-* [x] Added custom fonts
-* [x] Different icons for retweeted
-* [x] Different icons for favorited
-* [x] Added dividers for better visual separation of tweets
-* [x] Used ViewPages and PagerSlidingTabStrip
-
-
-# Project 4 - *Twitter Client*
-
+I implemented some features from project 4 as well:
 
 * [x] The app includes **all required user stories** from Week 3 Twitter Client
 * [x] User can **switch between Timeline and Mention views using tabs**
@@ -72,26 +57,25 @@ The following **additional** features are implemented:
  * [x] User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
  * [x] Profile view includes that user's timeline
 * [x] User can [infinitely paginate](http://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView) any of these timelines (home, mentions, user) by scrolling to the bottom
-
-The following **optional** features are implemented:
-
-* [ ] User can view following / followers list through the profile
-* [ ] Implements robust error handling, [check if internet is available](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#checking-for-network-connectivity), handle error cases, network failures
-* [ ] When a network request is sent, user sees an [indeterminate progress indicator](http://guides.codepath.com/android/Handling-ProgressBars#progress-within-actionbar)
-* [ ] User can **"reply" to any tweet on their home timeline**
+* [x] User can **"reply" to any tweet on their home timeline**
   * [x] The user that wrote the original tweet is automatically "@" replied in compose
 * [x] User can click on a tweet to be **taken to a "detail view"** of that tweet
- * [ ] User can take favorite (and unfavorite) or retweet actions on a tweet
-* [ ] User can **search for tweets matching a particular query** and see results
-* [ ] Usernames and hashtags are styled and clickable within tweets [using clickable spans](http://guides.codepath.com/android/Working-with-the-TextView#creating-clickable-styled-spans)
 
-The following **bonus** features are implemented:
 
-* [x] Use Parcelable instead of Serializable using the popular [Parceler library](http://guides.codepath.com/android/Using-Parceler).
-* [x] Leverages the [data binding support module](http://guides.codepath.com/android/Applying-Data-Binding-for-Views) to bind data into layout templates.
-* [ ] On the profile screen, leverage the [CoordinatorLayout](http://guides.codepath.com/android/Handling-Scrolls-with-CoordinatorLayout#responding-to-scroll-events) to [apply scrolling behavior](https://hackmd.io/s/SJyDOCgU) as the user scrolls through the profile timeline.
-* [ ] User can view their direct messages (or send new ones)
-
+* [x] Enforced limits for tweets that are too long
+* [x] Implemented MVVM architecture with data binding
+* [x] Implemented custom toolbar with iconography of the logged-in user for context
+* [x] Used Retrolambda to simplify callbacks
+* [x] Used Butterknife to simplify view boilerplate
+* [x] Used Gson to read JSON
+* [x] Added link to scroll to top by clicking on Twitter logo for better UX (don’t want to have the user manually scroll to the top to pulll to refresh, for example.
+* [x] Added LinkifiedTextView to solve problem with click propagation when list item is selected
+* [x] Added custom fonts for composing views
+* [x] Different icons for items that have been retweeted by logged-in user
+* [x] Different icons for items that have been favorited by logged-in user
+* [x] Added context and automatic @ for replies
+* [x] Added dividers for better visual separation of tweets
+* [x] Used ViewPager and PagerSlidingTabStrip
 
 ## Video Walkthrough
 
@@ -109,7 +93,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 - Twitter API clean in comparision to NYT API
 - Very tempting to use Twitter Kit
 - Code reuse / good MVVM architecture + inheritance scheme made adding features much easier
-- Coordinator layout with fragments?
+- Coordinator layout with fragments -- seemed difficult
 
 ## Open-source libraries used
 
