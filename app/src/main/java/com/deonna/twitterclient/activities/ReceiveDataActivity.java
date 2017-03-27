@@ -41,7 +41,5 @@ public class ReceiveDataActivity extends AppCompatActivity {
 
             }
         }
-
-        finish();
     }
 }
