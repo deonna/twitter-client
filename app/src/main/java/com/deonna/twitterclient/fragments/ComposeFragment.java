@@ -1,6 +1,7 @@
 package com.deonna.twitterclient.fragments;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -166,7 +167,18 @@ public class ComposeFragment extends DialogFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                binding.tvCharacterCount.setText(String.valueOf(composeViewModel.getCharacterCount(s.length())));
+                int currentCount = composeViewModel.getCharacterCount(s.length());
+
+                if (currentCount <= 0) {
+                    binding.btSendTweet.setEnabled(false);
+                    binding.tvCharacterCount.setText("Too many characters.");
+                    binding.tvCharacterCount.setTextColor(Color.RED);
+                } else {
+                    binding.btSendTweet.setEnabled(true);
+                    binding.tvCharacterCount.setText(String.valueOf(currentCount));
+                    binding.tvCharacterCount.setTextColor(Color.BLACK);
+                }
+
             }
 
             @Override
