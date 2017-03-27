@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.FragmentComposeBinding;
+import com.deonna.twitterclient.models.Draft;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.ComposeViewModel;
@@ -70,6 +71,10 @@ public class ComposeFragment extends DialogFragment {
         );
         setupClickEvents(composeViewModel);
 
+        setupSaveDraft();
+
+        setDraftIfExists();
+
         return fragmentView;
     }
 
@@ -80,6 +85,31 @@ public class ComposeFragment extends DialogFragment {
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, height);
 
         super.onResume();
+    }
+
+    private void setupSaveDraft() {
+
+        binding.btSaveDraft.setOnClickListener((view) -> {
+
+            String newTweet = binding.etNewTweet.getText().toString();
+
+            Draft draft = new Draft(newTweet);
+            draft.saveNew();
+            dismiss();
+        });
+    }
+
+    private void setDraftIfExists() {
+
+        String draft = Draft.getLast();
+
+        if (draft != null && !draft.isEmpty()) {
+
+            binding.etNewTweet.setText(draft);
+
+            int selectionPosition = draft.length();
+            binding.etNewTweet.setSelection(selectionPosition);
+        }
     }
 
     private void setProfilePicture(String url, ImageView ivProfileImage, int size) {

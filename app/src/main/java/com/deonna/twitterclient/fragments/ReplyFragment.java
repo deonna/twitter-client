@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.FragmentReplyBinding;
+import com.deonna.twitterclient.models.Draft;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.ReplyViewModel;
@@ -113,14 +115,7 @@ public class ReplyFragment extends DialogFragment {
 
         binding.ivCloseDialog.setOnClickListener((view) -> {
 
-            String newTweet = binding.etNewTweet.getText().toString();
-
-            if (newTweet.isEmpty()) {
-                dismiss();
-            } else {
-                //TODO: Prompt to save draft
-                //Load this draft afterward
-            }
+            dismiss();
         });
 
         final TextWatcher characterCountWatcher = getCharacterCountWatcher(replyViewModel);

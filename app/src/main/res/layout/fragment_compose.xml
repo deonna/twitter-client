@@ -75,6 +75,25 @@
                 android:layout_height="wrap_content">
 
             <Button
+                android:id="@+id/btSaveDraft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="8dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/rounded_corner_button"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:textSize="10sp"
+                android:text="Save" />
+
+            <Button
                 android:id="@+id/btSendTweet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

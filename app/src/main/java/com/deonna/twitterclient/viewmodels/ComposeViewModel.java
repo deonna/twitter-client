@@ -20,12 +20,12 @@ public class ComposeViewModel {
     protected Context context;
     protected User currentUser;
 
-    private TweetsRefreshListener refreshListener;
+//    private TweetsRefreshListener refreshListener;
 
     public ComposeViewModel(Context context, User user) {
 
         currentUser = user;
-        refreshListener = (TweetsRefreshListener) context;
+//        refreshListener = (TweetsRefreshListener) context;
 
         this.context = context;
     }
@@ -47,7 +47,7 @@ public class ComposeViewModel {
             @Override
             public void onTweetSent(String newTweet) {
 
-                refreshListener.getNewestTweets();
+//                refreshListener.getNewestTweets();
             }
 
             @Override

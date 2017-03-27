@@ -35,6 +35,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         this.context = context;
         this.tweets = tweets;
+        this.fragmentManager = fragmentManger;
     }
 
     public TweetsAdapter(ProfileActivity profileContext, List<Tweet> tweets) {
