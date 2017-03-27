@@ -83,6 +83,10 @@ Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/DtyQkHM.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+The link isn't rendering properly.
+
+[Twitter Client Demo #1](http://i.imgur.com/DtyQkHM.gif)
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
