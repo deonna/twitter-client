@@ -118,8 +118,8 @@ public class TweetViewModel {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public Drawable getFavoritedDrawable() {
 
+    public Drawable getFavoritedDrawable() {
         if (tweet.retweeted) {
             return context.getDrawable(R.drawable.ic_favorite_selected);
         } else {
@@ -145,6 +145,21 @@ public class TweetViewModel {
     public void favorite(long id) {
 
         client.favoriteTweet(id, new FavoriteCallback() {
+            @Override
+            public void onFavorite() {
+
+            }
+
+            @Override
+            public void onFavoriteFailed() {
+
+            }
+        });
+    }
+
+    public void unfavorite(long id) {
+
+        client.unfavoriteTweet(id, new FavoriteCallback() {
             @Override
             public void onFavorite() {
 

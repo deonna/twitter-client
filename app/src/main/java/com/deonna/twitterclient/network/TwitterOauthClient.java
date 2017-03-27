@@ -184,7 +184,17 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void favoriteTweet(long id, FavoriteCallback callback) {
 
-        String apiUrl = getApiUrl("favorites/create.json");
+        sendToFavoritesEndpoint(id, "favorites/create.json", callback);
+
+    }
+    public void unfavoriteTweet(long id, FavoriteCallback callback) {
+
+        sendToFavoritesEndpoint(id, "favorites/destroy.json", callback);
+    }
+
+    private void sendToFavoritesEndpoint(long id, String url, FavoriteCallback callback) {
+
+        String apiUrl = getApiUrl(url);
 
         RequestParams params = new RequestParams();
         params.put("id", id);
@@ -206,6 +216,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
             }
         });
     }
+
 
     public void retweet(long id, RetweetCallback callback) {
 
@@ -231,4 +242,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
             }
         });
     }
+
+
 }
