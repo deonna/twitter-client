@@ -123,7 +123,7 @@ public class Tweet extends BaseModel {
 
         String candidateUrl = "";
 
-        if (entities.media == null || entities.media.isEmpty()) {
+        if (entities == null || entities.media == null || entities.media.isEmpty()) {
             return candidateUrl;
         }
 
