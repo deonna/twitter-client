@@ -4,12 +4,13 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
+import com.deonna.twitterclient.callbacks.FavoriteCallback;
+import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.callbacks.TweetSentCallback;
 import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
-import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -177,6 +178,56 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
                 callback.onTweetSentFailed();
+            }
+        });
+    }
+
+    public void favoriteTweet(long id, FavoriteCallback callback) {
+
+        String apiUrl = getApiUrl("favorites/create.json");
+
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+
+        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                callback.onFavorite();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+
+                callback.onFavoriteFailed();
+            }
+        });
+    }
+
+    public void retweet(long id, RetweetCallback callback) {
+
+        String apiUrl = getApiUrl("favorites/create.json");
+
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+
+        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                callback.onRetweet();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+
+                callback.onRetweetFailed();
             }
         });
     }

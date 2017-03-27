@@ -60,6 +60,7 @@ I implemented some features from project 4 as well:
 * [x] User can **"reply" to any tweet on their home timeline**
   * [x] The user that wrote the original tweet is automatically "@" replied in compose
 * [x] User can click on a tweet to be **taken to a "detail view"** of that tweet
+* User can take favorite or retweet actions on a tweet
 
 
 * [x] Enforced limits for tweets that are too long
@@ -103,6 +104,10 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 - [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
 - [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
+- Butterknife
+- Gson
+- Retrolambda
+
 
 ## License
 

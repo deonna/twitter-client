@@ -10,6 +10,8 @@ import android.util.Log;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
+import com.deonna.twitterclient.callbacks.FavoriteCallback;
+import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.callbacks.TweetsCallback;
 import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
 import com.deonna.twitterclient.fragments.TweetsListFragment;
@@ -151,4 +153,6 @@ public class TweetsListViewModel implements ViewModel {
 
         Tweet.deleteAll();
     }
+
+
 }

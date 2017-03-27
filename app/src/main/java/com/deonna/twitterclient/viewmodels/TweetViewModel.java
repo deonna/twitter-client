@@ -8,7 +8,11 @@ import android.text.format.DateUtils;
 import android.view.View;
 
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.callbacks.FavoriteCallback;
+import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.network.TwitterOauthClient;
+import com.deonna.twitterclient.utilities.TwitterApplication;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,10 +29,14 @@ public class TweetViewModel {
     private Context context;
     private Tweet tweet;
 
+    protected final TwitterOauthClient client;
+
     public TweetViewModel(Context context, Tweet tweet) {
 
         this.context = context;
         this.tweet = tweet;
+
+        client = TwitterApplication.getRestClient();
     }
 
     public String getName() {
@@ -117,5 +125,35 @@ public class TweetViewModel {
         } else {
             return context.getDrawable(R.drawable.ic_favorite);
         }
+    }
+
+    public void retweet(long id) {
+
+        client.retweet(id, new RetweetCallback() {
+            @Override
+            public void onRetweet() {
+
+            }
+
+            @Override
+            public void onRetweetFailed() {
+
+            }
+        });
+    }
+
+    public void favorite(long id) {
+
+        client.favoriteTweet(id, new FavoriteCallback() {
+            @Override
+            public void onFavorite() {
+
+            }
+
+            @Override
+            public void onFavoriteFailed() {
+
+            }
+        });
     }
 }
