@@ -37,7 +37,7 @@ public class TimelineViewModel implements ViewModel {
 
         this.context = context;
 
-        refreshListener = (TweetsRefreshListener) context;
+//        refreshListener = (TweetsRefreshListener) context;
 
         tweets = new ArrayList<>();
         tweetsAdapter = new TweetsAdapter(context, tweets, fragmentManager);
@@ -95,32 +95,32 @@ public class TimelineViewModel implements ViewModel {
         });
     }
 
-    public void getNewestTweets() {
-
-        Long sinceId = null;
-
-        if (!tweets.isEmpty()) {
-            sinceId = tweets.get(0).id - 1;
-        } else {
-            sinceId = 1L;
-        }
-
-        client.getNewestTweets(sinceId, new TweetsCallback() {
-
-            @Override
-            public void onTweetsReceived(List<Tweet> newTweets) {
-
-                tweets.addAll(0, newTweets);
-                tweetsAdapter.notifyItemRangeChanged(0, newTweets.size());
-
-                refreshListener.finishRefreshing();
-            }
-
-            @Override
-            public void onTweetsError() {
-
-                refreshListener.finishRefreshing();
-            }
-        });
-    }
+//    public void getNewestTweets() {
+//
+//        Long sinceId = null;
+//
+//        if (!tweets.isEmpty()) {
+//            sinceId = tweets.get(0).id - 1;
+//        } else {
+//            sinceId = 1L;
+//        }
+//
+//        client.getNewestTweets(sinceId, new TweetsCallback() {
+//
+//            @Override
+//            public void onTweetsReceived(List<Tweet> newTweets) {
+//
+//                tweets.addAll(0, newTweets);
+//                tweetsAdapter.notifyItemRangeChanged(0, newTweets.size());
+//
+//                refreshListener.finishRefreshing();
+//            }
+//
+//            @Override
+//            public void onTweetsError() {
+//
+//                refreshListener.finishRefreshing();
+//            }
+//        });
+//    }
 }

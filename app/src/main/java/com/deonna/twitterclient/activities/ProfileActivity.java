@@ -18,7 +18,6 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ProfileActivity extends AppCompatActivity {
 
-
     public static final String KEY_USER = "user";
 
     private ProfileViewModel profileViewModel;
@@ -46,7 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
     private void loadImage(String url, ImageView ivImage) {
 
         int size = TweetDetailViewModel.getProfileImageSize();
-
 
         Glide.with(this)
                 .load(url)

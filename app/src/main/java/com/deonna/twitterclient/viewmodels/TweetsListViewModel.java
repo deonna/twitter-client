@@ -3,12 +3,16 @@ package com.deonna.twitterclient.viewmodels;
 import android.app.Fragment;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.TweetsCallback;
+import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
+import com.deonna.twitterclient.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
@@ -106,5 +110,34 @@ public class TweetsListViewModel implements ViewModel {
         } else {
             return maxId - 1;
         }
+    }
+
+    public void getNewestTweets(final SwipeRefreshLayout srlTimeline) {
+
+        Long sinceId = null;
+
+        if (!tweets.isEmpty()) {
+            sinceId = tweets.get(0).id - 1;
+        } else {
+            sinceId = 1L;
+        }
+
+        client.getNewestTweets(sinceId, new TweetsCallback() {
+
+            @Override
+            public void onTweetsReceived(List<Tweet> newTweets) {
+
+                tweets.addAll(0, newTweets);
+                tweetsAdapter.notifyItemRangeChanged(0, newTweets.size());
+
+                srlTimeline.setRefreshing(false);
+            }
+
+            @Override
+            public void onTweetsError() {
+
+               srlTimeline.setRefreshing(false);
+            }
+        });
     }
 }

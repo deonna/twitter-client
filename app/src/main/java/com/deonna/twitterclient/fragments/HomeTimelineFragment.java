@@ -18,6 +18,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
         super.setupBindings(inflater, parent);
 
         super.setupTimelineView();
+        super.setupSwipeToRefresh();
 
         return binding.getRoot();
     }

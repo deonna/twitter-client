@@ -1,6 +1,6 @@
-# Project 3 - *Name of App Here*
+# Project 3 - *Twitter Client*
 
-**Name of your app** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+**Twitter Client** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
 Time spent: **X** hours spent in total
 
@@ -56,17 +56,16 @@ The following **additional** features are implemented:
 * [x] Different icons for retweeted
 * [x] Different icons for favorited
 * [x] Added dividers for better visual separation of tweets
+* [x] Used ViewPages and PagerSlidingTabStrip
 
 
----
-
-# Project 4 - *Name of App Here*
+# Project 4 - *Twitter Client*
 
 
 * [x] The app includes **all required user stories** from Week 3 Twitter Client
-* [ ] User can **switch between Timeline and Mention views using tabs**
-  * [ ] User can view their home timeline tweets.
-  * [ ] User can view the recent mentions of their username.
+* [x] User can **switch between Timeline and Mention views using tabs**
+  * [x] User can view their home timeline tweets.
+  * [x] User can view the recent mentions of their username.
 * [x] User can navigate to **view their own profile**
   * [x] User can see picture, tagline, # of followers, # of following, and tweets on their profile.
 * [x] User can **click on the profile image** in any tweet to see **another user's** profile.

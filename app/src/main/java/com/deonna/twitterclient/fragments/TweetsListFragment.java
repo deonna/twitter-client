@@ -30,6 +30,7 @@ public class TweetsListFragment extends Fragment {
         setupBindings(inflater, parent);
 
         setupTimelineView();
+        setupSwipeToRefresh();
 
         return binding.getRoot();
     }
@@ -49,10 +50,12 @@ public class TweetsListFragment extends Fragment {
 
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void setupSwipeToRefresh() {
 
-        super.onCreate(savedInstanceState);
+        binding.srlTimeline.setOnRefreshListener(() -> {
+
+            tweetsListViewModel.getNewestTweets(binding.srlTimeline);
+        });
     }
 
     public void scrollToTop() {
