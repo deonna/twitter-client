@@ -1,55 +1,74 @@
 package com.deonna.twitterclient.models;
 
+import com.deonna.twitterclient.database.DbFlowExclusionStrategy;
+import com.deonna.twitterclient.database.TwitterClientDatabase;
+import com.google.gson.ExclusionStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import org.json.JSONObject;
 import org.parceler.Parcel;
 
-@Parcel
-public class User {
+@Table(database = TwitterClientDatabase.class)
+@Parcel(analyze={User.class})
+public class User extends BaseModel {
 
     private static final String SMALL_IMAGE_TEXT = "_normal";
 
+    @Column
     @SerializedName("name")
     @Expose
     public String name;
 
+    @Column
     @SerializedName("location")
     @Expose
     public String location;
 
+    @Column
     @SerializedName("profile_image_url_https")
     @Expose
     public String profileImageUrl;
 
+    @Column
     @SerializedName("verified")
     @Expose
     public Boolean isVerified;
 
+    @Column
+    @PrimaryKey
     @SerializedName("screen_name")
     @Expose
     public String screenName;
 
+    @Column
     @SerializedName("profile_background_image_url")
     @Expose
     public String profileBackgroundImageUrl;
 
+    @Column
     @SerializedName("friends_count")
     @Expose
     public int numFollowing;
 
+    @Column
     @SerializedName("followers_count")
     @Expose
     public int numFollowers;
 
+    @Column
     @SerializedName("url")
     @Expose
     public String url;
 
+    @Column
     @SerializedName("description")
     @Expose
     public String description;
@@ -59,7 +78,9 @@ public class User {
         return  profileImageUrl.replaceAll(SMALL_IMAGE_TEXT, "");
     }
 
-    public static Gson gson = new GsonBuilder().create();
+    public static Gson gson = new GsonBuilder()
+            .setExclusionStrategies(new ExclusionStrategy[]{ new DbFlowExclusionStrategy() })
+            .create();
 
     public static User fromJson(JSONObject userJson) {
 

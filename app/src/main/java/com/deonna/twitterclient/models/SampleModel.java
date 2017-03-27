@@ -1,6 +1,6 @@
 package com.deonna.twitterclient.models;
 
-import com.deonna.twitterclient.database.MyDatabase;
+import com.deonna.twitterclient.database.TwitterClientDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -20,7 +20,7 @@ import java.util.List;
  * Note: All models **must extend from** `BaseModel` as shown below.
  * 
  */
-@Table(database = MyDatabase.class)
+@Table(database = TwitterClientDatabase.class)
 public class SampleModel extends BaseModel {
 
 	@PrimaryKey
