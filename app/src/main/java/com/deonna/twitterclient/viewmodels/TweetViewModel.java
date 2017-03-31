@@ -3,10 +3,7 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.Observable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,6 +32,7 @@ public class TweetViewModel extends BaseObservable {
     private Context context;
     private Tweet tweet;
     private Drawable retweetIcon;
+    private Drawable favoriteIcon;
 
     protected final TwitterOauthClient client;
 
@@ -44,6 +42,8 @@ public class TweetViewModel extends BaseObservable {
         this.tweet = tweet;
 
         setRetweetIcon(tweet.retweeted);
+        setFavoriteIcon(tweet.favorited);
+
         client = TwitterApplication.getRestClient();
     }
 
@@ -125,10 +125,27 @@ public class TweetViewModel extends BaseObservable {
 
         if (retweeted) {
             retweetIcon = context.getDrawable(R.drawable.ic_retweet_selected);
-            notifyPropertyChanged(BR.retweetIcon);
+            notifyPropertyChanged(BR.retweetIcon); //TODO: unnecessary?
         } else {
             retweetIcon = context.getDrawable(R.drawable.ic_retweet);
             notifyPropertyChanged(BR.retweetIcon);
+        }
+    }
+
+    @Bindable
+    public Drawable getFavoriteIcon() {
+
+        return favoriteIcon;
+    }
+
+    public void setFavoriteIcon(boolean favorited) {
+
+        if (favorited) {
+            favoriteIcon = context.getDrawable(R.drawable.ic_favorite_selected);
+            notifyPropertyChanged(BR.favoriteIcon);
+        } else {
+            favoriteIcon = context.getDrawable(R.drawable.ic_favorite);
+            notifyPropertyChanged(BR.favoriteIcon);
         }
     }
 
@@ -171,12 +188,17 @@ public class TweetViewModel extends BaseObservable {
         });
     }
 
-    public void favorite(long id) {
+    public void favorite(long id, ImageView ivFavoriteIcon, TextView tvFavoriteCount) {
 
         client.favoriteTweet(id, new FavoriteCallback() {
             @Override
-            public void onFavorite() {
+            public void onFavorite(Tweet newTweet) {
 
+                tweet = newTweet;
+                setFavoriteIcon(true);
+
+                ivFavoriteIcon.setImageDrawable(favoriteIcon);
+                tvFavoriteCount.setText(tweet.favoriteCount.toString());
             }
 
             @Override
@@ -186,12 +208,17 @@ public class TweetViewModel extends BaseObservable {
         });
     }
 
-    public void unfavorite(long id) {
+    public void unfavorite(long id, ImageView ivFavoriteIcon, TextView tvFavoriteCount) {
 
         client.unfavoriteTweet(id, new FavoriteCallback() {
             @Override
-            public void onFavorite() {
+            public void onFavorite(Tweet newTweet) {
 
+                tweet = newTweet;
+                setFavoriteIcon(false);
+
+                ivFavoriteIcon.setImageDrawable(favoriteIcon);
+                tvFavoriteCount.setText(tweet.favoriteCount.toString());
             }
 
             @Override

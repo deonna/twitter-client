@@ -93,22 +93,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         tweetBinding.ivRetweets.setOnClickListener((view) -> {
 
             tweetViewModel.retweet(tweet.id, tweetBinding.ivRetweets, tweetBinding.tvRetweets);
+
+//            notifyItemChanged(position);
         });
 
         tweetBinding.ivFavorites.setOnClickListener((view) -> {
 
-
             if (tweet.favorited) {
-                tweetViewModel.unfavorite(tweet.id);
-
-                tweet.favorited = false;
-                tweetBinding.ivFavorites.setImageDrawable(context.getDrawable(R.drawable.ic_favorite));
+                tweetViewModel.unfavorite(tweet.id, tweetBinding.ivFavorites, tweetBinding.tvFavorites);
             } else {
-                tweetViewModel.favorite(tweet.id);
-
-                tweet.favorited = true;
-                tweetBinding.ivFavorites.setImageDrawable(context.getDrawable(R.drawable.ic_favorite_selected));
+                tweetViewModel.favorite(tweet.id, tweetBinding.ivFavorites, tweetBinding.tvFavorites);
             }
+
+            notifyItemChanged(position);
         });
 
         loadProfileImage(

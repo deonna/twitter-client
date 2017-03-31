@@ -5,7 +5,6 @@ import com.deonna.twitterclient.database.TwitterClientDatabase;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
@@ -78,7 +77,7 @@ public class Tweet extends BaseModel {
         .setExclusionStrategies(new ExclusionStrategy[]{new DbFlowExclusionStrategy()})
         .create();
 
-    public static List<Tweet> fromJson(JSONArray tweetsJson) {
+    public static List<Tweet> fromJsonMultiple(JSONArray tweetsJson) {
 
         List<Tweet> tweets = gson.fromJson(
                 tweetsJson.toString(),

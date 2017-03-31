@@ -43,8 +43,15 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
     private static final int DEFAULT_SINCE_ID = 1;
+    public static final String FAVORITES_CREATE_ENDPOINT = "favorites/create.json";
+    public static final String FAVORITES_DESTROY_ENDPOINT = "favorites/destroy.json";
+    public static final String STATUS_UPDATE_ENDPOINT = "statuses/update.json";
+    public static final String KEY_ID = "id";
+    public static final String KEY_STATUS = "status";
+    public static final String KEY_SKIP_STATUS = "skip_status";
+    public static final String KEY_INCLUDE_EMAIL = "include_email";
 
-	public TwitterOauthClient(Context context) {
+    public TwitterOauthClient(Context context) {
 
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
@@ -113,7 +120,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 
-                List<Tweet> tweets = Tweet.fromJson(response);
+                List<Tweet> tweets = Tweet.fromJsonMultiple(response);
 
                 callback.onTweetsReceived(tweets);
                 Tweet.saveAll(tweets);
@@ -134,8 +141,8 @@ public class TwitterOauthClient extends OAuthBaseClient {
         String apiUrl = getApiUrl("account/verify_credentials.json");
 
         RequestParams params = new RequestParams();
-        params.put("skip_status", true);
-        params.put("include_email", true);
+        params.put(KEY_SKIP_STATUS, true);
+        params.put(KEY_INCLUDE_EMAIL, true);
 
         getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
 
@@ -159,10 +166,10 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void sendNewTweet(String newTweet, TweetSentCallback callback) {
 
-        String apiUrl = getApiUrl("statuses/update.json");
+        String apiUrl = getApiUrl(STATUS_UPDATE_ENDPOINT);
 
         RequestParams params = new RequestParams();
-        params.put("status", newTweet);
+        params.put(KEY_STATUS, newTweet);
 
         getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
 
@@ -184,12 +191,12 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void favoriteTweet(long id, FavoriteCallback callback) {
 
-        sendToFavoritesEndpoint(id, "favorites/create.json", callback);
+        sendToFavoritesEndpoint(id, FAVORITES_CREATE_ENDPOINT, callback);
 
     }
     public void unfavoriteTweet(long id, FavoriteCallback callback) {
 
-        sendToFavoritesEndpoint(id, "favorites/destroy.json", callback);
+        sendToFavoritesEndpoint(id, FAVORITES_DESTROY_ENDPOINT, callback);
     }
 
     private void sendToFavoritesEndpoint(long id, String url, FavoriteCallback callback) {
@@ -197,14 +204,16 @@ public class TwitterOauthClient extends OAuthBaseClient {
         String apiUrl = getApiUrl(url);
 
         RequestParams params = new RequestParams();
-        params.put("id", id);
+        params.put(KEY_ID, id);
 
         getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                callback.onFavorite();
+                Tweet tweet = Tweet.fromJsonSingle(response);
+
+                callback.onFavorite(tweet);
             }
 
             @Override
@@ -223,7 +232,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
         String apiUrl = getApiUrl("statuses/retweet/" + id + ".json");
 
         RequestParams params = new RequestParams();
-        params.put("id", id);
+        params.put(KEY_ID, id);
 
         getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
 

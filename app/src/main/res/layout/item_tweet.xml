@@ -194,7 +194,7 @@
                     android:layout_marginEnd="2dp"
                     android:layout_marginRight="2dp"
                     android:scaleType="fitCenter"
-                    android:src="@{tweetViewModel.getFavoritedDrawable()}"
+                    android:src="@{tweetViewModel.getFavoriteIcon()}"
                     tools:src="@drawable/ic_favorite_selected"/>
 
                 <TextView
