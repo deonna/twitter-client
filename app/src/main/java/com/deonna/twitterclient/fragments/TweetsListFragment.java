@@ -15,18 +15,18 @@ import android.view.ViewGroup;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.FragmentTweetsListBinding;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
-import com.deonna.twitterclient.viewmodels.TweetsListViewModel;
+import com.deonna.twitterclient.viewmodels.TweetsTimelineViewModel;
 
 public class TweetsListFragment extends Fragment {
 
-    protected TweetsListViewModel tweetsListViewModel;
+    protected TweetsTimelineViewModel tweetsTimelineViewModel;
     protected FragmentTweetsListBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
-        setupViewModel(new TweetsListViewModel(getContext(), getFragmentManager()));
+        setupViewModel(new TweetsTimelineViewModel(getContext(), getFragmentManager()));
         setupBindings(inflater, parent);
 
         setupTimelineView();
@@ -35,17 +35,17 @@ public class TweetsListFragment extends Fragment {
         return binding.getRoot();
     }
 
-    public void setupViewModel(TweetsListViewModel viewModel) {
+    public void setupViewModel(TweetsTimelineViewModel viewModel) {
 
-        tweetsListViewModel = viewModel;
-        tweetsListViewModel.onCreate();
+        tweetsTimelineViewModel = viewModel;
+        tweetsTimelineViewModel.onCreate();
     }
 
     public void setupBindings(LayoutInflater inflater, @Nullable ViewGroup parent) {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tweets_list, parent, false);
 
-        binding.setTweetsListViewModel(tweetsListViewModel);
+        binding.setTweetsTimelineViewModel(tweetsTimelineViewModel);
         binding.executePendingBindings();
 
     }
@@ -54,7 +54,7 @@ public class TweetsListFragment extends Fragment {
 
         binding.srlTimeline.setOnRefreshListener(() -> {
 
-            tweetsListViewModel.getNewestTweets(binding.srlTimeline);
+            tweetsTimelineViewModel.getNewestTweets(binding.srlTimeline);
         });
     }
 
@@ -65,7 +65,7 @@ public class TweetsListFragment extends Fragment {
 
     public void addNewlyComposedTweet() {
 
-        tweetsListViewModel.addNewlyComposedTweet();
+        tweetsTimelineViewModel.addNewlyComposedTweet();
     }
 
     protected void setupTimelineView() {
@@ -76,9 +76,9 @@ public class TweetsListFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         binding.rvTimeline.setLayoutManager(layoutManager);
-        binding.rvTimeline.setAdapter(tweetsListViewModel.getAdapter());
+        binding.rvTimeline.setAdapter(tweetsTimelineViewModel.getAdapter());
 
-        EndlessRecyclerViewScrollListener scrollListener = tweetsListViewModel.initializeEndlessScrollListener(layoutManager);
+        EndlessRecyclerViewScrollListener scrollListener = tweetsTimelineViewModel.initializeEndlessScrollListener(layoutManager);
 
         binding.rvTimeline.addOnScrollListener(scrollListener);
     }

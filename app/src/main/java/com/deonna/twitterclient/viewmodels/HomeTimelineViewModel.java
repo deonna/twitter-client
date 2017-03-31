@@ -10,7 +10,7 @@ import com.deonna.twitterclient.network.NetworkStatus;
 
 import java.util.List;
 
-public class HomeTimelineViewModel extends TweetsListViewModel {
+public class HomeTimelineViewModel extends TweetsTimelineViewModel {
 
     public HomeTimelineViewModel(Context context, FragmentManager fragmentManager) {
 

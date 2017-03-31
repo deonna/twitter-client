@@ -8,8 +8,8 @@
     <data>
 
         <variable
-            name="tweetsListViewModel"
-            type="com.deonna.twitterclient.viewmodels.TweetsListViewModel"/>
+            name="tweetsTimelineViewModel"
+            type="com.deonna.twitterclient.viewmodels.TweetsTimelineViewModel"/>
 
     </data>
 

@@ -16,9 +16,9 @@ import com.deonna.twitterclient.utilities.TwitterApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TweetsListViewModel implements ViewModel {
+public class TweetsTimelineViewModel implements ViewModel {
 
-    protected static final String TAG = TweetsListViewModel.class.getSimpleName();
+    protected static final String TAG = TweetsTimelineViewModel.class.getSimpleName();
     protected static final String ERROR = "Error loading Tweets!";
 
     protected final Context context;
@@ -30,7 +30,7 @@ public class TweetsListViewModel implements ViewModel {
 
     protected Long maxId;
 
-    public TweetsListViewModel(Context context, FragmentManager fragmentManager) {
+    public TweetsTimelineViewModel(Context context, FragmentManager fragmentManager) {
 
         this.context = context;
 
@@ -43,7 +43,6 @@ public class TweetsListViewModel implements ViewModel {
     @Override
     public void onCreate() {
 
-//        getHomeTimeline();
     }
 
     @Override

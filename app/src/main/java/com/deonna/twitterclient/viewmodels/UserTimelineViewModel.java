@@ -9,7 +9,7 @@ import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;
 
-public class UserTimelineViewModel extends TweetsListViewModel {
+public class UserTimelineViewModel extends TweetsTimelineViewModel {
 
     private String screenName;
 

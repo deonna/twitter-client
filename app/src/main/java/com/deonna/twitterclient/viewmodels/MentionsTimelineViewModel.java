@@ -10,7 +10,7 @@ import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;
 
-public class MentionsTimelineViewModel extends TweetsListViewModel {
+public class MentionsTimelineViewModel extends TweetsTimelineViewModel {
 
     public MentionsTimelineViewModel(Context context, FragmentManager fragmentManager) {
 
