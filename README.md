@@ -59,11 +59,15 @@ I implemented some features from project 4 as well:
 * [x] Added link to scroll to top by clicking on Twitter logo for better UX (don’t want to have the user manually scroll to the top to pulll to refresh, for example.
 * [x] Added LinkifiedTextView to solve problem with click propagation when list item is selected
 * [x] Added custom fonts for composing views
+* [x] Added verified user badge
 * [x] Different icons for items that have been retweeted by logged-in user
 * [x] Different icons for items that have been favorited by logged-in user
+* [x] Used Glide transformations
 * [x] Added context and automatic @ for replies
 * [x] Added dividers for better visual separation of tweets
 * [x] Used ViewPager and PagerSlidingTabStrip
+* [x] Followed Twitter branding guidelines and use official iconography - SVG -> vector drawable
+conversion
 
 
 * [x] User can see embedded image media within the tweet detail view
