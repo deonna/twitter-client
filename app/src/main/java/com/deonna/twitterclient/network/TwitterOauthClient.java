@@ -7,7 +7,7 @@ import com.deonna.twitterclient.BuildConfig;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.callbacks.TweetSentCallback;
-import com.deonna.twitterclient.callbacks.TweetsCallback;
+import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
@@ -49,43 +49,43 @@ public class TwitterOauthClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
 
-	public void getHomeTimeline(final TweetsCallback callback) {
+	public void getHomeTimeline(final TweetsReceivedCallback callback) {
 
         fetchTimeline(HOME_TIMELINE_PATH, null, null, null, true, callback);
 	}
 
-	public void getMentionsTimeline(final TweetsCallback callback) {
+	public void getMentionsTimeline(final TweetsReceivedCallback callback) {
 
         fetchTimeline(MENTIONS_TIMELINE_PATH, null, null, null, true, callback);
     }
 
-	public void getUserTimeline(String screenName, final TweetsCallback callback) {
+	public void getUserTimeline(String screenName, final TweetsReceivedCallback callback) {
 
         fetchTimeline(USER_TIMELINE_PATH, screenName, null, null, true, callback);
 	}
 
-	public void getNextOldestTweets(Long maxId, final TweetsCallback callback) {
+	public void getNextOldestTweets(Long maxId, final TweetsReceivedCallback callback) {
 
         fetchTimeline(HOME_TIMELINE_PATH, null, maxId, null, true, callback);
     }
 
-    public void getNextOldestMentions(Long maxId, final TweetsCallback callback) {
+    public void getNextOldestMentions(Long maxId, final TweetsReceivedCallback callback) {
 
         fetchTimeline(MENTIONS_TIMELINE_PATH, null, maxId, null, true, callback);
     }
 
-    public void getNextOldestUserTimelineTweets(String screenName, Long maxId, TweetsCallback
+    public void getNextOldestUserTimelineTweets(String screenName, Long maxId, TweetsReceivedCallback
             callback) {
 
         fetchTimeline(USER_TIMELINE_PATH, screenName, maxId, null, true, callback);
     }
 
-    public void getNewestTweets(Long sinceId, TweetsCallback callback) {
+    public void getNewestTweets(Long sinceId, TweetsReceivedCallback callback) {
 
         fetchTimeline(HOME_TIMELINE_PATH, null, null, sinceId, true, callback);
     }
 
-	private void fetchTimeline(String apiUrl, String screenName, Long maxId, Long sinceId, Boolean entities, final TweetsCallback callback) {
+	private void fetchTimeline(String apiUrl, String screenName, Long maxId, Long sinceId, Boolean entities, final TweetsReceivedCallback callback) {
 
         RequestParams params = new RequestParams();
         params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
@@ -124,7 +124,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
-                callback.onTweetsError();
+                callback.onTweetsReceivedError();
             }
         });
     }

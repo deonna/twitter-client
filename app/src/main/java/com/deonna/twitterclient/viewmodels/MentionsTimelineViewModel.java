@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
-import com.deonna.twitterclient.callbacks.TweetsCallback;
+import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class MentionsTimelineViewModel extends TweetsListViewModel {
 
     public void getMentionsTimeline() {
 
-        client.getMentionsTimeline(new TweetsCallback() {
+        client.getMentionsTimeline(new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -38,7 +38,7 @@ public class MentionsTimelineViewModel extends TweetsListViewModel {
             }
 
             @Override
-            public void onTweetsError() {
+            public void onTweetsReceivedError() {
 
             }
         });
@@ -47,7 +47,7 @@ public class MentionsTimelineViewModel extends TweetsListViewModel {
     @Override
     protected void getNextOldestTweets() {
 
-        client.getNextOldestMentions(maxId, new TweetsCallback() {
+        client.getNextOldestMentions(maxId, new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -59,7 +59,7 @@ public class MentionsTimelineViewModel extends TweetsListViewModel {
             }
 
             @Override
-            public void onTweetsError() {
+            public void onTweetsReceivedError() {
 
             }
         });

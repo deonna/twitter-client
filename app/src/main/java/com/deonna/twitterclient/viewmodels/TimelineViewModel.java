@@ -4,8 +4,6 @@ import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
-import com.deonna.twitterclient.callbacks.TweetsCallback;
-import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;

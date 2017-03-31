@@ -1,20 +1,13 @@
 package com.deonna.twitterclient.viewmodels;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
-import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
-import com.deonna.twitterclient.callbacks.FavoriteCallback;
-import com.deonna.twitterclient.callbacks.RetweetCallback;
-import com.deonna.twitterclient.callbacks.TweetsCallback;
-import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
-import com.deonna.twitterclient.fragments.TweetsListFragment;
+import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
@@ -86,7 +79,7 @@ public class TweetsListViewModel implements ViewModel {
 
     protected void getNextOldestTweets() {
 
-        client.getNextOldestTweets(maxId, new TweetsCallback() {
+        client.getNextOldestTweets(maxId, new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -98,7 +91,7 @@ public class TweetsListViewModel implements ViewModel {
             }
 
             @Override
-            public void onTweetsError() {
+            public void onTweetsReceivedError() {
 
             }
         });
@@ -124,7 +117,7 @@ public class TweetsListViewModel implements ViewModel {
             sinceId = 1L;
         }
 
-        client.getNewestTweets(sinceId, new TweetsCallback() {
+        client.getNewestTweets(sinceId, new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -136,7 +129,7 @@ public class TweetsListViewModel implements ViewModel {
             }
 
             @Override
-            public void onTweetsError() {
+            public void onTweetsReceivedError() {
 
                srlTimeline.setRefreshing(false);
             }
@@ -153,7 +146,7 @@ public class TweetsListViewModel implements ViewModel {
             sinceId = 1L;
         }
 
-        client.getNewestTweets(sinceId, new TweetsCallback() {
+        client.getNewestTweets(sinceId, new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -163,7 +156,7 @@ public class TweetsListViewModel implements ViewModel {
             }
 
             @Override
-            public void onTweetsError() {
+            public void onTweetsReceivedError() {
 
             }
         });

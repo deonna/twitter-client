@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
-import com.deonna.twitterclient.callbacks.TweetsCallback;
+import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.NetworkStatus;
 
@@ -31,7 +31,7 @@ public class HomeTimelineViewModel extends TweetsListViewModel {
 
     public void getHomeTimeline() {
 
-        client.getHomeTimeline(new TweetsCallback() {
+        client.getHomeTimeline(new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -43,7 +43,7 @@ public class HomeTimelineViewModel extends TweetsListViewModel {
             }
 
             @Override
-            public void onTweetsError() {
+            public void onTweetsReceivedError() {
 
             }
         });

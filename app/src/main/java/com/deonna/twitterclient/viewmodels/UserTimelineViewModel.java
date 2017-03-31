@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
-import com.deonna.twitterclient.callbacks.TweetsCallback;
+import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class UserTimelineViewModel extends TweetsListViewModel {
 
     public void getUserTimeline() {
 
-        client.getUserTimeline(screenName, new TweetsCallback() {
+        client.getUserTimeline(screenName, new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -36,7 +36,7 @@ public class UserTimelineViewModel extends TweetsListViewModel {
             }
 
             @Override
-            public void onTweetsError() {
+            public void onTweetsReceivedError() {
 
             }
         });
@@ -45,7 +45,7 @@ public class UserTimelineViewModel extends TweetsListViewModel {
     @Override
     protected void getNextOldestTweets() {
 
-        client.getNextOldestUserTimelineTweets(screenName, maxId, new TweetsCallback() {
+        client.getNextOldestUserTimelineTweets(screenName, maxId, new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -57,7 +57,7 @@ public class UserTimelineViewModel extends TweetsListViewModel {
             }
 
             @Override
-            public void onTweetsError() {
+            public void onTweetsReceivedError() {
 
             }
         });

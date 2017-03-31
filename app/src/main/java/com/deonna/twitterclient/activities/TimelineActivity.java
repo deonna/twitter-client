@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.astuetz.PagerSlidingTabStrip;
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.callbacks.NewTweetsListener;
 import com.deonna.twitterclient.databinding.ActivityTimelineBinding;
 import com.deonna.twitterclient.fragments.ComposeFragment;
 import com.deonna.twitterclient.fragments.HomeTimelineFragment;
@@ -36,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements NewTweetsListener {
 
     private TimelineViewModel timelineViewModel;
     private ActivityTimelineBinding binding;
@@ -60,6 +61,15 @@ public class TimelineActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupTabs();
+    }
+
+    @Override
+    public void displayNewestTweets() {
+
+        TweetsListFragment tweetsListFragment = getCurrentFragment();
+
+        tweetsListFragment.addNewlyComposedTweet();
+        tweetsListFragment.scrollToTop();
     }
 
     private void setupToolbar() {
@@ -113,14 +123,6 @@ public class TimelineActivity extends AppCompatActivity {
         TweetsPagerAdapter tweetsPagerAdapter = (TweetsPagerAdapter) binding.vpTimelines.getAdapter();
 
         return tweetsPagerAdapter.getCurrentFragment(position);
-    }
-
-    public void addNewlyComposedTweet() {
-
-        TweetsListFragment tweetsListFragment = getCurrentFragment();
-
-        tweetsListFragment.addNewlyComposedTweet();
-        tweetsListFragment.scrollToTop();
     }
 
     public class TweetsPagerAdapter extends FragmentPagerAdapter {
