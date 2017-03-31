@@ -213,8 +213,10 @@ public class TweetViewModel extends BaseObservable {
                 tweet = newTweet;
                 setFavoriteIcon(true);
 
+                String tweetCount = (tweet.favoriteCount == "0") ? "1" : tweet.favoriteCount.toString();
+
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
-                tvFavoriteCount.setText(tweet.favoriteCount.toString());
+                tvFavoriteCount.setText(tweetCount);
 
                 if (adapter != null) {
                     adapter.tweets.set(position, tweet);
@@ -239,8 +241,10 @@ public class TweetViewModel extends BaseObservable {
                 tweet = newTweet;
                 setFavoriteIcon(false);
 
+                String tweetCount = (tweet.favoriteCount == "0") ? "" : tweet.favoriteCount.toString();
+
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
-                tvFavoriteCount.setText(tweet.favoriteCount.toString());
+                tvFavoriteCount.setText(tweetCount);
 
                 if (adapter != null) {
                     adapter.tweets.set(position, tweet);
