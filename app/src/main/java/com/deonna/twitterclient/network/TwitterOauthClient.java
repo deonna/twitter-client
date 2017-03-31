@@ -230,7 +230,9 @@ public class TwitterOauthClient extends OAuthBaseClient {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                callback.onRetweet();
+                Tweet tweet = Tweet.fromJsonSingle(response);
+
+                callback.onRetweet(tweet);
             }
 
             @Override

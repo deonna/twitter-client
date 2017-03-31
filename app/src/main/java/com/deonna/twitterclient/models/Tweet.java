@@ -88,6 +88,16 @@ public class Tweet extends BaseModel {
         return tweets;
     }
 
+    public static Tweet fromJsonSingle(JSONObject tweetsJson) {
+
+        Tweet tweet = gson.fromJson(
+                tweetsJson.toString(),
+                new TypeToken<Tweet>() {
+                }.getType());
+
+        return tweet;
+    }
+
     public static List<Tweet> getAll() {
         return SQLite
                 .select()

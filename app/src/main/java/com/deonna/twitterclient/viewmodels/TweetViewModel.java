@@ -1,12 +1,18 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+import android.databinding.Observable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.deonna.twitterclient.BR;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
@@ -18,7 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class TweetViewModel {
+public class TweetViewModel extends BaseObservable {
 
     private static final int IMAGE_SIZE = 96;
 
@@ -28,6 +34,7 @@ public class TweetViewModel {
 
     private Context context;
     private Tweet tweet;
+    private Drawable retweetIcon;
 
     protected final TwitterOauthClient client;
 
@@ -36,6 +43,7 @@ public class TweetViewModel {
         this.context = context;
         this.tweet = tweet;
 
+        setRetweetIcon(tweet.retweeted);
         client = TwitterApplication.getRestClient();
     }
 
@@ -107,7 +115,32 @@ public class TweetViewModel {
         return IMAGE_SIZE;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Bindable
+    public Drawable getRetweetIcon() {
+
+        return retweetIcon;
+    }
+
+    public void setRetweetIcon(boolean retweeted) {
+
+        if (retweeted) {
+            retweetIcon = context.getDrawable(R.drawable.ic_retweet_selected);
+            notifyPropertyChanged(BR.retweetIcon);
+        } else {
+            retweetIcon = context.getDrawable(R.drawable.ic_retweet);
+            notifyPropertyChanged(BR.retweetIcon);
+        }
+    }
+
+    public Drawable getFavoritedDrawable() {
+
+        if (tweet.favorited) {
+            return context.getDrawable(R.drawable.ic_favorite_selected);
+        } else {
+            return context.getDrawable(R.drawable.ic_favorite);
+        }
+    }
+
     public Drawable getRetweetedDrawable() {
 
         if (tweet.retweeted) {
@@ -117,27 +150,23 @@ public class TweetViewModel {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-
-    public Drawable getFavoritedDrawable() {
-        if (tweet.retweeted) {
-            return context.getDrawable(R.drawable.ic_favorite_selected);
-        } else {
-            return context.getDrawable(R.drawable.ic_favorite);
-        }
-    }
-
-    public void retweet(long id) {
+    public void retweet(long id, ImageView ivRetweetIcon, TextView tvRetweetCount) {
 
         client.retweet(id, new RetweetCallback() {
             @Override
-            public void onRetweet() {
+            public void onRetweet(Tweet newTweet) {
 
+                tweet = newTweet;
+                setRetweetIcon(true);
+
+                ivRetweetIcon.setImageDrawable(retweetIcon);
+                tvRetweetCount.setText(tweet.retweetCount.toString());
             }
 
             @Override
             public void onRetweetFailed() {
 
+                setRetweetIcon(false);
             }
         });
     }

@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.deonna.twitterclient"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 25
     }
 

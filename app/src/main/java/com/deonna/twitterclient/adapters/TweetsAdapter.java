@@ -57,7 +57,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         Tweet tweet = tweets.get(position);
 
@@ -92,10 +92,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         tweetBinding.ivRetweets.setOnClickListener((view) -> {
 
-            tweetViewModel.retweet(tweet.id);
-
-            tweet.retweeted = true;
-            tweetBinding.ivRetweets.setImageDrawable(context.getDrawable(R.drawable.ic_retweet_selected));
+            tweetViewModel.retweet(tweet.id, tweetBinding.ivRetweets, tweetBinding.tvRetweets);
         });
 
         tweetBinding.ivFavorites.setOnClickListener((view) -> {

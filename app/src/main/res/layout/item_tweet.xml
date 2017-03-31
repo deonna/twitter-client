@@ -168,7 +168,7 @@
                     android:layout_marginEnd="2dp"
                     android:layout_marginRight="2dp"
                     android:scaleType="fitCenter"
-                    android:src="@{tweetViewModel.getRetweetedDrawable()}"
+                    android:src="@{tweetViewModel.getRetweetIcon()}"
                     tools:src="@drawable/ic_retweet_selected"/>
 
                 <TextView
