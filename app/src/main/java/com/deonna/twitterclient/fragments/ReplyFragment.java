@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.databinding.FragmentReplyBinding;
 import com.deonna.twitterclient.models.Draft;
 import com.deonna.twitterclient.models.User;
@@ -58,7 +59,7 @@ public class ReplyFragment extends DialogFragment {
 
         View fragmentView = binding.getRoot();
 
-        ReplyViewModel replyViewModel = new ReplyViewModel(getActivity(), currentUser);
+        ReplyViewModel replyViewModel = new ReplyViewModel((TimelineActivity) getActivity(), currentUser);
         binding.setReplyViewModel(replyViewModel);
 
         // Add content

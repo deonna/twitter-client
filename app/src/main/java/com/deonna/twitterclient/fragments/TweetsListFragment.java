@@ -63,6 +63,11 @@ public class TweetsListFragment extends Fragment {
         binding.rvTimeline.scrollToPosition(0);
     }
 
+    public void addNewlyComposedTweet() {
+
+        tweetsListViewModel.addNewlyComposedTweet();
+    }
+
     protected void setupTimelineView() {
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);

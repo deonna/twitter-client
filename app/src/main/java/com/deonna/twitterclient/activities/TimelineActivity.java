@@ -103,12 +103,24 @@ public class TimelineActivity extends AppCompatActivity {
     @OnClick(R.id.ivLogo)
     public void scrollToTop() {
 
+        getCurrentFragment().scrollToTop();
+    }
+
+    private TweetsListFragment getCurrentFragment() {
+
         int position = binding.vpTimelines.getCurrentItem();
 
         TweetsPagerAdapter tweetsPagerAdapter = (TweetsPagerAdapter) binding.vpTimelines.getAdapter();
-        TweetsListFragment tweetsListFragment = tweetsPagerAdapter.getCurrentFragment(position);
 
-        tweetsListFragment.scrollToTop();;
+        return tweetsPagerAdapter.getCurrentFragment(position);
+    }
+
+    public void addNewlyComposedTweet() {
+
+        TweetsListFragment tweetsListFragment = getCurrentFragment();
+
+        tweetsListFragment.addNewlyComposedTweet();
+        tweetsListFragment.scrollToTop();
     }
 
     public class TweetsPagerAdapter extends FragmentPagerAdapter {

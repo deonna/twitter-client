@@ -3,6 +3,7 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.callbacks.TweetSentCallback;
 import com.deonna.twitterclient.callbacks.TweetsRefreshListener;
 import com.deonna.twitterclient.models.User;
@@ -17,10 +18,10 @@ public class ComposeViewModel {
     protected static final TwitterOauthClient client = TwitterApplication.getRestClient();
 
 
-    protected Context context;
+    protected TimelineActivity context;
     protected User currentUser;
 
-    public ComposeViewModel(Context context, User user) {
+    public ComposeViewModel(TimelineActivity context, User user) {
 
         currentUser = user;
 
@@ -44,6 +45,7 @@ public class ComposeViewModel {
             @Override
             public void onTweetSent(String newTweet) {
 
+                context.addNewlyComposedTweet();
             }
 
             @Override

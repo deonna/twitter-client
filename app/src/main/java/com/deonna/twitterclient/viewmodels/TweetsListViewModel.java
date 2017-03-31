@@ -143,6 +143,32 @@ public class TweetsListViewModel implements ViewModel {
         });
     }
 
+    public void addNewlyComposedTweet() {
+
+        Long sinceId = null;
+
+        if (!tweets.isEmpty()) {
+            sinceId = tweets.get(0).id - 1;
+        } else {
+            sinceId = 1L;
+        }
+
+        client.getNewestTweets(sinceId, new TweetsCallback() {
+
+            @Override
+            public void onTweetsReceived(List<Tweet> newTweets) {
+
+                tweets.addAll(0, newTweets);
+                tweetsAdapter.notifyItemRangeChanged(0, newTweets.size());
+            }
+
+            @Override
+            public void onTweetsError() {
+
+            }
+        });
+    }
+
     public void loadTweetsFromDb() {
 
         tweets.addAll(Tweet.getAll());
