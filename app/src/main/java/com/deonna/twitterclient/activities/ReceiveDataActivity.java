@@ -37,8 +37,6 @@ public class ReceiveDataActivity extends AppCompatActivity {
 
                 composeFragment = ComposeFragment.newInstance(TwitterApplication.getCurrentUser(), title, url);
                 composeFragment.show(fragmentManager, ComposeFragment.LAYOUT_NAME);
-
-
             }
         }
     }

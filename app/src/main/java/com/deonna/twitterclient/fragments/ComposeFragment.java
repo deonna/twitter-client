@@ -152,6 +152,7 @@ public class ComposeFragment extends DialogFragment {
 
         binding.etNewTweet.setTypeface(Fonts.fontRegular);
         binding.btSendTweet.setTypeface(Fonts.fontExtraBold);
+        binding.btSaveDraft.setTypeface(Fonts.fontExtraBold);
         binding.tvCharacterCount.setTypeface(Fonts.fontRegular);
     }
 

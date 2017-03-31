@@ -19,6 +19,7 @@ import com.deonna.twitterclient.fragments.HomeTimelineFragment;
 import com.deonna.twitterclient.fragments.MentionsTimelineFragment;
 import com.deonna.twitterclient.fragments.TweetsListFragment;
 import com.deonna.twitterclient.utilities.Fonts;
+import com.deonna.twitterclient.utilities.Images;
 import com.deonna.twitterclient.viewmodels.TimelineViewModel;
 import com.deonna.twitterclient.viewmodels.TweetDetailViewModel;
 
@@ -50,17 +51,19 @@ public class TimelineActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        ViewPager vpTimelines = (ViewPager) findViewById(R.id.vpTimelines);
-        vpTimelines.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
-
-        PagerSlidingTabStrip pstsTimelines = (PagerSlidingTabStrip) findViewById(R.id.pstsTimelines);
-        pstsTimelines.setViewPager(vpTimelines);
+        setupTabs();
     }
 
     private void setupToolbar() {
 
         setSupportActionBar(binding.tbMain);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    private void setupTabs() {
+
+        binding.vpTimelines.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
+        binding.pstsTimelines.setViewPager(binding.vpTimelines);
     }
 
     @OnClick(R.id.fabCompose)
@@ -75,11 +78,7 @@ public class TimelineActivity extends AppCompatActivity {
 
         int size = TweetDetailViewModel.getProfileImageSize();
 
-        Glide.with(this)
-                .load(url)
-                .override(size, size)
-                .bitmapTransform(new RoundedCornersTransformation(this, 10, 2))
-                .into(binding.ivProfileImage);
+        Images.loadFromUrl(this, binding.ivProfileImage, url, size, size);
     }
 
     @OnClick(R.id.ivProfileImage)
