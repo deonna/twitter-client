@@ -26,7 +26,8 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Tweet> tweets;
+    public List<Tweet> tweets;
+
     private Context context;
     private FragmentManager fragmentManager;
 
@@ -63,7 +64,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         TweetViewHolder tweetHolder = (TweetViewHolder) holder;
         ItemTweetBinding tweetBinding = tweetHolder.binding;
-        TweetViewModel tweetViewModel = new TweetViewModel(context, tweet);
+        TweetViewModel tweetViewModel = new TweetViewModel(context, tweet, this);
 
         tweetBinding.setTweetViewModel(tweetViewModel);
         tweetBinding.executePendingBindings();
@@ -92,20 +93,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         tweetBinding.ivRetweets.setOnClickListener((view) -> {
 
-            tweetViewModel.retweet(tweet.id, tweetBinding.ivRetweets, tweetBinding.tvRetweets);
-
-//            notifyItemChanged(position);
+            tweetViewModel.retweet(tweet.id, position, tweetBinding.ivRetweets, tweetBinding
+                    .tvRetweets);
         });
 
         tweetBinding.ivFavorites.setOnClickListener((view) -> {
 
             if (tweet.favorited) {
-                tweetViewModel.unfavorite(tweet.id, tweetBinding.ivFavorites, tweetBinding.tvFavorites);
+                tweetViewModel.unfavorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
+                        .tvFavorites);
             } else {
-                tweetViewModel.favorite(tweet.id, tweetBinding.ivFavorites, tweetBinding.tvFavorites);
+                tweetViewModel.favorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
+                        .tvFavorites);
             }
-
-            notifyItemChanged(position);
         });
 
         loadProfileImage(
