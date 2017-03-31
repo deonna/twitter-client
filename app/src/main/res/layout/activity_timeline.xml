@@ -49,8 +49,6 @@
 
             </android.support.v7.widget.Toolbar>
 
-
-
             <com.astuetz.PagerSlidingTabStrip
                 android:id="@+id/pstsTimelines"
                 android:layout_width="match_parent"

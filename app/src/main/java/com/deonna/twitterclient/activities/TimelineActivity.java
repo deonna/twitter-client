@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.bumptech.glide.Glide;
@@ -25,6 +29,9 @@ import com.deonna.twitterclient.viewmodels.TweetDetailViewModel;
 
 import org.parceler.Parcels;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -33,6 +40,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     private TimelineViewModel timelineViewModel;
     private ActivityTimelineBinding binding;
+    private TweetsPagerAdapter tweetsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +70,9 @@ public class TimelineActivity extends AppCompatActivity {
 
     private void setupTabs() {
 
-        binding.vpTimelines.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
+        tweetsPagerAdapter = new TweetsPagerAdapter(getSupportFragmentManager());
+
+        binding.vpTimelines.setAdapter(tweetsPagerAdapter);
         binding.pstsTimelines.setViewPager(binding.vpTimelines);
     }
 
@@ -90,6 +100,17 @@ public class TimelineActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.ivLogo)
+    public void scrollToTop() {
+
+        int position = binding.vpTimelines.getCurrentItem();
+
+        TweetsPagerAdapter tweetsPagerAdapter = (TweetsPagerAdapter) binding.vpTimelines.getAdapter();
+        TweetsListFragment tweetsListFragment = tweetsPagerAdapter.getCurrentFragment(position);
+
+        tweetsListFragment.scrollToTop();;
+    }
+
     public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
         final int HOME_POSITION = 0;
@@ -97,8 +118,14 @@ public class TimelineActivity extends AppCompatActivity {
 
         final String[] tabTitles = { "Home", "Mentions" };
 
+
+        Map<Integer, TweetsListFragment> positionToFragment;
+
         public TweetsPagerAdapter(FragmentManager fm) {
+
             super(fm);
+
+            positionToFragment = new HashMap<>();
         }
 
         @Override
@@ -107,14 +134,22 @@ public class TimelineActivity extends AppCompatActivity {
             switch (position) {
 
                 case HOME_POSITION:
-                    return new HomeTimelineFragment();
+                    HomeTimelineFragment homeTimelineFragment =  new HomeTimelineFragment();
+                    positionToFragment.put(position, homeTimelineFragment);
+
+                    return homeTimelineFragment;
 
                 case MENTIONS_POSITION:
-                    return new MentionsTimelineFragment();
+                    MentionsTimelineFragment mentionsTimelineFragment = new MentionsTimelineFragment();
+                    positionToFragment.put(position, mentionsTimelineFragment);
 
-                default:
-                    return new HomeTimelineFragment();
+                    return mentionsTimelineFragment;
 
+                default: //TODO: reduce duplication
+                    HomeTimelineFragment defaultFragment =  new HomeTimelineFragment();
+                    positionToFragment.put(position, defaultFragment);
+
+                    return defaultFragment;
             }
         }
 
@@ -126,6 +161,11 @@ public class TimelineActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return tabTitles[position];
+        }
+
+        public TweetsListFragment getCurrentFragment(int position) {
+
+            return positionToFragment.get(position);
         }
     }
 }
