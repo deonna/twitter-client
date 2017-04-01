@@ -16,10 +16,10 @@ import java.util.List;
 
 public class UsersListViewModel implements ViewModel {
 
-    private Context context;
-    private final User profileUser;
-    private final List<User> users;
-    private UsersListAdapter usersListAdapter;
+    protected Context context;
+    protected final User profileUser;
+    protected final List<User> users;
+    protected UsersListAdapter usersListAdapter;
 
     protected final TwitterOauthClient client;
 
@@ -57,7 +57,7 @@ public class UsersListViewModel implements ViewModel {
         };
     }
 
-    private void getFollowersList() {
+    public void getFollowersList() {
 
         client.getFollowersList(profileUser.screenName, new UsersListCallback() {
 
@@ -74,4 +74,22 @@ public class UsersListViewModel implements ViewModel {
             }
         });
     }
+//
+//    public void getFollowingList() {
+//
+//        client.getFollowingList(profileUser.screenName, new UsersListCallback() {
+//
+//            @Override
+//            public void onUsersReceived(List<User> newUsers) {
+//
+//                users.addAll(newUsers);
+//                usersListAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onUsersReceivedError() {
+//
+//            }
+//        });
+//    }
 }

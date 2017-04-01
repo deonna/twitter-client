@@ -17,22 +17,24 @@ public class FollowersListViewModel extends UsersListViewModel {
     @Override
     public void onCreate() {
 
-
+        getFollowersList();
     }
 
-    private void getFollowersList() {
+    public void getFollowersList() {
 
-//        client.getFollowersList(get ,new UsersListCallback() {
-//
-//            @Override
-//            public void onUsersReceived(List<User> newUsers) {
-//
-//            }
-//
-//            @Override
-//            public void onUsersReceivedError() {
-//
-//            }
-//        });
+        client.getFollowersList(profileUser.screenName, new UsersListCallback() {
+
+            @Override
+            public void onUsersReceived(List<User> newUsers) {
+
+                users.addAll(newUsers);
+                usersListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onUsersReceivedError() {
+
+            }
+        });
     }
 }

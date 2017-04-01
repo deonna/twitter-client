@@ -274,8 +274,41 @@ public class TwitterOauthClient extends OAuthBaseClient {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                Log.d("Response", response.toString());
+                try {
 
+                    JSONArray usersArray = response.getJSONArray("users");
+                    List<User> users = User.fromJsonMultiple(usersArray);
+
+                    callback.onUsersReceived(users);
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
+    }
+
+    public void getFollowingList(String screenName, UsersListCallback callback) {
+
+        String apiUrl = getApiUrl("friends/list.json");
+
+        RequestParams params = new RequestParams();
+
+        params.put("screen_name", screenName.toLowerCase());
+        params.put("skip_status", true);
+        params.put("include_user_entities", false);
+
+        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
                 try {
 
@@ -288,10 +321,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
                     e.printStackTrace();
                 }
-
-//                List<User> users = User.fromJson(response);
-
-//                callback.onUsersReceived(users);
             }
 
             @Override

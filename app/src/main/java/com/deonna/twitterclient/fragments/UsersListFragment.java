@@ -23,10 +23,10 @@ import org.parceler.Parcels;
 public class UsersListFragment extends DialogFragment {
 
     public static final String LAYOUT_NAME = "fragment_users_list";
-    private static final String KEY_USER = "user";
+    protected static final String KEY_USER = "user";
 
     protected UsersListViewModel usersListViewModel;
-    private FragmentUsersListBinding binding;
+    protected FragmentUsersListBinding binding;
 
     public static UsersListFragment newInstance(User user) {
 
@@ -40,24 +40,24 @@ public class UsersListFragment extends DialogFragment {
         return usersListFragment;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        User user =  (User) Parcels.unwrap(getArguments().getParcelable(KEY_USER));
-
-        usersListViewModel = new UsersListViewModel(getActivity(), user);
-        usersListViewModel.onCreate();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
+
+        User user = getUser();
+
+        setupViewModel(new UsersListViewModel(getActivity(), user));
 
         setupBindings(inflater, parent);
         setupUsersListView();
 
         return binding.getRoot();
+    }
+
+    protected void setupViewModel(UsersListViewModel viewModel) {
+
+        usersListViewModel = viewModel;
+        usersListViewModel.onCreate();
     }
 
     protected User getUser() {
