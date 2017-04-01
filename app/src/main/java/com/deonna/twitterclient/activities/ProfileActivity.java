@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.ActivityProfileBinding;
 import com.deonna.twitterclient.fragments.FollowersListFragment;
+import com.deonna.twitterclient.fragments.FollowingListFragment;
 import com.deonna.twitterclient.fragments.UsersListFragment;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Images;
@@ -74,10 +75,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.tvFollowing.setOnTouchListener((view, event) -> {
 
-            //TODO: ensure this is the following list
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            UsersListFragment usersListFragment = UsersListFragment.newInstance(user);
-            usersListFragment.show(fragmentManager, UsersListFragment.LAYOUT_NAME);
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FollowingListFragment followingListFragment = FollowingListFragment.newInstance(user);
+                followingListFragment.show(fragmentManager, FollowingListFragment.LAYOUT_NAME);
+            }
 
             return true;
         });

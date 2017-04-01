@@ -260,7 +260,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void getFollowersList(String screenName, Long cursor, UsersListCallback callback) {
 
-        //TODO: Add cursor param
         String apiUrl = getApiUrl("followers/list.json");
 
         RequestParams params = new RequestParams();
@@ -301,11 +300,15 @@ public class TwitterOauthClient extends OAuthBaseClient {
         });
     }
 
-    public void getFollowingList(String screenName, UsersListCallback callback) {
+    public void getFollowingList(String screenName, Long cursor, UsersListCallback callback) {
 
         String apiUrl = getApiUrl("friends/list.json");
 
         RequestParams params = new RequestParams();
+
+        if (cursor != null) {
+            params.put("cursor", cursor);
+        }
 
         params.put("screen_name", screenName.toLowerCase());
         params.put("skip_status", true);
