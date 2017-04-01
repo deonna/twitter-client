@@ -20,7 +20,6 @@ public class TweetListViewModel extends TweetViewModel {
         this.adapter = adapter;
     }
 
-    @Override
     public void retweet(long id, int position, ImageView ivRetweetIcon, TextView tvRetweetCount) {
 
         client.retweet(id, new RetweetCallback() {
@@ -47,7 +46,6 @@ public class TweetListViewModel extends TweetViewModel {
         });
     }
 
-    @Override
     public void favorite(long id, int position, ImageView ivFavoriteIcon, TextView tvFavoriteCount) {
 
         client.favoriteTweet(id, new FavoriteCallback() {
@@ -79,7 +77,6 @@ public class TweetListViewModel extends TweetViewModel {
         });
     }
 
-    @Override
     public void unfavorite(long id, int position, ImageView ivFavoriteIcon, TextView tvFavoriteCount) {
 
         client.unfavoriteTweet(id, new FavoriteCallback() {

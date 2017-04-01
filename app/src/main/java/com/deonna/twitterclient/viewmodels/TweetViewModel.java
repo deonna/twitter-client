@@ -142,7 +142,7 @@ public class TweetViewModel extends BaseObservable {
         }
     }
 
-    public void retweet(long id, int position, ImageView ivRetweetIcon, TextView tvRetweetCount) {
+    public void retweet(long id, ImageView ivRetweetIcon, TextView tvRetweetCount) {
 
         client.retweet(id, new RetweetCallback() {
             @Override
@@ -163,7 +163,7 @@ public class TweetViewModel extends BaseObservable {
         });
     }
 
-    public void favorite(long id, int position, ImageView ivFavoriteIcon, TextView
+    public void favorite(long id, ImageView ivFavoriteIcon, TextView
             tvFavoriteCount) {
 
         client.favoriteTweet(id, new FavoriteCallback() {
@@ -173,11 +173,12 @@ public class TweetViewModel extends BaseObservable {
                 tweet = newTweet;
                 setFavoriteIcon(true);
 
-                // Sometimes have an issue with API incorrectly returning 0 for favorite count after POST
-                String favoriteCount = getFavoriteCount().equals("") ? "1" : getFavoriteCount();
+                if (getFavoriteCount().equals("")) {
+                    tweet.favoriteCount = "1";
+                }
 
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
-                tvFavoriteCount.setText(favoriteCount);
+                tvFavoriteCount.setText(getFavoriteCount());
             }
 
             @Override
@@ -187,7 +188,7 @@ public class TweetViewModel extends BaseObservable {
         });
     }
 
-    public void unfavorite(long id, int position, ImageView ivFavoriteIcon, TextView
+    public void unfavorite(long id, ImageView ivFavoriteIcon, TextView
             tvFavoriteCount) {
 
         client.unfavoriteTweet(id, new FavoriteCallback() {

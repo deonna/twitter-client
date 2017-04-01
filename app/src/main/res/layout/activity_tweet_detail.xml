@@ -179,7 +179,7 @@
                 tools:text="4,999"/>
 
             <TextView
-                android:id="@+id/tvRetweets"
+                android:id="@+id/tvRetweetsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tvNumRetweets"
@@ -193,8 +193,8 @@
                 android:id="@+id/tvNumFavorites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/tvRetweets"
-                android:layout_toRightOf="@+id/tvRetweets"
+                android:layout_toEndOf="@+id/tvRetweetsLabel"
+                android:layout_toRightOf="@+id/tvRetweetsLabel"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="3dp"
                 android:layout_marginRight="3dp"
@@ -204,7 +204,7 @@
                 tools:text="4,999"/>
 
             <TextView
-                android:id="@+id/tvFavorites"
+                android:id="@+id/tvFavoritesLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/tvNumFavorites"

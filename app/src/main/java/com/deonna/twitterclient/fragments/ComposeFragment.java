@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.activities.TimelineActivity;
+import com.deonna.twitterclient.callbacks.NewTweetsListener;
 import com.deonna.twitterclient.databinding.FragmentComposeBinding;
 import com.deonna.twitterclient.models.Draft;
 import com.deonna.twitterclient.models.User;
@@ -82,7 +83,7 @@ public class ComposeFragment extends DialogFragment {
 
         View fragmentView = binding.getRoot();
 
-        ComposeViewModel composeViewModel = new ComposeViewModel((TimelineActivity) getActivity(), currentUser);
+        ComposeViewModel composeViewModel = new ComposeViewModel((NewTweetsListener) getActivity(), currentUser);
         binding.setComposeViewModel(composeViewModel);
         binding.executePendingBindings();
 

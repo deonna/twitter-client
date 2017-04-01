@@ -3,11 +3,12 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 
 import com.deonna.twitterclient.activities.TimelineActivity;
+import com.deonna.twitterclient.callbacks.NewTweetsListener;
 import com.deonna.twitterclient.models.User;
 
 public class ReplyViewModel extends ComposeViewModel {
 
-    public ReplyViewModel(TimelineActivity context, User user) {
+    public ReplyViewModel(NewTweetsListener context, User user) {
         super(context, user);
     }
 
