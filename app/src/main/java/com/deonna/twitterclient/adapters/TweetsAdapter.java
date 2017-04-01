@@ -17,7 +17,7 @@ import com.deonna.twitterclient.databinding.ItemTweetBinding;
 import com.deonna.twitterclient.fragments.ReplyFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.utilities.Images;
-import com.deonna.twitterclient.viewmodels.TweetViewModel;
+import com.deonna.twitterclient.viewmodels.TweetListViewModel;
 
 import org.parceler.Parcels;
 
@@ -60,22 +60,22 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         TweetViewHolder tweetHolder = (TweetViewHolder) holder;
         ItemTweetBinding tweetBinding = tweetHolder.binding;
-        TweetViewModel tweetViewModel = new TweetViewModel(context, tweet, this);
+        TweetListViewModel tweetListViewModel = new TweetListViewModel(context, tweet, this);
 
-        tweetBinding.setTweetViewModel(tweetViewModel);
+        tweetBinding.setTweetListViewModel(tweetListViewModel);
         tweetBinding.executePendingBindings();
 
         setupTweetDetailClickListener(tweetBinding, tweet);
         setupRepliesClickListener(tweetBinding, tweet);
         setupProfileImageClickListener(tweetBinding, tweet);
 
-        setupRetweetsClickListener(tweetBinding, tweetViewModel, tweet, position);
-        setupFavoritesClickListener(tweetBinding, tweetViewModel, tweet, position);
+        setupRetweetsClickListener(tweetBinding, tweetListViewModel, tweet, position);
+        setupFavoritesClickListener(tweetBinding, tweetListViewModel, tweet, position);
 
         loadProfileImage(
                 tweet.user.getLargeProfileImageUrl(),
                 tweetBinding.ivProfileImage,
-                TweetViewModel.getProfileImageSize()
+                TweetListViewModel.getProfileImageSize()
         );
 
         loadMedia(tweet.getMediaUrl(), tweetBinding.ivMedia);
@@ -118,25 +118,25 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         });
     }
 
-    private void setupRetweetsClickListener(ItemTweetBinding tweetBinding, TweetViewModel tweetViewModel, Tweet tweet, int position) {
+    private void setupRetweetsClickListener(ItemTweetBinding tweetBinding, TweetListViewModel tweetListViewModel, Tweet tweet, int position) {
 
         tweetBinding.ivRetweets.setOnClickListener((view) -> {
 
-            tweetViewModel.retweet(tweet.id, position, tweetBinding.ivRetweets, tweetBinding
+            tweetListViewModel.retweet(tweet.id, position, tweetBinding.ivRetweets, tweetBinding
                     .tvRetweets);
         });
 
     }
 
-    private void setupFavoritesClickListener(ItemTweetBinding tweetBinding, TweetViewModel tweetViewModel, Tweet tweet, int position) {
+    private void setupFavoritesClickListener(ItemTweetBinding tweetBinding, TweetListViewModel tweetListViewModel, Tweet tweet, int position) {
 
         tweetBinding.ivFavorites.setOnClickListener((view) -> {
 
             if (tweet.favorited) {
-                tweetViewModel.unfavorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
+                tweetListViewModel.unfavorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
                         .tvFavorites);
             } else {
-                tweetViewModel.favorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
+                tweetListViewModel.favorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
                         .tvFavorites);
             }
         });

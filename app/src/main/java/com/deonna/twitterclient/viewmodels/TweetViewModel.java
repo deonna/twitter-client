@@ -2,16 +2,13 @@ package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.graphics.drawable.Drawable;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.deonna.twitterclient.BR;
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.models.Tweet;
@@ -31,11 +28,10 @@ public class TweetViewModel extends BaseObservable {
     private static final String DATE_PATTERN = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
     private Context context;
-    private Tweet tweet;
-    private TweetsAdapter adapter;
+    protected Tweet tweet;
 
-    private Drawable retweetIcon;
-    private Drawable favoriteIcon;
+    protected Drawable retweetIcon;
+    protected Drawable favoriteIcon;
 
     protected final TwitterOauthClient client;
 
@@ -48,13 +44,6 @@ public class TweetViewModel extends BaseObservable {
         setFavoriteIcon(tweet.favorited);
 
         client = TwitterApplication.getRestClient();
-    }
-
-    public TweetViewModel(Context context, Tweet tweet, TweetsAdapter adapter) {
-
-        this(context, tweet);
-
-        this.adapter = adapter;
     }
 
     public String getName() {
@@ -164,11 +153,6 @@ public class TweetViewModel extends BaseObservable {
 
                 ivRetweetIcon.setImageDrawable(retweetIcon);
                 tvRetweetCount.setText(getRetweetCount());
-
-                if (adapter != null) {
-                    adapter.tweets.set(position, tweet);
-                    adapter.notifyItemChanged(position);
-                }
             }
 
             @Override
@@ -194,11 +178,6 @@ public class TweetViewModel extends BaseObservable {
 
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
                 tvFavoriteCount.setText(favoriteCount);
-
-                if (adapter != null) {
-                    adapter.tweets.set(position, tweet);
-                    adapter.notifyItemChanged(position);
-                }
             }
 
             @Override
@@ -220,11 +199,6 @@ public class TweetViewModel extends BaseObservable {
 
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
                 tvFavoriteCount.setText(getFavoriteCount());
-
-                if (adapter != null) {
-                    adapter.tweets.set(position, tweet);
-                    adapter.notifyItemChanged(position);
-                }
             }
 
             @Override

@@ -8,8 +8,8 @@
 
     <data>
         <variable
-            name="tweetViewModel"
-            type="com.deonna.twitterclient.viewmodels.TweetViewModel"/>
+            name="tweetListViewModel"
+            type="com.deonna.twitterclient.viewmodels.TweetListViewModel"/>
     </data>
 
     <RelativeLayout
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="2dp"
-                    android:text="@{tweetViewModel.getName()}"
+                    android:text="@{tweetListViewModel.getName()}"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     tools:text="James Altucher"
@@ -74,7 +74,7 @@
                     android:layout_toEndOf="@id/tvName"
                     android:layout_toRightOf="@id/tvName"
                     android:layout_centerVertical="true"
-                    android:visibility="@{tweetViewModel.getIsVerifiedVisibility()}"
+                    android:visibility="@{tweetListViewModel.getIsVerifiedVisibility()}"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_verified"/>
 
@@ -87,7 +87,7 @@
                     android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
                     android:layout_centerVertical="true"
-                    android:text="@{tweetViewModel.getScreenName()}"
+                    android:text="@{tweetListViewModel.getScreenName()}"
                     android:textSize="10sp"
                     tools:text="\@jaltucher"/>
 
@@ -98,7 +98,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="@{tweetViewModel.getRelativeTimestamp()}"
+                    android:text="@{tweetListViewModel.getRelativeTimestamp()}"
                     android:textSize="10sp"
                     tools:text="May 10"/>
 
@@ -113,7 +113,7 @@
                 android:lineSpacingMultiplier="1.2"
                 android:autoLink="all"
                 android:linksClickable="true"
-                android:text="@{tweetViewModel.getTweetText()}"
+                android:text="@{tweetListViewModel.getTweetText()}"
                 android:textSize="12sp"
                 tools:text="I am a tweet."/>
 
@@ -125,7 +125,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:scaleType="fitCenter"
-                android:visibility="@{tweetViewModel.getMediaVisibility()}"
+                android:visibility="@{tweetListViewModel.getMediaVisibility()}"
                 tools:src="@drawable/ic_launcher"
                 app:scalableType="fitCenter"/>
 
@@ -168,7 +168,7 @@
                     android:layout_marginEnd="2dp"
                     android:layout_marginRight="2dp"
                     android:scaleType="fitCenter"
-                    android:src="@{tweetViewModel.getRetweetIcon()}"
+                    android:src="@{tweetListViewModel.getRetweetIcon()}"
                     tools:src="@drawable/ic_retweet_selected"/>
 
                 <TextView
@@ -181,7 +181,7 @@
                     android:layout_marginEnd="12dp"
                     android:layout_marginRight="12dp"
                     android:alpha=".5"
-                    android:text="@{tweetViewModel.getRetweetCount()}"
+                    android:text="@{tweetListViewModel.getRetweetCount()}"
                     android:textSize="10sp"
                     tools:text="4,999"/>
 
@@ -194,7 +194,7 @@
                     android:layout_marginEnd="2dp"
                     android:layout_marginRight="2dp"
                     android:scaleType="fitCenter"
-                    android:src="@{tweetViewModel.getFavoriteIcon()}"
+                    android:src="@{tweetListViewModel.getFavoriteIcon()}"
                     tools:src="@drawable/ic_favorite_selected"/>
 
                 <TextView
@@ -205,7 +205,7 @@
                     android:layout_toRightOf="@+id/ivFavorites"
                     android:layout_centerVertical="true"
                     android:alpha=".5"
-                    android:text="@{tweetViewModel.getFavoriteCount()}"
+                    android:text="@{tweetListViewModel.getFavoriteCount()}"
                     android:textSize="10sp"
                     tools:text="4,999"/>
 
