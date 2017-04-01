@@ -258,12 +258,16 @@ public class TwitterOauthClient extends OAuthBaseClient {
         });
     }
 
-    public void getFollowersList(String screenName, UsersListCallback callback) {
+    public void getFollowersList(String screenName, Long cursor, UsersListCallback callback) {
 
         //TODO: Add cursor param
         String apiUrl = getApiUrl("followers/list.json");
 
         RequestParams params = new RequestParams();
+
+        if (cursor != null) {
+            params.put("cursor", cursor);
+        }
 
         params.put("screen_name", screenName.toLowerCase());
         params.put("skip_status", true);
@@ -277,9 +281,11 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 try {
 
                     JSONArray usersArray = response.getJSONArray("users");
+                    Long nextCursor = response.getLong("next_cursor");
+
                     List<User> users = User.fromJsonMultiple(usersArray);
 
-                    callback.onUsersReceived(users);
+                    callback.onUsersReceived(users, nextCursor);
 
                 } catch (JSONException e) {
 
@@ -313,9 +319,11 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 try {
 
                     JSONArray usersArray = response.getJSONArray("users");
+                    Long nextCursor = response.getLong("next_cursor");
+
                     List<User> users = User.fromJsonMultiple(usersArray);
 
-                    callback.onUsersReceived(users);
+                    callback.onUsersReceived(users, nextCursor);
 
                 } catch (JSONException e) {
 

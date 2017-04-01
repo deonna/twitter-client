@@ -12,6 +12,8 @@ import java.util.List;
 
 public class FollowersListViewModel extends UsersListViewModel {
 
+    private Long cursor;
+
     public FollowersListViewModel(Context context, User user) {
 
         super(context, user);
@@ -25,13 +27,15 @@ public class FollowersListViewModel extends UsersListViewModel {
 
     public void getFollowersList() {
 
-        client.getFollowersList(profileUser.screenName, new UsersListCallback() {
+        client.getFollowersList(profileUser.screenName, cursor, new UsersListCallback() {
 
             @Override
-            public void onUsersReceived(List<User> newUsers) {
+            public void onUsersReceived(List<User> newUsers, Long nextCursor) {
 
                 users.addAll(newUsers);
                 usersListAdapter.notifyDataSetChanged();
+
+                cursor = nextCursor;
             }
 
             @Override
@@ -43,20 +47,22 @@ public class FollowersListViewModel extends UsersListViewModel {
 
     public void getNextOldestFollowersList() {
 
-//        client.getFollowersList(profileUser.screenName, new UsersListCallback() {
-//
-//            @Override
-//            public void onUsersReceived(List<User> newUsers) {
-//
-//                users.addAll(newUsers);
-//                usersListAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onUsersReceivedError() {
-//
-//            }
-//        });
+        client.getFollowersList(profileUser.screenName, cursor, new UsersListCallback() {
+
+            @Override
+            public void onUsersReceived(List<User> newUsers, Long nextCursor) {
+
+                users.addAll(newUsers);
+                usersListAdapter.notifyDataSetChanged();
+
+                cursor = nextCursor;
+            }
+
+            @Override
+            public void onUsersReceivedError() {
+
+            }
+        });
     }
 
     public EndlessRecyclerViewScrollListener initializeEndlessScrollListener(LinearLayoutManager layoutManager) {

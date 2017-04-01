@@ -1,6 +1,5 @@
 package com.deonna.twitterclient.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.FollowersListViewModel;
@@ -54,5 +52,6 @@ public class FollowersListFragment extends UsersListFragment {
         tvTitle.setTypeface(Fonts.fontBold);
         tvTitle.setGravity(Gravity.CENTER);
         tvTitle.setText(TITLE);
+        tvTitle.setPadding(0, 20, 0, 20);
     }
 }
