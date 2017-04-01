@@ -3,11 +3,14 @@ package com.deonna.twitterclient.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.activities.ProfileActivity;
@@ -16,6 +19,7 @@ import com.deonna.twitterclient.databinding.ItemTweetBinding;
 import com.deonna.twitterclient.fragments.ReplyFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.utilities.Images;
+import com.deonna.twitterclient.utilities.PatternEditableBuilder;
 import com.deonna.twitterclient.viewmodels.TweetListViewModel;
 
 import org.parceler.Parcels;
@@ -62,6 +66,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         tweetBinding.setTweetListViewModel(tweetListViewModel);
         tweetBinding.executePendingBindings();
 
+        addPatternEditableBuilderForStatus(tweetBinding.tvTweet);
+
         setupTweetDetailClickListener(tweetBinding, tweet);
         setupRepliesClickListener(tweetBinding, tweet);
         setupProfileImageClickListener(tweetBinding, tweet);
@@ -82,6 +88,20 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
 
         return tweets.size();
+    }
+
+    private void addPatternEditableBuilderForStatus(TextView tvTweet) {
+
+        new PatternEditableBuilder()
+                .addPattern(
+                    PatternEditableBuilder.USERNAME_PATTERN,
+                    context.getResources().getColor(R.color.twitterBlueLight),
+                    ((text) -> {
+                        Toast.makeText(context, "Clicked username: " + text,
+                                Toast.LENGTH_SHORT).show();
+                    })
+                )
+                .into(tvTweet);
     }
 
     private void setupTweetDetailClickListener(ItemTweetBinding tweetBinding, Tweet tweet) {
