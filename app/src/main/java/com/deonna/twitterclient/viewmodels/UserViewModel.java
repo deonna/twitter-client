@@ -1,6 +1,7 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
+import android.view.View;
 
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
@@ -30,5 +31,10 @@ public class UserViewModel {
     public String getLargeProfileImageUrl() {
 
         return user.getLargeProfileImageUrl();
+    }
+
+    public int getIsVerifiedVisibility() {
+
+        return user.isVerified ? View.VISIBLE : View.GONE;
     }
 }

@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="1dp"
                 android:textStyle="bold"
-                android:text="@{profileViewModel.getName()}"
+                android:text="@{userViewModel.getName()}"
                 tools:text="The Verge"/>
 
             <ImageView
@@ -53,7 +53,7 @@
                 android:layout_height="12dp"
                 android:layout_toEndOf="@+id/tvName"
                 android:layout_toRightOf="@+id/tvName"
-                android:visibility="@{profileViewModel.getIsVerifiedVisibility()}"
+                android:visibility="@{userViewModel.getIsVerifiedVisibility()}"
                 android:src="@drawable/ic_verified"/>
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvName"
                 android:textSize="10sp"
-                android:text="@{profileViewModel.getScreenName()}"
+                android:text="@{userViewModel.getScreenName()}"
                 tools:text="\@verge"/>
 
         </RelativeLayout>

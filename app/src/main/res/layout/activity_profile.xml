@@ -221,6 +221,7 @@
                     android:layout_marginRight="12dp"
                     android:layout_toEndOf="@+id/tvNumFollowers"
                     android:layout_toRightOf="@+id/tvNumFollowers"
+                    android:clickable="true"
                     android:text="FOLLOWERS"
                     android:textSize="10sp"/>
 

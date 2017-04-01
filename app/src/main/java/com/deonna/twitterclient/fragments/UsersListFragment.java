@@ -14,20 +14,28 @@ import android.view.ViewGroup;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.FragmentUsersListBinding;
+import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
 import com.deonna.twitterclient.viewmodels.UsersListViewModel;
+
+import org.parceler.Parcels;
 
 public class UsersListFragment extends DialogFragment {
 
     public static final String LAYOUT_NAME = "fragment_users_list";
-    private static final String KEY_USERS_LIST = "users_list";
+    private static final String KEY_USER = "user";
 
     protected UsersListViewModel usersListViewModel;
     private FragmentUsersListBinding binding;
 
-    public static UsersListFragment newInstance() {
+    public static UsersListFragment newInstance(User user) {
 
         UsersListFragment usersListFragment = new UsersListFragment();
+
+        Bundle args = new Bundle();
+        args.putParcelable(KEY_USER, Parcels.wrap(user));
+
+        usersListFragment.setArguments(args);
 
         return usersListFragment;
     }
@@ -48,18 +56,27 @@ public class UsersListFragment extends DialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_users_list, container, false);
+        User user = getUser();
 
-        View fragmentView = binding.getRoot();
+        setupBindings(inflater, parent);
+        setupUsersListView();
+
+        return binding.getRoot();
+    }
+
+    protected User getUser() {
+
+        return (User) Parcels.unwrap(getArguments().getParcelable(KEY_USER));
+    }
+
+    protected void setupBindings(LayoutInflater inflater, @Nullable ViewGroup parent) {
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_users_list, parent, false);
 
         binding.setUsersListViewModel(usersListViewModel);
         binding.executePendingBindings();
-
-        setupUsersListView();
-
-        return fragmentView;
     }
 
     protected void setupUsersListView() {

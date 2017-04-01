@@ -22,17 +22,17 @@ public class FollowersListViewModel extends UsersListViewModel {
 
     private void getFollowersList() {
 
-        client.getFollowersList(get ,new UsersListCallback() {
-
-            @Override
-            public void onUsersReceived(List<User> newUsers) {
-
-            }
-
-            @Override
-            public void onUsersReceivedError() {
-
-            }
-        });
+//        client.getFollowersList(get ,new UsersListCallback() {
+//
+//            @Override
+//            public void onUsersReceived(List<User> newUsers) {
+//
+//            }
+//
+//            @Override
+//            public void onUsersReceivedError() {
+//
+//            }
+//        });
     }
 }
