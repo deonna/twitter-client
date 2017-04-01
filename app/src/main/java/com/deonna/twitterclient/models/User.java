@@ -13,8 +13,12 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.parceler.Parcel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(database = TwitterClientDatabase.class)
 @Parcel(analyze={User.class})
@@ -82,7 +86,7 @@ public class User extends BaseModel {
             .setExclusionStrategies(new ExclusionStrategy[]{ new DbFlowExclusionStrategy() })
             .create();
 
-    public static User fromJson(JSONObject userJson) {
+    public static User fromJsonSingle(JSONObject userJson) {
 
         User user = gson.fromJson(
                 userJson.toString(),
@@ -95,5 +99,15 @@ public class User extends BaseModel {
     public String getBannerImageUrl() {
 
         return profileBannerUrl;
+    }
+
+    public static List<User> fromJsonMultiple(JSONArray usersJson) {
+
+        List<User> users = gson.fromJson(
+                usersJson.toString(),
+                new TypeToken<ArrayList<User>>() {
+                }.getType());
+
+        return users;
     }
 }

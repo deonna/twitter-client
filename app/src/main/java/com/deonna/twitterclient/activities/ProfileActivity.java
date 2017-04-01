@@ -1,23 +1,20 @@
 package com.deonna.twitterclient.activities;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.ActivityProfileBinding;
+import com.deonna.twitterclient.fragments.UsersListFragment;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Images;
 import com.deonna.twitterclient.viewmodels.ProfileViewModel;
 import com.deonna.twitterclient.viewmodels.TweetDetailViewModel;
 
 import org.parceler.Parcels;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -51,11 +48,16 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.tvFollowers.setOnClickListener((view) -> {
 
-//            Intent intent = new Intent();
-//
-//            startActivity(intent);
+
         });
     }
+
+     private void openUserListFragment() {
+
+         FragmentManager fragmentManager = getSupportFragmentManager();
+         UsersListFragment usersListFragment = UsersListFragment.newInstance();
+         usersListFragment.show(fragmentManager, UsersListFragment.LAYOUT_NAME);
+     }
 
     private void setupFollowingClickListener() {
 
@@ -75,7 +77,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void loadBackgroundImage(String url, ImageView ivImage) {
-
 
         Images.loadFromUrlWithFixedSize(this, ivImage, url);
     }

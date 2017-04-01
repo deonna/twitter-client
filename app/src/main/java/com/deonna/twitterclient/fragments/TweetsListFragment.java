@@ -74,8 +74,8 @@ public class TweetsListFragment extends Fragment {
         binding.rvTimeline.addItemDecoration(itemDecoration);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-
         binding.rvTimeline.setLayoutManager(layoutManager);
+
         binding.rvTimeline.setAdapter(tweetsTimelineViewModel.getAdapter());
 
         EndlessRecyclerViewScrollListener scrollListener = tweetsTimelineViewModel.initializeEndlessScrollListener(layoutManager);

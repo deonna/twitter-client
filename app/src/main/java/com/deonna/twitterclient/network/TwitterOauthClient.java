@@ -9,6 +9,7 @@ import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.callbacks.TweetSentCallback;
 import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
+import com.deonna.twitterclient.callbacks.UsersListCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -149,7 +150,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                User user = User.fromJson(response);
+                User user = User.fromJsonSingle(response);
 
                 callback.onUserInfoReceived(user);
             }
@@ -250,6 +251,29 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
                 callback.onRetweetFailed();
+            }
+        });
+    }
+
+    public void getFollowersList(String screenName, Long cursor, UsersListCallback callback) {
+
+        String apiUrl = getApiUrl("followers/list.json");
+
+        RequestParams params = new RequestParams();
+
+        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+
+                List<User> users = User.fromJsonMultiple(response);
+
+                callback.onUsersReceived(users);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
     }
