@@ -49,4 +49,21 @@ public class Images {
                 )
                 .into(ivImage);
     }
+
+    public static void loadFromUrlWithFixedSizeRoundedTop(
+            Context context,
+            ImageView ivImage,
+            String url) {
+
+        Glide.with(context)
+                .load(url)
+                .bitmapTransform(
+                        new RoundedCornersTransformation(
+                                context,
+                                50,
+                                ROUNDED_CORNER_MARGIN,
+                                RoundedCornersTransformation.CornerType.TOP)
+                )
+                .into(ivImage);
+    }
 }

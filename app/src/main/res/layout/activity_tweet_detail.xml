@@ -14,8 +14,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:background="@android:color/white">
+        android:paddingBottom="10dp"
+        android:background="@drawable/rounded_corners">
 
         <RelativeLayout
             android:id="@+id/rlMedia"
@@ -27,7 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:layout_alignParentTop="true"
-                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 android:visibility="@{tweetDetailViewModel.getMediaVisibility()}"
                 tools:src="@drawable/ic_launcher"/>
 
@@ -39,10 +40,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/rlMedia"
+            android:layout_marginTop="6dp"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginEnd="6dp"
-            android:layout_marginRight="6dp">
+            android:layout_marginRight="6dp"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/ivProfileImage"
@@ -101,7 +104,11 @@
             android:layout_below="@+id/rlUserInfo"
             android:layout_alignLeft="@+id/rlUserInfo"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="6dp"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp">
 
             <com.deonna.twitterclient.components.LinkifiedTextView
                 android:id="@+id/tvTweet"
@@ -126,7 +133,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_alignLeft="@+id/rlTweet"
-            android:layout_below="@+id/rlTweet">
+            android:layout_below="@+id/rlTweet"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp">
 
             <TextView
                 android:id="@+id/tvTimestamp"
@@ -149,7 +160,10 @@
             android:layout_below="@+id/rlTimeStamp"
             android:layout_alignLeft="@+id/rlTweet"
             android:layout_marginBottom="4dp"
-            >
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp">
 
 
             <TextView
@@ -210,7 +224,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlTweetStats"
-            android:layout_alignLeft="@+id/rlTweetStats">
+            android:layout_alignLeft="@+id/rlTweetStats"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp">
 
             <ImageView
                 android:id="@+id/ivReplies"

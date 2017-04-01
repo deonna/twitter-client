@@ -46,6 +46,6 @@ public class TweetDetailActivity extends AppCompatActivity {
 
     private void loadMedia(String url) {
 
-        Images.loadFromUrlWithFixedSize(this, binding.ivMedia, url);
+        Images.loadFromUrlWithFixedSizeRoundedTop(this, binding.ivMedia, url);
     }
 }
