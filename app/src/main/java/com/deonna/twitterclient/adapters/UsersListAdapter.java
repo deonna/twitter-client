@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.ItemUserBinding;
 import com.deonna.twitterclient.models.User;
+import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.utilities.Images;
 import com.deonna.twitterclient.viewmodels.UserViewModel;
 
@@ -53,14 +54,28 @@ public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         userBinding.setUserViewModel(userViewModel);
         userBinding.executePendingBindings();
 
-        userBinding.tvName.setText(userViewModel.getName());
-        userBinding.tvScreenName.setText(userViewModel.getScreenName());
-        loadProfileImage(userViewModel.getLargeProfileImageUrl(), userBinding.ivProfileImage, 10);
+        inititalizeTextViews(userBinding, userViewModel);
+
+        setupFonts(userBinding);
+
+        loadProfileImage(userViewModel.getLargeProfileImageUrl(), userBinding.ivProfileImage);
     }
 
-    private void loadProfileImage(String url, ImageView ivProfileImage, int size) {
+    private void loadProfileImage(String url, ImageView ivProfileImage) {
 
-        Images.loadFromUrl(context, ivProfileImage, url, size, size);
+        Images.loadFromUrlWithFixedSize(context, ivProfileImage, url);
+    }
+
+    private void inititalizeTextViews(ItemUserBinding userBinding, UserViewModel userViewModel) {
+
+        userBinding.tvName.setText(userViewModel.getName());
+        userBinding.tvScreenName.setText(userViewModel.getScreenName());
+    }
+
+    private void setupFonts(ItemUserBinding userBinding) {
+
+        userBinding.tvName.setTypeface(Fonts.fontBold);
+        userBinding.tvScreenName.setTypeface(Fonts.fontRegular);
     }
 
     @Override

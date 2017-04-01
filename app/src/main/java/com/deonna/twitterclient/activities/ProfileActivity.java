@@ -66,11 +66,6 @@ public class ProfileActivity extends AppCompatActivity {
                 followersListFragment.show(fragmentManager, FollowersListFragment.LAYOUT_NAME);
             }
 
-//            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                UsersListFragment usersListFragment = UsersListFragment.newInstance(user);
-//                usersListFragment.show(fragmentManager, UsersListFragment.LAYOUT_NAME);
-//            }
             return true;
         });
     }

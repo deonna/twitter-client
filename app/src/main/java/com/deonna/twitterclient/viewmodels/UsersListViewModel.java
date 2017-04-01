@@ -37,8 +37,6 @@ public class UsersListViewModel implements ViewModel {
 
     @Override
     public void onCreate() {
-
-        getFollowersList();
     }
 
     public UsersListAdapter getAdapter() {
@@ -56,40 +54,4 @@ public class UsersListViewModel implements ViewModel {
             }
         };
     }
-
-    public void getFollowersList() {
-
-        client.getFollowersList(profileUser.screenName, new UsersListCallback() {
-
-            @Override
-            public void onUsersReceived(List<User> newUsers) {
-
-                users.addAll(newUsers);
-                usersListAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onUsersReceivedError() {
-
-            }
-        });
-    }
-//
-//    public void getFollowingList() {
-//
-//        client.getFollowingList(profileUser.screenName, new UsersListCallback() {
-//
-//            @Override
-//            public void onUsersReceived(List<User> newUsers) {
-//
-//                users.addAll(newUsers);
-//                usersListAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onUsersReceivedError() {
-//
-//            }
-//        });
-//    }
 }
