@@ -16,6 +16,7 @@ import com.deonna.twitterclient.activities.TweetDetailActivity;
 import com.deonna.twitterclient.databinding.ItemTweetBinding;
 import com.deonna.twitterclient.fragments.ReplyFragment;
 import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.utilities.Images;
 import com.deonna.twitterclient.viewmodels.TweetViewModel;
 
 import org.parceler.Parcels;
@@ -36,11 +37,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.context = context;
         this.tweets = tweets;
         this.fragmentManager = fragmentManger;
-    }
-
-    public TweetsAdapter(ProfileActivity profileContext, List<Tweet> tweets) {
-
-        this.tweets = tweets;
     }
 
     @Override
@@ -69,44 +65,12 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         tweetBinding.setTweetViewModel(tweetViewModel);
         tweetBinding.executePendingBindings();
 
-        tweetBinding.rlTweetLayout.setOnClickListener((view) -> {
+        setupTweetDetailClickListener(tweetBinding, tweet);
+        setupRepliesClickListener(tweetBinding, tweet);
+        setupProfileImageClickListener(tweetBinding, tweet);
 
-            Intent intent = new Intent(context, TweetDetailActivity.class);
-            intent.putExtra(TweetDetailActivity.KEY_TWEET, Parcels.wrap(tweet));
-
-            context.startActivity(intent);
-        });
-
-        tweetBinding.ivReplies.setOnClickListener((view) -> {
-
-            ReplyFragment replyFragment = ReplyFragment.newInstance(tweet.user);
-            replyFragment.show(fragmentManager, ReplyFragment.LAYOUT_NAME);
-        });
-
-        tweetBinding.ivProfileImage.setOnClickListener((view) -> {
-
-            Intent intent = new Intent(context, ProfileActivity.class);
-            intent.putExtra(ProfileActivity.KEY_USER, Parcels.wrap(tweet.user));
-
-            context.startActivity(intent);
-        });
-
-        tweetBinding.ivRetweets.setOnClickListener((view) -> {
-
-            tweetViewModel.retweet(tweet.id, position, tweetBinding.ivRetweets, tweetBinding
-                    .tvRetweets);
-        });
-
-        tweetBinding.ivFavorites.setOnClickListener((view) -> {
-
-            if (tweet.favorited) {
-                tweetViewModel.unfavorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
-                        .tvFavorites);
-            } else {
-                tweetViewModel.favorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
-                        .tvFavorites);
-            }
-        });
+        setupRetweetsClickListener(tweetBinding, tweetViewModel, tweet, position);
+        setupFavoritesClickListener(tweetBinding, tweetViewModel, tweet, position);
 
         loadProfileImage(
                 tweet.user.getLargeProfileImageUrl(),
@@ -123,14 +87,64 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return tweets.size();
     }
 
-    // TODO: Make this a utlitiy function
+    private void setupTweetDetailClickListener(ItemTweetBinding tweetBinding, Tweet tweet) {
+
+        tweetBinding.rlTweetLayout.setOnClickListener((view) -> {
+
+            Intent intent = new Intent(context, TweetDetailActivity.class);
+            intent.putExtra(TweetDetailActivity.KEY_TWEET, Parcels.wrap(tweet));
+
+            context.startActivity(intent);
+        });
+    }
+
+    private void setupRepliesClickListener(ItemTweetBinding tweetBinding, Tweet tweet) {
+
+        tweetBinding.ivReplies.setOnClickListener((view) -> {
+
+            ReplyFragment replyFragment = ReplyFragment.newInstance(tweet.user);
+            replyFragment.show(fragmentManager, ReplyFragment.LAYOUT_NAME);
+        });
+    }
+
+    private void setupProfileImageClickListener(ItemTweetBinding tweetBinding, Tweet tweet) {
+
+        tweetBinding.ivProfileImage.setOnClickListener((view) -> {
+
+            Intent intent = new Intent(context, ProfileActivity.class);
+            intent.putExtra(ProfileActivity.KEY_USER, Parcels.wrap(tweet.user));
+
+            context.startActivity(intent);
+        });
+    }
+
+    private void setupRetweetsClickListener(ItemTweetBinding tweetBinding, TweetViewModel tweetViewModel, Tweet tweet, int position) {
+
+        tweetBinding.ivRetweets.setOnClickListener((view) -> {
+
+            tweetViewModel.retweet(tweet.id, position, tweetBinding.ivRetweets, tweetBinding
+                    .tvRetweets);
+        });
+
+    }
+
+    private void setupFavoritesClickListener(ItemTweetBinding tweetBinding, TweetViewModel tweetViewModel, Tweet tweet, int position) {
+
+        tweetBinding.ivFavorites.setOnClickListener((view) -> {
+
+            if (tweet.favorited) {
+                tweetViewModel.unfavorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
+                        .tvFavorites);
+            } else {
+                tweetViewModel.favorite(tweet.id, position, tweetBinding.ivFavorites, tweetBinding
+                        .tvFavorites);
+            }
+        });
+    }
+
     private void loadProfileImage(String url, ImageView ivProfileImage, int size) {
 
-        Glide.with(context)
-                .load(url)
-                .override(size, size)
-                .bitmapTransform(new RoundedCornersTransformation(context, 10, 2))
-                .into(ivProfileImage);
+        Images.loadFromUrl(context, ivProfileImage, url, size, size);
     }
 
     private void loadMedia(String url, ImageView ivImage) {

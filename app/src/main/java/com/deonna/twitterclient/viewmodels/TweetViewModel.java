@@ -112,12 +112,12 @@ public class TweetViewModel extends BaseObservable {
 
     public String getRetweetCount() {
 
-        return tweet.retweetCount;
+        return (tweet.retweetCount.equals("0")) ? "" : tweet.retweetCount;
     }
 
     public String getFavoriteCount() {
 
-        return tweet.favoriteCount;
+        return (tweet.favoriteCount.equals("0")) ? "" : tweet.favoriteCount;
     }
 
     public static int getProfileImageSize() {
@@ -125,7 +125,6 @@ public class TweetViewModel extends BaseObservable {
         return IMAGE_SIZE;
     }
 
-    @Bindable
     public Drawable getRetweetIcon() {
 
         return retweetIcon;
@@ -135,14 +134,11 @@ public class TweetViewModel extends BaseObservable {
 
         if (retweeted) {
             retweetIcon = context.getDrawable(R.drawable.ic_retweet_selected);
-            notifyPropertyChanged(BR.retweetIcon); //TODO: unnecessary?
         } else {
             retweetIcon = context.getDrawable(R.drawable.ic_retweet);
-            notifyPropertyChanged(BR.retweetIcon);
         }
     }
 
-    @Bindable
     public Drawable getFavoriteIcon() {
 
         return favoriteIcon;
@@ -152,28 +148,8 @@ public class TweetViewModel extends BaseObservable {
 
         if (favorited) {
             favoriteIcon = context.getDrawable(R.drawable.ic_favorite_selected);
-            notifyPropertyChanged(BR.favoriteIcon);
         } else {
             favoriteIcon = context.getDrawable(R.drawable.ic_favorite);
-            notifyPropertyChanged(BR.favoriteIcon);
-        }
-    }
-
-    public Drawable getFavoritedDrawable() {
-
-        if (tweet.favorited) {
-            return context.getDrawable(R.drawable.ic_favorite_selected);
-        } else {
-            return context.getDrawable(R.drawable.ic_favorite);
-        }
-    }
-
-    public Drawable getRetweetedDrawable() {
-
-        if (tweet.retweeted) {
-            return context.getDrawable(R.drawable.ic_retweet_selected);
-        } else {
-            return context.getDrawable(R.drawable.ic_retweet);
         }
     }
 
@@ -187,7 +163,7 @@ public class TweetViewModel extends BaseObservable {
                 setRetweetIcon(true);
 
                 ivRetweetIcon.setImageDrawable(retweetIcon);
-                tvRetweetCount.setText(tweet.retweetCount.toString());
+                tvRetweetCount.setText(getRetweetCount());
 
                 if (adapter != null) {
                     adapter.tweets.set(position, tweet);
@@ -213,10 +189,11 @@ public class TweetViewModel extends BaseObservable {
                 tweet = newTweet;
                 setFavoriteIcon(true);
 
-                String tweetCount = (tweet.favoriteCount == "0") ? "1" : tweet.favoriteCount.toString();
+                // Sometimes have an issue with API incorrectly returning 0 for favorite count after POST
+                String favoriteCount = getFavoriteCount().equals("") ? "1" : getFavoriteCount();
 
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
-                tvFavoriteCount.setText(tweetCount);
+                tvFavoriteCount.setText(favoriteCount);
 
                 if (adapter != null) {
                     adapter.tweets.set(position, tweet);
@@ -241,10 +218,8 @@ public class TweetViewModel extends BaseObservable {
                 tweet = newTweet;
                 setFavoriteIcon(false);
 
-                String tweetCount = (tweet.favoriteCount == "0") ? "" : tweet.favoriteCount.toString();
-
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
-                tvFavoriteCount.setText(tweetCount);
+                tvFavoriteCount.setText(getFavoriteCount());
 
                 if (adapter != null) {
                     adapter.tweets.set(position, tweet);
