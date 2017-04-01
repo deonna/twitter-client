@@ -66,7 +66,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         tweetBinding.setTweetListViewModel(tweetListViewModel);
         tweetBinding.executePendingBindings();
 
-        addPatternEditableBuilderForStatus(tweetBinding.tvTweet);
+        addPatternEditableBuilderForStatus(tweetBinding.tvTweet, tweetListViewModel);
 
         setupTweetDetailClickListener(tweetBinding, tweet);
         setupRepliesClickListener(tweetBinding, tweet);
@@ -90,15 +90,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return tweets.size();
     }
 
-    private void addPatternEditableBuilderForStatus(TextView tvTweet) {
+    private void addPatternEditableBuilderForStatus(TextView tvTweet, TweetListViewModel tweetListViewModel) {
 
         new PatternEditableBuilder()
                 .addPattern(
                     PatternEditableBuilder.USERNAME_PATTERN,
                     context.getResources().getColor(R.color.twitterBlueLight),
                     ((text) -> {
-                        Toast.makeText(context, "Clicked username: " + text,
-                                Toast.LENGTH_SHORT).show();
+                        tweetListViewModel.openProfileForUser(text.substring(1));
                     })
                 )
                 .into(tvTweet);

@@ -1,14 +1,24 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.deonna.twitterclient.activities.ProfileActivity;
 import com.deonna.twitterclient.activities.TimelineActivity;
+import com.deonna.twitterclient.activities.TweetDetailActivity;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
+import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.models.User;
+
+import org.parceler.Parcels;
+
+import java.util.List;
 
 public class TweetListViewModel extends TweetViewModel {
 
@@ -99,6 +109,25 @@ public class TweetListViewModel extends TweetViewModel {
 
             @Override
             public void onFavoriteFailed() {
+
+            }
+        });
+    }
+
+    public void openProfileForUser(String screenName) {
+
+        client.getUserInfo(screenName, new UserInfoCallback() {
+            @Override
+            public void onUserInfoReceived(User user) {
+
+                Intent intent = new Intent(context, ProfileActivity.class);
+                intent.putExtra(ProfileActivity.KEY_USER, Parcels.wrap(user));
+
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onUserInfoError() {
 
             }
         });

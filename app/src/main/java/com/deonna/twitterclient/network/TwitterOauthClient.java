@@ -168,6 +168,34 @@ public class TwitterOauthClient extends OAuthBaseClient {
         });
     }
 
+	public void getUserInfo(String screenName, UserInfoCallback callback ) {
+
+        String apiUrl = getApiUrl("users/show.json");
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_SCREEN_NAME, screenName);
+        params.put(KEY_INCLUDE_EMAIL, true);
+
+        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                User user = User.fromJsonSingle(response);
+
+                callback.onUserInfoReceived(user);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+
+                callback.onUserInfoError();
+            }
+        });
+    }
+
     public void sendNewTweet(String newTweet, TweetSentCallback callback) {
 
         String apiUrl = getApiUrl(STATUS_UPDATE_ENDPOINT);
