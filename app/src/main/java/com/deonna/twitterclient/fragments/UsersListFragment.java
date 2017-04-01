@@ -44,21 +44,15 @@ public class UsersListFragment extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        usersListViewModel = new UsersListViewModel(getActivity());
-    }
+        User user =  (User) Parcels.unwrap(getArguments().getParcelable(KEY_USER));
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        usersListViewModel = new UsersListViewModel(getActivity());
-//    }
+        usersListViewModel = new UsersListViewModel(getActivity(), user);
+        usersListViewModel.onCreate();
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-
-        User user = getUser();
 
         setupBindings(inflater, parent);
         setupUsersListView();

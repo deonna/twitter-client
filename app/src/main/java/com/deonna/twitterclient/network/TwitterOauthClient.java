@@ -1,6 +1,7 @@
 package com.deonna.twitterclient.network;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
@@ -16,6 +17,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
@@ -51,6 +53,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
     public static final String KEY_STATUS = "status";
     public static final String KEY_SKIP_STATUS = "skip_status";
     public static final String KEY_INCLUDE_EMAIL = "include_email";
+    private static final String KEY_CURSOR = "cursor";
 
     public TwitterOauthClient(Context context) {
 
@@ -255,19 +258,40 @@ public class TwitterOauthClient extends OAuthBaseClient {
         });
     }
 
-    public void getFollowersList(String screenName, Long cursor, UsersListCallback callback) {
+    public void getFollowersList(String screenName, UsersListCallback callback) {
 
+        //TODO: Add cursor param
         String apiUrl = getApiUrl("followers/list.json");
 
         RequestParams params = new RequestParams();
 
+        params.put("screen_name", screenName.toLowerCase());
+        params.put("skip_status", true);
+        params.put("include_user_entities", false);
+
         getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                List<User> users = User.fromJsonMultiple(response);
+                Log.d("Response", response.toString());
 
-                callback.onUsersReceived(users);
+
+                try {
+
+                    JSONArray usersArray = response.getJSONArray("users");
+                    List<User> users = User.fromJsonMultiple(usersArray);
+
+                    callback.onUsersReceived(users);
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+//                List<User> users = User.fromJson(response);
+
+//                callback.onUsersReceived(users);
             }
 
             @Override
@@ -277,6 +301,4 @@ public class TwitterOauthClient extends OAuthBaseClient {
             }
         });
     }
-
-
 }

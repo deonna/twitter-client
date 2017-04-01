@@ -34,8 +34,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private User user;
 
-//    @BindView(R.id.tvFollowers) TextView tvFollowers;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,8 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
         profileViewModel.onCreate();
 
         binding = DataBindingUtil.setContentView(ProfileActivity.this, R.layout.activity_profile);
-
-//        ButterKnife.bind(this);
 
         binding.setProfileViewModel(profileViewModel);
 
@@ -70,31 +66,17 @@ public class ProfileActivity extends AppCompatActivity {
             return true;
         });
     }
-//
-//    @OnTouch(R.id.tvFollowers)
-//    public boolean setupFollowersClickListener() {
-//
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        UsersListFragment usersListFragment = UsersListFragment.newInstance(user);
-//        usersListFragment.show(fragmentManager, UsersListFragment.LAYOUT_NAME);
-//
-//        return true;
-//    }
-
-//     private void openUserListFragment() {
-//
-//         FragmentManager fragmentManager = getSupportFragmentManager();
-//         UsersListFragment usersListFragment = UsersListFragment.newInstance();
-//         usersListFragment.show(fragmentManager, UsersListFragment.LAYOUT_NAME);
-//     }
 
     private void setupFollowingClickListener() {
 
-        binding.tvFollowers.setOnClickListener((view) -> {
+        binding.tvFollowing.setOnTouchListener((view, event) -> {
 
-//            Intent intent = new Intent();
-//
-//            startActivity(intent);
+            //TODO: ensure this is the following list
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            UsersListFragment usersListFragment = UsersListFragment.newInstance(user);
+            usersListFragment.show(fragmentManager, UsersListFragment.LAYOUT_NAME);
+
+            return true;
         });
     }
 

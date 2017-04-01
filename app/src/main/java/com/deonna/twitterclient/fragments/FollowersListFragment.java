@@ -14,6 +14,6 @@ public class FollowersListFragment extends UsersListFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        usersListViewModel = new FollowersListViewModel(context);
+//        usersListViewModel = new FollowersListViewModel(context);
     }
 }

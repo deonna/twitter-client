@@ -27,6 +27,11 @@ public class User extends BaseModel {
     private static final String SMALL_IMAGE_TEXT = "_normal";
 
     @Column
+    @SerializedName("id")
+    @Expose
+    public String id;
+
+    @Column
     @SerializedName("name")
     @Expose
     public String name;

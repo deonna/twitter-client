@@ -9,9 +9,9 @@ import java.util.List;
 
 public class FollowersListViewModel extends UsersListViewModel {
 
-    public FollowersListViewModel(Context context) {
+    public FollowersListViewModel(Context context, User user) {
 
-        super(context);
+        super(context, user);
     }
 
     @Override

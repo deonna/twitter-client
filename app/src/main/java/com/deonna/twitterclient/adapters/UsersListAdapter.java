@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -13,7 +12,6 @@ import com.deonna.twitterclient.databinding.ItemUserBinding;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Images;
 import com.deonna.twitterclient.viewmodels.UserViewModel;
-import com.deonna.twitterclient.viewmodels.UsersListViewModel;
 
 import java.util.List;
 
