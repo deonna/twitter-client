@@ -120,11 +120,12 @@
             <ImageView
                 android:id="@+id/ivMedia"
                 android:layout_width="400dp"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/tvTweet"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 android:visibility="@{tweetListViewModel.getMediaVisibility()}"
                 tools:src="@drawable/ic_launcher"
                 app:scalableType="fitCenter"/>
