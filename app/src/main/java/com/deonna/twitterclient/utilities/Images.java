@@ -33,4 +33,20 @@ public class Images {
                 )
                 .into(ivImage);
     }
+
+    public static void loadFromUrlWithFixedSize(
+            Context context,
+            ImageView ivImage,
+            String url) {
+
+        Glide.with(context)
+                .load(url)
+                .bitmapTransform(
+                        new RoundedCornersTransformation(
+                                context,
+                                ROUNDED_CORNER_RADIUS,
+                                ROUNDED_CORNER_MARGIN)
+                )
+                .into(ivImage);
+    }
 }

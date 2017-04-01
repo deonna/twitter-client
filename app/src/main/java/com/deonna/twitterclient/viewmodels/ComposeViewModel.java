@@ -17,7 +17,6 @@ public class ComposeViewModel {
 
     protected static final TwitterOauthClient client = TwitterApplication.getRestClient();
 
-
     protected NewTweetsListener context;
     protected User currentUser;
 

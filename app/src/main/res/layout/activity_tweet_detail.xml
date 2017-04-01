@@ -18,10 +18,27 @@
         android:background="@android:color/white">
 
         <RelativeLayout
+            android:id="@+id/rlMedia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivMedia"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitCenter"
+                android:visibility="@{tweetDetailViewModel.getMediaVisibility()}"
+                tools:src="@drawable/ic_launcher"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/rlUserInfo"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/rlMedia"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginEnd="6dp"

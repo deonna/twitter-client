@@ -33,6 +33,8 @@ public class TweetDetailActivity extends AppCompatActivity {
         binding.executePendingBindings();
 
         loadProfileImage(tweet.user.getLargeProfileImageUrl());
+
+        loadMedia(tweet.getMediaUrl());
     }
 
     private void loadProfileImage(String url) {
@@ -40,5 +42,10 @@ public class TweetDetailActivity extends AppCompatActivity {
         int size = TweetDetailViewModel.getProfileImageSize();
 
         Images.loadFromUrl(this, binding.ivProfileImage, url, size, size);
+    }
+
+    private void loadMedia(String url) {
+
+        Images.loadFromUrlWithFixedSize(this, binding.ivMedia, url);
     }
 }

@@ -149,10 +149,12 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private void loadMedia(String url, ImageView ivImage) {
 
-        Glide.with(context)
-                .load(url)
-                .bitmapTransform(new RoundedCornersTransformation(context, 10, 2))
-                .into(ivImage);
+        Images.loadFromUrlWithFixedSize(context, ivImage, url);
+
+//        Glide.with(context)
+//                .load(url)
+//                .bitmapTransform(new RoundedCornersTransformation(context, 10, 2))
+//                .into(ivImage);
     }
 
     public static class TweetViewHolder extends RecyclerView.ViewHolder {
