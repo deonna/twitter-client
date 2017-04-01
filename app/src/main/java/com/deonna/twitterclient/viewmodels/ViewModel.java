@@ -7,7 +7,4 @@ package com.deonna.twitterclient.viewmodels;
 public interface ViewModel {
 
     void onCreate();
-    void onPause();
-    void onResume();
-    void onDestroy();
 }

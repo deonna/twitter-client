@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
@@ -26,16 +27,21 @@ public class TweetListViewModel extends TweetViewModel {
             @Override
             public void onRetweet(Tweet newTweet) {
 
-                tweet = newTweet;
                 setRetweetIcon(true);
 
                 ivRetweetIcon.setImageDrawable(retweetIcon);
                 tvRetweetCount.setText(getRetweetCount());
 
-                if (adapter != null) {
-                    adapter.tweets.set(position, tweet);
-                    adapter.notifyItemChanged(position);
-                }
+                // add new retweet to timeline
+                adapter.tweets.add(0, newTweet);
+                adapter.notifyItemRangeChanged(0, adapter.tweets.size());
+
+                // update RT count and icon of original tweet
+                tweet.retweeted = true;
+                tweet.retweetCount = newTweet.retweetCount;
+                adapter.notifyItemChanged(position);
+
+                ((TimelineActivity) context).scrollToTop();
             }
 
             @Override
@@ -64,10 +70,8 @@ public class TweetListViewModel extends TweetViewModel {
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
                 tvFavoriteCount.setText(getFavoriteCount());
 
-                if (adapter != null) {
-                    adapter.tweets.set(position, tweet);
-                    adapter.notifyItemChanged(position);
-                }
+                adapter.tweets.set(position, tweet);
+                adapter.notifyItemChanged(position);
             }
 
             @Override
@@ -89,10 +93,8 @@ public class TweetListViewModel extends TweetViewModel {
                 ivFavoriteIcon.setImageDrawable(favoriteIcon);
                 tvFavoriteCount.setText(getFavoriteCount());
 
-                if (adapter != null) {
-                    adapter.tweets.set(position, tweet);
-                    adapter.notifyItemChanged(position);
-                }
+                adapter.tweets.set(position, tweet);
+                adapter.notifyItemChanged(position);
             }
 
             @Override

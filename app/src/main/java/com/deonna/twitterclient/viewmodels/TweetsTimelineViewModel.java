@@ -45,21 +45,6 @@ public class TweetsTimelineViewModel implements ViewModel {
 
     }
 
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
-
     public TweetsAdapter getAdapter() {
 
         return tweetsAdapter;

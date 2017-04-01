@@ -27,7 +27,7 @@ public class TweetViewModel extends BaseObservable {
 
     private static final String DATE_PATTERN = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
-    private Context context;
+    protected Context context;
     protected Tweet tweet;
 
     protected Drawable retweetIcon;

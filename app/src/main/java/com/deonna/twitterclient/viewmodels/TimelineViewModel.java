@@ -22,7 +22,6 @@ public class TimelineViewModel implements ViewModel {
     private final TimelineActivity context;
 
     private final List<Tweet> tweets;
-    private final TweetsAdapter tweetsAdapter;
 
     private final TwitterOauthClient client;
 
@@ -34,36 +33,14 @@ public class TimelineViewModel implements ViewModel {
         this.context = context;
 
         tweets = new ArrayList<>();
-        tweetsAdapter = new TweetsAdapter(context, tweets, fragmentManager);
 
         client = TwitterApplication.getRestClient();
-
     }
 
     @Override
     public void onCreate() {
 
         getLoggedInUserInfo();
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
-
-    public TweetsAdapter getAdapter() {
-
-        return tweetsAdapter;
     }
 
     public User getCurrentUser() {
