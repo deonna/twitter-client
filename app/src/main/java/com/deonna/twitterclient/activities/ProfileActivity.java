@@ -1,14 +1,17 @@
 package com.deonna.twitterclient.activities;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.ActivityProfileBinding;
 import com.deonna.twitterclient.models.User;
+import com.deonna.twitterclient.utilities.Images;
 import com.deonna.twitterclient.viewmodels.ProfileViewModel;
 import com.deonna.twitterclient.viewmodels.TweetDetailViewModel;
 
@@ -38,17 +41,42 @@ public class ProfileActivity extends AppCompatActivity {
         binding.setProfileViewModel(profileViewModel);
 
         loadImage(profileViewModel.getLargeProfileImageUrl(), binding.ivProfileImage);
+        loadBackgroundImage(profileViewModel.getBannerImageUrl(), binding.ivBannerImage);
 
+        setupFollowersClickListener();
+        setupFollowingClickListener();
+    }
+
+    private void setupFollowersClickListener() {
+
+        binding.tvFollowers.setOnClickListener((view) -> {
+
+//            Intent intent = new Intent();
+//
+//            startActivity(intent);
+        });
+    }
+
+    private void setupFollowingClickListener() {
+
+        binding.tvFollowers.setOnClickListener((view) -> {
+
+//            Intent intent = new Intent();
+//
+//            startActivity(intent);
+        });
     }
 
     private void loadImage(String url, ImageView ivImage) {
 
         int size = TweetDetailViewModel.getProfileImageSize();
 
-        Glide.with(this)
-                .load(url)
-                .override(size, size)
-                .bitmapTransform(new RoundedCornersTransformation(this, 10, 2))
-                .into(ivImage);
+        Images.loadFromUrl(this, ivImage, url, size, size);
+    }
+
+    private void loadBackgroundImage(String url, ImageView ivImage) {
+
+
+        Images.loadFromUrlWithFixedSize(this, ivImage, url);
     }
 }

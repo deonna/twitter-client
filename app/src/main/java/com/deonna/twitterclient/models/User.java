@@ -49,9 +49,9 @@ public class User extends BaseModel {
     public String screenName;
 
     @Column
-    @SerializedName("profile_background_image_url")
+    @SerializedName("profile_banner_url")
     @Expose
-    public String profileBackgroundImageUrl;
+    public String profileBannerUrl;
 
     @Column
     @SerializedName("friends_count")
@@ -92,8 +92,8 @@ public class User extends BaseModel {
         return user;
     }
 
-    public String getBackgroundImageUrl() {
+    public String getBannerImageUrl() {
 
-        return profileBackgroundImageUrl;
+        return profileBannerUrl;
     }
 }

@@ -21,9 +21,27 @@
         tools:context="com.deonna.twitterclient.activities.ProfileActivity">
 
         <RelativeLayout
+            android:id="@+id/rlBannerImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivBannerImage"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:visibility="@{profileViewModel.getBannerImageVisibility()}"
+                tools:src="@drawable/ic_launcher"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/rlProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/rlBannerImage"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -132,7 +150,7 @@
                     android:layout_marginEnd="4dp"
                     android:alpha=".5"
                     android:scaleType="fitCenter"
-                    android:visibility="@{profileViewModel.getLinkVisibility()}"
+                    android:visibility="@{profileViewModel.getUrlVisibility()}"
                     android:src="@drawable/ic_link"/>
 
                 <com.deonna.twitterclient.components.LinkifiedTextView
@@ -143,7 +161,7 @@
                     android:layout_toEndOf="@+id/ivLink"
                     android:layout_toRightOf="@+id/ivLink"
                     android:text="@{profileViewModel.getUrl()}"
-                    android:visibility="@{profileViewModel.getLinkVisibility()}"
+                    android:visibility="@{profileViewModel.getUrlVisibility()}"
                     android:lineSpacingMultiplier="1.2"
                     android:autoLink="all"
                     android:linksClickable="true"

@@ -76,7 +76,7 @@ public class ProfileViewModel implements ViewModel {
         return user.location;
     }
 
-    public int getLinkVisibility() {
+    public int getUrlVisibility() {
 
         return (user.url == null || user.url.isEmpty()) ? View.GONE : View.VISIBLE;
     }
@@ -101,8 +101,13 @@ public class ProfileViewModel implements ViewModel {
         return user.getLargeProfileImageUrl();
     }
 
-    public String getBackgroundImageUrl() {
+    public String getBannerImageUrl() {
 
-        return user.getBackgroundImageUrl();
+        return user.getBannerImageUrl();
+    }
+
+    public int getBannerImageVisibility() {
+
+        return (user.profileBannerUrl == null || user.profileBannerUrl.isEmpty()) ? View.GONE : View.VISIBLE;
     }
 }

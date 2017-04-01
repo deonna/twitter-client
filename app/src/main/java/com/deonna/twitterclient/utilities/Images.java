@@ -20,11 +20,9 @@ public class Images {
             int height,
             int width) {
 
-        int size = TweetDetailViewModel.getProfileImageSize();
-
         Glide.with(context)
                 .load(url)
-                .override(size, size)
+                .override(height, width)
                 .bitmapTransform(
                         new RoundedCornersTransformation(
                                 context,
