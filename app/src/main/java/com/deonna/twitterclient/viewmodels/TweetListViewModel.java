@@ -139,22 +139,5 @@ public class TweetListViewModel extends TweetViewModel {
         intent.putExtra(SearchResultsActivity.KEY_SEARCH_TERM, hashtag);
 
         context.startActivity(intent);
-
-//        client.getSearchResultsForHashtag(hashtag, new SearchResultsCallback() {
-//
-//            @Override
-//            public void onSearchResultsReceived(List<Tweet> results) {
-//
-//                Intent intent = new Intent(context, SearchResultsActivity.class);
-//                intent.putExtra(SearchResultsActivity.KEY_RESULTS, Parcels.wrap(results));
-//
-//                context.startActivity(intent);
-//            }
-//
-//            @Override
-//            public void onSearchResultsError() {
-//
-//            }
-//        });
     }
 }

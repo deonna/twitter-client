@@ -32,7 +32,9 @@ public class SearchResultsViewModel extends TweetsTimelineViewModel {
                 tweets.addAll(results);
                 tweetsAdapter.notifyDataSetChanged();
 
-                maxId = getMaxIdForNextFetch(results);
+                if (!results.isEmpty()) {
+                    maxId = getMaxIdForNextFetch(results);
+                }
             }
 
             @Override
