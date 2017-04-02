@@ -1,9 +1,13 @@
 package com.deonna.twitterclient.utilities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.deonna.twitterclient.viewmodels.TweetDetailViewModel;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -18,7 +22,8 @@ public class Images {
             ImageView ivImage,
             String url,
             int height,
-            int width) {
+            int width
+    ) {
 
         Glide.with(context)
                 .load(url)
@@ -35,7 +40,8 @@ public class Images {
     public static void loadFromUrlWithFixedSize(
             Context context,
             ImageView ivImage,
-            String url) {
+            String url
+    ) {
 
         Glide.with(context)
                 .load(url)
@@ -48,10 +54,37 @@ public class Images {
                 .into(ivImage);
     }
 
+    public static void loadCircularImage(
+            Context context,
+            ImageView ivImage,
+            String url
+    ) {
+
+        Glide.with(context).load(url).asBitmap().centerCrop().into(new BitmapImageViewTarget(ivImage) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                ivImage.setImageDrawable(circularBitmapDrawable);
+            }
+        });
+//        Glide.with(context)
+//                .load(url)
+//                .bitmapTransform(
+//                        new RoundedCornersTransformation(
+//                                context,
+//                                ROUNDED_CORNER_RADIUS,
+//                                ROUNDED_CORNER_MARGIN)
+//                )
+//                .into(ivImage);
+    }
+
     public static void loadFromUrlWithFixedSizeRoundedTop(
             Context context,
             ImageView ivImage,
-            String url) {
+            String url
+    ) {
 
         Glide.with(context)
                 .load(url)

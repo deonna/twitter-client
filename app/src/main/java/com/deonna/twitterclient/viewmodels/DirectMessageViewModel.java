@@ -30,4 +30,9 @@ public class DirectMessageViewModel {
 
         return Times.getRelativeTimestamp(directMessage.createdAt);
     }
+
+    public String getProfileImageUrl() {
+
+        return directMessage.sender.getLargeProfileImageUrl();
+    }
 }

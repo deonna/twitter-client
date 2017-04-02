@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.ItemDirectMessageBinding;
 import com.deonna.twitterclient.models.DirectMessage;
+import com.deonna.twitterclient.utilities.Images;
 import com.deonna.twitterclient.viewmodels.DirectMessageViewModel;
 
 import java.util.List;
@@ -49,6 +51,11 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         binding.setDirectMessageViewModel(viewModel);
         binding.executePendingBindings();
+
+        loadProfileImage(
+            viewModel.getProfileImageUrl(),
+            binding.ivProfileImage
+        );
     }
 
     @Override
@@ -66,5 +73,10 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             binding = itemView;
         }
+    }
+
+    private void loadProfileImage(String url, ImageView ivProfileImage) {
+
+        Images.loadCircularImage(context, ivProfileImage, url);
     }
 }
