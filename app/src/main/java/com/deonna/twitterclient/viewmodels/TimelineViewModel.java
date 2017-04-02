@@ -29,7 +29,6 @@ public class TimelineViewModel implements ViewModel {
 
     private User currentUser;
     private Long maxId;
-    private Long directMessagesMaxId; //TODO: Extract logic into own activity and view model
 
     public TimelineViewModel(TimelineActivity context, FragmentManager fragmentManager) {
 
@@ -64,22 +63,6 @@ public class TimelineViewModel implements ViewModel {
 
             @Override
             public void onUserInfoError() {
-
-            }
-        });
-    }
-
-    public void getDirectMessages() {
-
-        client.getDirectMessages(directMessagesMaxId, new DirectMessagesCallback() {
-
-            @Override
-            public void onDirectMessagesReceived(List<DirectMessage> messages) {
-
-            }
-
-            @Override
-            public void onDirectMessagesError() {
 
             }
         });

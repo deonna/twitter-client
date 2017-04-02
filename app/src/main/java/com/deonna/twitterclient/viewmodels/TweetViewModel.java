@@ -3,29 +3,19 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.graphics.drawable.Drawable;
-import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.callbacks.FavoriteCallback;
-import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.TwitterOauthClient;
+import com.deonna.twitterclient.utilities.Times;
 import com.deonna.twitterclient.utilities.TwitterApplication;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 public class TweetViewModel extends BaseObservable {
 
     private static final int IMAGE_SIZE = 96;
 
     private static final String SCREEN_NAME_FORMAT = "@%s";
-
-    private static final String DATE_PATTERN = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
     protected Context context;
     protected Tweet tweet;
@@ -78,20 +68,7 @@ public class TweetViewModel extends BaseObservable {
 
     public String getRelativeTimestamp() {
 
-        SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN, Locale.ENGLISH);
-        format.setLenient(true);
-
-        String relativeDate = "";
-
-        try {
-            long dateMillis = format.parse(tweet.createdAt).getTime();
-            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return relativeDate;
+        return Times.getRelativeTimestamp(tweet.createdAt);
     }
 
     public String getTweetText() {

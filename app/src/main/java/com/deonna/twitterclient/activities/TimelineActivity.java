@@ -12,8 +12,6 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.callbacks.NewTweetsListener;
@@ -107,10 +105,19 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
 
     }
 
-    public void viewDirectMessages(MenuItem item) {
+    public void viewDirectMessages(MenuItem directMessageItem) {
 
-        Toast.makeText(this, "Viewing direct messages", Toast.LENGTH_SHORT).show();
-        timelineViewModel.getDirectMessages();
+//        Toast.makeText(this, "Viewing direct messages", Toast.LENGTH_SHORT).show();
+//        timelineViewModel.getDirectMessages();
+
+        directMessageItem.setOnMenuItemClickListener((item) -> {
+
+            Intent intent = new Intent(TimelineActivity.this, DirectMessagesActivity.class);
+
+            startActivity(intent);
+
+            return true;
+        });
     }
 
     private void setupToolbar() {

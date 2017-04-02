@@ -165,6 +165,4 @@ public class TweetsTimelineViewModel implements ViewModel {
 
         Tweet.deleteAll();
     }
-
-
 }
