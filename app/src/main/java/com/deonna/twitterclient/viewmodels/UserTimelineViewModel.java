@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;
@@ -13,9 +14,9 @@ public class UserTimelineViewModel extends TweetsTimelineViewModel {
 
     private String screenName;
 
-    public UserTimelineViewModel(Context context, FragmentManager fragmentManager) {
+    public UserTimelineViewModel(Context context, FragmentManager fragmentManager, TweetsListFragment fragment) {
 
-        super(context, fragmentManager);
+        super(context, fragmentManager, fragment);
     }
 
     public void setScreenName(String screenName) {

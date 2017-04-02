@@ -13,25 +13,35 @@
 
     </data>
 
-    <LinearLayout
-        android:id="@+id/llTimeline"
+    <RelativeLayout
+        android:id="@+id/rlTimeline"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:id="@+id/pbLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminateTint="@color/twitterBlue"
+            android:visibility="gone"/>
+
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/srlTimeline"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pbLoading">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvTimeline"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/tbMain"/>
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>

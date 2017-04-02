@@ -13,11 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.callbacks.ProgressBarListener;
 import com.deonna.twitterclient.databinding.FragmentTweetsListBinding;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
 import com.deonna.twitterclient.viewmodels.TweetsTimelineViewModel;
 
-public class TweetsListFragment extends Fragment {
+public class TweetsListFragment extends Fragment implements ProgressBarListener {
 
     protected TweetsTimelineViewModel tweetsTimelineViewModel;
     protected FragmentTweetsListBinding binding;
@@ -26,7 +27,7 @@ public class TweetsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
-        setupViewModel(new TweetsTimelineViewModel(getContext(), getFragmentManager()));
+        setupViewModel(new TweetsTimelineViewModel(getContext(), getFragmentManager(), this));
         setupBindings(inflater, parent);
 
         setupTimelineView();
@@ -81,5 +82,17 @@ public class TweetsListFragment extends Fragment {
         EndlessRecyclerViewScrollListener scrollListener = tweetsTimelineViewModel.initializeEndlessScrollListener(layoutManager);
 
         binding.rvTimeline.addOnScrollListener(scrollListener);
+    }
+
+    @Override
+    public void showProgressBar() {
+
+        binding.pbLoading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+        binding.pbLoading.setVisibility(View.GONE);
     }
 }

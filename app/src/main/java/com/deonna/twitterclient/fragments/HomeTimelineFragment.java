@@ -14,7 +14,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
-        super.setupViewModel(new HomeTimelineViewModel(getContext(), getFragmentManager()));
+        super.setupViewModel(new HomeTimelineViewModel(getContext(), getFragmentManager(), this));
         super.setupBindings(inflater, parent);
 
         super.setupTimelineView();

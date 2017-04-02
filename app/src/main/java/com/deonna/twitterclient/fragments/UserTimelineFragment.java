@@ -20,7 +20,7 @@ public class UserTimelineFragment extends TweetsListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
-        userTimelineViewModel = new UserTimelineViewModel(getContext(), getFragmentManager());
+        userTimelineViewModel = new UserTimelineViewModel(getContext(), getFragmentManager(), this);
 
         super.setupViewModel(userTimelineViewModel);
         super.setupBindings(inflater, parent);

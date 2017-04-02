@@ -50,7 +50,6 @@ public class UsersListViewModel implements ViewModel {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
 
-//                getNextOldestUsersList();
             }
         };
     }

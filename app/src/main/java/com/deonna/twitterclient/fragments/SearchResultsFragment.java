@@ -21,7 +21,7 @@ public class SearchResultsFragment extends TweetsListFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        searchResultsViewModel = new SearchResultsViewModel(getContext(), getFragmentManager());
+        searchResultsViewModel = new SearchResultsViewModel(getContext(), getFragmentManager(), this);
 
         super.setupViewModel(searchResultsViewModel);
         super.setupBindings(inflater, parent);

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
@@ -30,9 +31,12 @@ public class TweetsTimelineViewModel implements ViewModel {
 
     protected Long maxId;
 
-    public TweetsTimelineViewModel(Context context, FragmentManager fragmentManager) {
+    protected TweetsListFragment fragment;
+
+    public TweetsTimelineViewModel(Context context, FragmentManager fragmentManager, TweetsListFragment fragment) {
 
         this.context = context;
+        this.fragment = fragment;
 
         tweets = new ArrayList<>();
         tweetsAdapter = new TweetsAdapter(context, tweets, fragmentManager);
@@ -63,6 +67,8 @@ public class TweetsTimelineViewModel implements ViewModel {
 
     protected void getNextOldestTweets() {
 
+        fragment.showProgressBar();
+
         client.getNextOldestTweets(maxId, new TweetsReceivedCallback() {
 
             @Override
@@ -72,11 +78,14 @@ public class TweetsTimelineViewModel implements ViewModel {
                 tweetsAdapter.notifyDataSetChanged();
 
                 maxId = getMaxIdForNextFetch(newTweets);
+
+                fragment.hideProgressBar();
             }
 
             @Override
             public void onTweetsReceivedError() {
 
+                fragment.hideProgressBar();
             }
         });
     }

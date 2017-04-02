@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.NetworkStatus;
 
@@ -12,9 +13,9 @@ import java.util.List;
 
 public class HomeTimelineViewModel extends TweetsTimelineViewModel {
 
-    public HomeTimelineViewModel(Context context, FragmentManager fragmentManager) {
+    public HomeTimelineViewModel(Context context, FragmentManager fragmentManager, TweetsListFragment fragment) {
 
-        super(context, fragmentManager);
+        super(context, fragmentManager, fragment);
     }
 
     @Override
