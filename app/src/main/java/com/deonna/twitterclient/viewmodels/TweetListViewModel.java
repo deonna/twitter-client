@@ -6,12 +6,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deonna.twitterclient.activities.ProfileActivity;
+import com.deonna.twitterclient.activities.SearchResultsActivity;
 import com.deonna.twitterclient.activities.TimelineActivity;
-import com.deonna.twitterclient.activities.TweetDetailActivity;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
-import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.callbacks.SearchResultsCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
@@ -131,5 +131,30 @@ public class TweetListViewModel extends TweetViewModel {
 
             }
         });
+    }
+
+    public void getSearchResultsForHashtag(String hashtag) {
+
+        Intent intent = new Intent(context, SearchResultsActivity.class);
+        intent.putExtra(SearchResultsActivity.KEY_SEARCH_TERM, hashtag);
+
+        context.startActivity(intent);
+
+//        client.getSearchResultsForHashtag(hashtag, new SearchResultsCallback() {
+//
+//            @Override
+//            public void onSearchResultsReceived(List<Tweet> results) {
+//
+//                Intent intent = new Intent(context, SearchResultsActivity.class);
+//                intent.putExtra(SearchResultsActivity.KEY_RESULTS, Parcels.wrap(results));
+//
+//                context.startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onSearchResultsError() {
+//
+//            }
+//        });
     }
 }

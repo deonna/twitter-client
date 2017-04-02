@@ -7,6 +7,7 @@ import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
+import com.deonna.twitterclient.callbacks.SearchResultsCallback;
 import com.deonna.twitterclient.callbacks.TweetSentCallback;
 import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
@@ -366,6 +367,48 @@ public class TwitterOauthClient extends OAuthBaseClient {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
 
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+
+                callback.onUsersReceivedError();
+            }
+        });
+    }
+
+    public void getSearchResults(String hashtag, Long maxId, SearchResultsCallback callback) {
+
+        String apiUrl = getApiUrl("search/tweets.json");
+
+        RequestParams params = new RequestParams();
+        params.put("q", hashtag);
+        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
+
+        if (maxId != null) {
+            params.put(KEY_MAX_ID, maxId);
+        }
+
+        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                try {
+
+                    JSONArray tweetsArray = response.getJSONArray("statuses");
+
+                    List<Tweet> tweets = Tweet.fromJsonMultiple(tweetsArray);
+
+                    callback.onSearchResultsReceived(tweets);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+
+                callback.onSearchResultsError();
             }
         });
     }

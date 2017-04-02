@@ -28,7 +28,7 @@ public class UserTimelineViewModel extends TweetsTimelineViewModel {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
-                Log.d(TAG, newTweets.toString());
+
                 tweets.addAll(newTweets);
                 tweetsAdapter.notifyDataSetChanged();
 

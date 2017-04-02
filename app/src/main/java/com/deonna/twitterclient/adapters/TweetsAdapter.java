@@ -66,7 +66,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         tweetBinding.setTweetListViewModel(tweetListViewModel);
         tweetBinding.executePendingBindings();
 
-        addPatternEditableBuilderForStatus(tweetBinding.tvTweet, tweetListViewModel);
+        addMentionsLinks(tweetBinding.tvTweet, tweetListViewModel);
+        addHashtagLinks(tweetBinding.tvTweet, tweetListViewModel);
 
         setupTweetDetailClickListener(tweetBinding, tweet);
         setupRepliesClickListener(tweetBinding, tweet);
@@ -90,7 +91,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return tweets.size();
     }
 
-    private void addPatternEditableBuilderForStatus(TextView tvTweet, TweetListViewModel tweetListViewModel) {
+    private void addMentionsLinks(TextView tvTweet, TweetListViewModel tweetListViewModel) {
 
         new PatternEditableBuilder()
                 .addPattern(
@@ -99,6 +100,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     ((text) -> {
                         tweetListViewModel.openProfileForUser(text.substring(1));
                     })
+                )
+                .into(tvTweet);
+    }
+
+    private void addHashtagLinks(TextView tvTweet, TweetListViewModel tweetListViewModel) {
+
+        new PatternEditableBuilder()
+                .addPattern(
+                        PatternEditableBuilder.HASHTAG_PATTERN,
+                        context.getResources().getColor(R.color.twitterBlueLight),
+                        ((text) -> {
+                            tweetListViewModel.getSearchResultsForHashtag(text);
+                        })
                 )
                 .into(tvTweet);
     }

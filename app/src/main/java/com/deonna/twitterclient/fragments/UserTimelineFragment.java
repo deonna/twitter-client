@@ -16,17 +16,6 @@ public class UserTimelineFragment extends TweetsListFragment {
 
     private UserTimelineViewModel userTimelineViewModel;
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-
-        super.onActivityCreated(savedInstanceState);
-
-        User user = (User) Parcels.unwrap(getActivity().getIntent().getParcelableExtra(ProfileActivity.KEY_USER));
-        userTimelineViewModel.setScreenName(user.screenName);
-
-        userTimelineViewModel.getUserTimeline();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
@@ -45,4 +34,16 @@ public class UserTimelineFragment extends TweetsListFragment {
 
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
+        super.onActivityCreated(savedInstanceState);
+
+        User user = (User) Parcels.unwrap(getActivity().getIntent().getParcelableExtra(ProfileActivity.KEY_USER));
+        userTimelineViewModel.setScreenName(user.screenName);
+
+        userTimelineViewModel.getUserTimeline();
+    }
+
 }
