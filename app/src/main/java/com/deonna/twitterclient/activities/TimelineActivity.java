@@ -12,6 +12,8 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.callbacks.NewTweetsListener;
@@ -72,9 +74,16 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search, menu);
+        inflater.inflate(R.menu.timeline, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        setupSearchView(menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void setupSearchView(Menu menu) {
+
+        MenuItem searchItem = menu.findItem(R.id.miSearch);
 
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 
@@ -96,7 +105,12 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
             }
         });
 
-        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void viewDirectMessages(MenuItem item) {
+
+        Toast.makeText(this, "Viewing direct messages", Toast.LENGTH_SHORT).show();
+        timelineViewModel.getDirectMessages();
     }
 
     private void setupToolbar() {

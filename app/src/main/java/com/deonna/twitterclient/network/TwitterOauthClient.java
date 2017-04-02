@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
+import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.callbacks.SearchResultsCallback;
@@ -12,6 +13,7 @@ import com.deonna.twitterclient.callbacks.TweetSentCallback;
 import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.callbacks.UsersListCallback;
+import com.deonna.twitterclient.models.DirectMessage;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -375,7 +377,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void getSearchResults(String hashtag, Long maxId, SearchResultsCallback callback) {
 
-        String apiUrl = getApiUrl("search/tweets.json");
+        String apiUrl = getApiUrl("timeline/tweets.json");
 
         RequestParams params = new RequestParams();
         params.put("q", hashtag);
@@ -409,6 +411,35 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
                 callback.onSearchResultsError();
+            }
+        });
+    }
+
+    public void getDirectMessages(Long maxId, DirectMessagesCallback callback) {
+
+        String apiUrl = getApiUrl("direct_messages.json");
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
+
+        if (maxId != null) {
+            params.put(KEY_MAX_ID, maxId);
+        }
+
+        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+
+                List<DirectMessage> directMessages = DirectMessage.fromJsonMultiple(response);
+
+                callback.onDirectMessagesReceived(directMessages);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                callback.onDirectMessagesError();
             }
         });
     }

@@ -4,7 +4,9 @@ import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.activities.TimelineActivity;
 import com.deonna.twitterclient.adapters.TweetsAdapter;
+import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
+import com.deonna.twitterclient.models.DirectMessage;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
@@ -27,6 +29,7 @@ public class TimelineViewModel implements ViewModel {
 
     private User currentUser;
     private Long maxId;
+    private Long directMessagesMaxId; //TODO: Extract logic into own activity and view model
 
     public TimelineViewModel(TimelineActivity context, FragmentManager fragmentManager) {
 
@@ -61,6 +64,22 @@ public class TimelineViewModel implements ViewModel {
 
             @Override
             public void onUserInfoError() {
+
+            }
+        });
+    }
+
+    public void getDirectMessages() {
+
+        client.getDirectMessages(directMessagesMaxId, new DirectMessagesCallback() {
+
+            @Override
+            public void onDirectMessagesReceived(List<DirectMessage> messages) {
+
+            }
+
+            @Override
+            public void onDirectMessagesError() {
 
             }
         });
