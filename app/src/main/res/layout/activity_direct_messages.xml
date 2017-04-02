@@ -16,10 +16,18 @@
         android:layout_height="match_parent"
         tools:context="com.deonna.twitterclient.activities.DirectMessagesActivity">
 
+        <include
+            android:id="@+id/tbMain"
+            layout="@layout/toolbar_main"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvDirectMessages"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tbMain"/>
 
     </RelativeLayout>
 
