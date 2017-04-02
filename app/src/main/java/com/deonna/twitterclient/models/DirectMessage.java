@@ -17,7 +17,9 @@ import org.json.JSONArray;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Table(database = TwitterClientDatabase.class)
 @Parcel(analyze={DirectMessage.class})
