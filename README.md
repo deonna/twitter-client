@@ -35,7 +35,7 @@ The following **bonus** features are implemented:
 
 * [x] Use Parcelable instead of Serializable using the popular [Parceler library](http://guides.codepath.com/android/Using-Parceler).
 * [x] Leverages the [data binding support module](http://guides.codepath.com/android/Applying-Data-Binding-for-Views) to bind data into layout templates.
-* [ ] On the profile screen, leverage the [CoordinatorLayout](http://guides.codepath.com/android/Handling-Scrolls-with-CoordinatorLayout#responding-to-scroll-events) to [apply scrolling behavior](https://hackmd.io/s/SJyDOCgU) as the user scrolls through the profile timeline.
+* [x] On the profile screen, leverage the [CoordinatorLayout](http://guides.codepath.com/android/Handling-Scrolls-with-CoordinatorLayout#responding-to-scroll-events) to [apply scrolling behavior](https://hackmd.io/s/SJyDOCgU) as the user scrolls through the profile timeline.
 * [x] User can view their direct messages (or send new ones)
 
 The following **additional** features are implemented:
@@ -48,6 +48,8 @@ The following **additional** features are implemented:
 * [x] Added ability to favorite, unfavorite, retweet, and reply to users
 * [x] Added instant UI feedback upon sucessful favoriting/unfavoriting, retweeting, and replying
 * [x] Added incrementation of favorite and retweet count upon selecting for better UX
+* [x] Added ViewPager and PagerSlidingTabStrip for direct messages
+* [x] Added ViewPager and PagerSlidingTabStrip for profile view
 * [x] Added async database storage
 * [x] Implemented MVVM architecture with data binding
 * [x] Enforced limits for tweets that are too long
@@ -62,7 +64,6 @@ The following **additional** features are implemented:
 * [x] Used Glide transformations
 * [x] Added context and automatic @ for replies
 * [x] Added dividers for better visual separation of tweets
-* [x] Used ViewPager and PagerSlidingTabStrip for direct messages
 * [x] Followed Twitter branding guidelines and use official iconography - SVG -> vector drawable
 conversion
 
