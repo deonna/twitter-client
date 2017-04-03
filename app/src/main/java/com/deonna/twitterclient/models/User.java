@@ -11,7 +11,11 @@ import com.google.gson.reflect.TypeToken;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
+import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
+import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -119,5 +123,21 @@ public class User extends BaseModel {
                 }.getType());
 
         return users;
+    }
+
+    public static void saveUserAsync(User user) {
+
+        ProcessModelTransaction<User> processModelTransaction =
+                new ProcessModelTransaction.Builder<>(
+                        new ProcessModelTransaction.ProcessModel<User>() {
+                            @Override
+                            public void processModel(User user, DatabaseWrapper wrapper) {
+                                user.save();
+                            }
+                        }
+                ).build();
+
+        Transaction transaction = FlowManager.getDatabase(TwitterClientDatabase.class).beginTransactionAsync(processModelTransaction).build();
+        transaction.execute();
     }
 }

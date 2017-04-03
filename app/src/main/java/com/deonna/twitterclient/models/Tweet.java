@@ -12,9 +12,13 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
+import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
+import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -123,10 +127,27 @@ public class Tweet extends BaseModel {
 
         if (tweet != null) {
             if (tweet.user != null) {
-                tweet.user.save();
+                User.saveUserAsync(tweet.user);
             }
-            tweet.save();
+
+            Tweet.saveTweetAsync(tweet);
         }
+    }
+
+    private static void saveTweetAsync(Tweet tweet) {
+
+        ProcessModelTransaction<Tweet> processModelTransaction =
+                new ProcessModelTransaction.Builder<>(
+                    new ProcessModelTransaction.ProcessModel<Tweet>() {
+                        @Override
+                        public void processModel(Tweet tweet, DatabaseWrapper wrapper) {
+                            tweet.save();
+                        }
+                    }
+                ).build();
+
+        Transaction transaction = FlowManager.getDatabase(TwitterClientDatabase.class).beginTransactionAsync(processModelTransaction).build();
+        transaction.execute();
     }
 
     public static void deleteAll() {
