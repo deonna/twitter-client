@@ -2,7 +2,7 @@
 
 **Name of your app** is an android app that allows a user to view home and mentions timelines, view user profiles with user timelines, as well as compose and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **X** hours spent in total
+Time spent: **14** hours spent in total
 
 ## User Stories
 
@@ -22,7 +22,7 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 * [x] User can view following / followers list through the profile
-* [ ] Implements robust error handling, [check if internet is available](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#checking-for-network-connectivity), handle error cases, network failures
+* [x] Implements robust error handling, [check if internet is available](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#checking-for-network-connectivity), handle error cases, network failures
 * [x] When a network request is sent, user sees an [indeterminate progress indicator](http://guides.codepath.com/android/Handling-ProgressBars#progress-within-actionbar)
 * [x] User can **"reply" to any tweet on their home timeline**
   * [x] The user that wrote the original tweet is automatically "@" replied in compose
@@ -40,13 +40,33 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] Added Endless scroll for all Tweets list and user views
+* [x] Added ability to follow and unfollow users
+* [x] Added navigation view with header
+* [x] Added automatic scroll to top functionality when a new tweet is made
+* [x] Added ability to favorite, unfavorite, retweet, and reply to users
+* [x] Added instant UI feedback upon sucessful favoriting/unfavoriting, retweeting, and replying
+* [x] Implemented MVVM architecture with data binding
+* [x] Enforced limits for tweets that are too long
+* [x] Implemented custom toolbar with iconography of the logged-in user for context
+* [x] Used Retrolambda to simplify callbacks
+* [x] Used Butterknife to simplify view boilerplate
+* [x] Used Gson to read JSON
+* [x] Added link to scroll to top by clicking on Twitter logo for better UX (don’t want to have the user manually scroll to the top to pulll to refresh, for example.
+* [x] Added LinkifiedTextView to solve problem with click propagation when list item is selected
+* [x] Added custom fonts for composing views
+* [x] Used Glide transformations
+* [x] Added context and automatic @ for replies
+* [x] Added dividers for better visual separation of tweets
+* [x] Used ViewPager and PagerSlidingTabStrip for direct messages
+* [x] Followed Twitter branding guidelines and use official iconography - SVG -> vector drawable
+conversion
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/i3vyiEo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
