@@ -26,13 +26,27 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/tbMain"
-                android:minHeight="?attr/actionBarSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:titleTextColor="@android:color/white"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                android:background="?attr/colorPrimary"/>
+                app:titleTextColor="@android:color/white">
+
+                <ImageView
+                    android:id="@+id/ivBannerImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:visibility="@{profileViewModel.getBannerImageVisibility()}"
+                    tools:src="@drawable/ic_launcher" />
+
+            </android.support.v7.widget.Toolbar>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -41,27 +55,9 @@
                 tools:context="com.deonna.twitterclient.activities.ProfileActivity">
 
                 <RelativeLayout
-                    android:id="@+id/rlBannerImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/ivBannerImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_alignParentTop="true"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:visibility="@{profileViewModel.getBannerImageVisibility()}"
-                        tools:src="@drawable/ic_launcher"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
                     android:id="@+id/rlProfileInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlBannerImage"
                     android:layout_marginEnd="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
