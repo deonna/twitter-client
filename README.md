@@ -73,7 +73,7 @@ Here's a walkthrough of implemented user stories:
 <img src='http://i.imgur.com/i3vyiEo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 [Twitter Demo - GIF not rendering](http://i.imgur.com/i3vyiEo.gif)
-
+[Coordinator Layout Demo](http://i.imgur.com/dMJa6ag.gif)
 [Demo of previous user stories](http://i.imgur.com/DtyQkHM.gif)
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
