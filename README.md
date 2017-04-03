@@ -49,6 +49,7 @@ The following **additional** features are implemented:
 * [x] Added incrementation of favorite and retweet count upon selecting for better UX
 * [x] Implemented MVVM architecture with data binding
 * [x] Enforced limits for tweets that are too long
+* [x] Added ability to log out
 * [x] Implemented custom toolbar with iconography of the logged-in user for context
 * [x] Used Retrolambda to simplify callbacks
 * [x] Used Butterknife to simplify view boilerplate
