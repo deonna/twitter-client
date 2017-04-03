@@ -115,6 +115,10 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
 
         Images.loadCircularImage(TimelineActivity.this, ivProfileImage, user.getLargeProfileImageUrl());
         Images.loadFromUrlWithFixedSizeRegularCorners(TimelineActivity.this, ivBannerImage, user.getBannerImageUrl());
+
+        ivProfileImage.setOnClickListener((view) -> {
+            openCurrentUserProfile();
+        });
     }
 
     private void setupDrawerContent() {
@@ -175,18 +179,6 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
 
     }
 
-    public void viewDirectMessages(MenuItem directMessageItem) {
-
-        directMessageItem.setOnMenuItemClickListener((item) -> {
-
-            Intent intent = new Intent(TimelineActivity.this, DirectMessagesActivity.class);
-
-            startActivity(intent);
-
-            return true;
-        });
-    }
-
     private void setupToolbar() {
 
         setSupportActionBar(binding.tbMain);
@@ -216,7 +208,7 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
         Images.loadFromUrl(this, binding.ivProfileImage, url, size, size);
     }
 
-    @OnClick(R.id.ivProfileImage)
+//    @OnClick(R.id.ivProfileImage)
     public void openCurrentUserProfile() {
 
         Intent intent = new Intent(TimelineActivity.this, ProfileActivity.class);

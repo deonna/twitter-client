@@ -9,12 +9,4 @@
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView" />
 
-    <item
-        android:id="@+id/miDirectMessage"
-        android:icon="@drawable/ic_direct_message"
-        android:orderInCategory="2"
-        android:onClick="viewDirectMessages"
-        android:title="Send Message"
-        app:showAsAction="ifRoom|collapseActionView"/>
-
 </menu>

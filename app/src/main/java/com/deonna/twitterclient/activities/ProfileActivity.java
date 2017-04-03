@@ -94,6 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void loadBackgroundImage(String url, ImageView ivImage) {
 
-        Images.loadFromUrlWithFixedSize(this, ivImage, url);
+        Images.loadFromUrlWithFixedSizeRegularCorners(this, ivImage, url);
     }
 }
