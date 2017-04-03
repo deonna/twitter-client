@@ -23,11 +23,22 @@
             android:layout_width="match_parent"
             />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvDirectMessages"
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/pstsTimelines"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/tbMain"
+            app:pstsIndicatorColor="@color/twitterBlueLight"
+            app:pstsUnderlineColor="@color/twitterBlueLight"
+            app:pstsShouldExpand="true"
+            app:pstsTextAllCaps="true"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpTimelines"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tbMain"/>
+            android:layout_below="@+id/pstsTimelines"
+            android:background="@android:color/white"/>
 
     </RelativeLayout>
 

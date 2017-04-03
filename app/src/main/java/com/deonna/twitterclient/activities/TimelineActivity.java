@@ -107,9 +107,6 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
 
     public void viewDirectMessages(MenuItem directMessageItem) {
 
-//        Toast.makeText(this, "Viewing direct messages", Toast.LENGTH_SHORT).show();
-//        timelineViewModel.getDirectMessages();
-
         directMessageItem.setOnMenuItemClickListener((item) -> {
 
             Intent intent = new Intent(TimelineActivity.this, DirectMessagesActivity.class);

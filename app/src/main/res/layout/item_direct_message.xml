@@ -27,6 +27,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_centerVertical="true"
             tools:src="@drawable/ic_launcher"/>
 
         <TextView
@@ -63,6 +64,15 @@
             android:maxLines="2"
             tools:text="I'm doing really well this weekend. I'm actually working on a new book that will be released soon, and preparing a blog post that will most certainly go viral."/>
 
+        <ImageView
+            android:id="@+id/ivReply"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_toRightOf="@+id/ivProfileImage"
+            android:layout_toEndOf="@+id/ivProfileImage"
+            android:layout_below="@+id/tvText"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_reply"/>
 
     </RelativeLayout>
 </layout>
