@@ -16,45 +16,35 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import org.json.JSONArray;
 import org.parceler.Parcel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by deonna on 3/26/17.
+ * Created by deonna on 4/2/17.
  */
 
-@Parcel(analyze = ExtendedEntities.class)
+@Parcel(analyze = VideoInfo.class)
 @Table(database = TwitterClientDatabase.class)
-public class ExtendedEntities {
+public class VideoInfo {
 
     @Column
-    @SerializedName("id")
-    @PrimaryKey
-    @Expose
-    public long id;
+    @PrimaryKey(autoincrement=true)
+    long id;
 
-    @Column
-    @SerializedName("type")
+    @SerializedName("variants")
     @Expose
-    public String type;
-
-    @Column
-    @SerializedName("video_info")
-    @Expose
-    @ForeignKey
-    public VideoInfo videoInfo;
+    List<VideoStats> videoStats;
 
     public static Gson gson = new GsonBuilder()
             .setExclusionStrategies(new ExclusionStrategy[]{ new DbFlowExclusionStrategy() })
             .create();
 
-    public static List<ExtendedEntities> fromJsonMultiple(JSONArray extendedEntitiesJson) {
+    public static List<VideoInfo> fromJsonMultiple(JSONArray videoInfoListJson) {
 
-        List<ExtendedEntities> extendedEntities = gson.fromJson(
-                extendedEntitiesJson.toString(),
-                new TypeToken<ArrayList<ExtendedEntities>>() {
+        List<VideoInfo> videoInfoList = gson.fromJson(
+                videoInfoListJson.toString(),
+                new TypeToken<List<VideoInfo>>() {
                 }.getType());
 
-        return extendedEntities;
+        return videoInfoList;
     }
 }

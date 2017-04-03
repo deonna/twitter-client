@@ -125,6 +125,8 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
         if (entities != null) {
             params.put(KEY_ENTITIES, entities);
+        } else {
+            params.put(KEY_ENTITIES, true);
         }
 
         getClient().get(getApiUrl(apiUrl), params, new JsonHttpResponseHandler() {
@@ -503,6 +505,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
     }
 
     public void getTrends(TrendsCallback callback) {
+
         String apiUrl = getApiUrl("trends/place.json");
 
         final int WOEID = 1;

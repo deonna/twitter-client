@@ -64,6 +64,12 @@ public class Tweet extends BaseModel {
     public Entities entities;
 
     @Column
+    @SerializedName("extended_entities")
+    @Expose
+    @ForeignKey
+    public ExtendedEntities extendedEntities;
+
+    @Column
     @SerializedName("favorited")
     @Expose
     public boolean favorited;
