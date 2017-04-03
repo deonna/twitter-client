@@ -47,6 +47,7 @@ The following **additional** features are implemented:
 * [x] Added ability to favorite, unfavorite, retweet, and reply to users
 * [x] Added instant UI feedback upon sucessful favoriting/unfavoriting, retweeting, and replying
 * [x] Added incrementation of favorite and retweet count upon selecting for better UX
+* [x] Added async database storage
 * [x] Implemented MVVM architecture with data binding
 * [x] Enforced limits for tweets that are too long
 * [x] Added ability to log out
