@@ -28,6 +28,7 @@ import com.deonna.twitterclient.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.utilities.Images;
+import com.deonna.twitterclient.utilities.TwitterApplication;
 import com.deonna.twitterclient.viewmodels.TimelineViewModel;
 import com.deonna.twitterclient.viewmodels.TweetDetailViewModel;
 
@@ -145,12 +146,22 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
             case R.id.nav_trends:
                 break;
             case R.id.nav_logout:
+                TwitterApplication.getRestClient().logOut();
+                getLoginScreen();
                 break;
         }
 
         menuItem.setChecked(true);
 
         binding.dlMain.closeDrawers();
+    }
+
+    private void getLoginScreen() {
+
+        finish();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     private void setupSearchView(Menu menu) {

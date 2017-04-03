@@ -69,6 +69,10 @@ public class TwitterOauthClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
 
+    public void logOut() {
+        super.clearAccessToken();
+    }
+
 	public void getHomeTimeline(final TweetsReceivedCallback callback) {
 
         fetchTimeline(HOME_TIMELINE_PATH, null, null, null, true, callback);
