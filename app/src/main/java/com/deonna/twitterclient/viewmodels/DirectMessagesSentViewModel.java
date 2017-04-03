@@ -1,6 +1,7 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
 import com.deonna.twitterclient.models.DirectMessage;
@@ -13,9 +14,9 @@ import java.util.List;
 
 public class DirectMessagesSentViewModel extends DirectMessagesListViewModel {
 
-    public DirectMessagesSentViewModel(Context context) {
+    public DirectMessagesSentViewModel(Context context, FragmentManager fragmentManager) {
 
-        super(context);
+        super(context, fragmentManager);
     }
 
     @Override

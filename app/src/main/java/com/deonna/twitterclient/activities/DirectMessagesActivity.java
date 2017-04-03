@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.adapters.DirectMessagesAdapter;
+import com.deonna.twitterclient.callbacks.NewTweetsListener;
 import com.deonna.twitterclient.databinding.ActivityDirectMessagesBinding;
 import com.deonna.twitterclient.fragments.DirectMessagesListFragment;
 import com.deonna.twitterclient.fragments.DirectMessagesReceivedFragment;
@@ -22,7 +23,7 @@ import com.deonna.twitterclient.viewmodels.DirectMessagesViewModel;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DirectMessagesActivity extends AppCompatActivity {
+public class DirectMessagesActivity extends AppCompatActivity implements NewTweetsListener {
 
     private DirectMessagesViewModel directMessagesViewModel;
     private ActivityDirectMessagesBinding binding;
@@ -40,6 +41,11 @@ public class DirectMessagesActivity extends AppCompatActivity {
         binding.setDirectMessagesViewModel(directMessagesViewModel);
 
         setupTabs();
+    }
+
+    @Override
+    public void displayNewestTweets() {
+
     }
 
     private void setupTabs() {

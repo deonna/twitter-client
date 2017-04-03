@@ -1,6 +1,7 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.adapters.DirectMessagesAdapter;
 import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
@@ -21,12 +22,12 @@ public class DirectMessagesListViewModel implements ViewModel {
 
     protected Long maxId;
 
-    public DirectMessagesListViewModel(Context context) {
+    public DirectMessagesListViewModel(Context context, FragmentManager fragmentManager) {
 
         this.context = context;
 
         directMessages = new ArrayList<>();
-        adapter = new DirectMessagesAdapter(context, directMessages);
+        adapter = new DirectMessagesAdapter(context, directMessages, fragmentManager);
 
         client = TwitterApplication.getRestClient();
     }

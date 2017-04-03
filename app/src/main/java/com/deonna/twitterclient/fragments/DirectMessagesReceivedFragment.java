@@ -18,7 +18,7 @@ public class DirectMessagesReceivedFragment extends DirectMessagesListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
-        setupViewModel(new DirectMessagesReceivedViewModel(getContext()));
+        setupViewModel(new DirectMessagesReceivedViewModel(getContext(), getFragmentManager()));
         setupBindings(inflater, parent);
 
         setupMessagesView();

@@ -30,9 +30,9 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class ReplyFragment extends DialogFragment {
 
     public static final String LAYOUT_NAME = "fragment_reply";
-    private static final String KEY_CURRENT_USER = "current_user";
+    protected static final String KEY_CURRENT_USER = "current_user";
 
-    private FragmentReplyBinding binding;
+    protected FragmentReplyBinding binding;
 
     public static ReplyFragment newInstance(User currentUser) {
 
@@ -89,7 +89,7 @@ public class ReplyFragment extends DialogFragment {
         super.onResume();
     }
 
-    private void setProfilePicture(String url, ImageView ivProfileImage, int size) {
+    protected void setProfilePicture(String url, ImageView ivProfileImage, int size) {
 
         Glide.with(getActivity())
                 .load(url)
@@ -98,14 +98,14 @@ public class ReplyFragment extends DialogFragment {
                 .into(ivProfileImage);
     }
 
-    private void setupFonts() {
+    protected void setupFonts() {
 
         binding.etNewTweet.setTypeface(Fonts.fontRegular);
         binding.btSendTweet.setTypeface(Fonts.fontExtraBold);
         binding.tvCharacterCount.setTypeface(Fonts.fontRegular);
     }
 
-    private void setupClickEvents(final ReplyViewModel replyViewModel) {
+    protected void setupClickEvents(final ReplyViewModel replyViewModel) {
 
         binding.btSendTweet.setOnClickListener((view) -> {
 
@@ -125,7 +125,7 @@ public class ReplyFragment extends DialogFragment {
         binding.etNewTweet.addTextChangedListener(characterCountWatcher);
     }
 
-    private TextWatcher getCharacterCountWatcher(final ReplyViewModel replyViewModel) {
+    protected TextWatcher getCharacterCountWatcher(final ReplyViewModel replyViewModel) {
 
         return new TextWatcher() {
             @Override

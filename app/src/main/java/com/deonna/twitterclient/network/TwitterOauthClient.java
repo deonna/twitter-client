@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
+import com.deonna.twitterclient.callbacks.DirectMessageSentCallback;
 import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
@@ -57,6 +58,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
     public static final String KEY_SKIP_STATUS = "skip_status";
     public static final String KEY_INCLUDE_EMAIL = "include_email";
     private static final String KEY_CURSOR = "cursor";
+    private static final String KEY_TEXT = "text";
 
     public TwitterOauthClient(Context context) {
 
@@ -469,6 +471,30 @@ public class TwitterOauthClient extends OAuthBaseClient {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
 
                 callback.onDirectMessagesError();
+            }
+        });
+    }
+
+    public void sendDirectMessage(String screenName, String text, DirectMessageSentCallback callback) {
+
+        String apiUrl = getApiUrl("direct_messages/new.json");
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_SCREEN_NAME, screenName);
+        params.put(KEY_TEXT, text);
+
+        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                callback.onDirectMessageSent();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                callback.onDirectMessageSentFailed();
             }
         });
     }
