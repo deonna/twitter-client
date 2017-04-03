@@ -72,8 +72,9 @@ conversion
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/i3vyiEo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://imgur.com/a/Zn0pE.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+[Twitter Demo](http://imgur.com/a/Zn0pE.gif)
 [Coordinator Layout With Background Image on Profile Demo](http://i.imgur.com/lQoxoLh.gif)
 [Coordinator Layout Demo](http://i.imgur.com/dMJa6ag.gif)
 
