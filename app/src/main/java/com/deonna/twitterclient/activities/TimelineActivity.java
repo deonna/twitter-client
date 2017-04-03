@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.callbacks.NewTweetsListener;
@@ -20,6 +25,7 @@ import com.deonna.twitterclient.fragments.ComposeFragment;
 import com.deonna.twitterclient.fragments.HomeTimelineFragment;
 import com.deonna.twitterclient.fragments.MentionsTimelineFragment;
 import com.deonna.twitterclient.fragments.TweetsListFragment;
+import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.utilities.Images;
 import com.deonna.twitterclient.viewmodels.TimelineViewModel;
@@ -30,6 +36,7 @@ import org.parceler.Parcels;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -56,6 +63,7 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
 
         ButterKnife.bind(this);
 
+        setupDrawerContent();
         setupTabs();
     }
 
@@ -77,6 +85,68 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
         setupSearchView(menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                binding.dlMain.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void setupNavHeader(User user) {
+
+        View headerLayout = binding.nvMain.inflateHeaderView(R.layout.nav_header);
+
+        ImageView ivProfileImage = (ImageView) headerLayout.findViewById(R.id.ivProfileImage);
+        ImageView ivBannerImage = (ImageView) headerLayout.findViewById(R.id.ivBannerImage);
+
+        TextView tvName = (TextView) headerLayout.findViewById(R.id.tvName);
+        TextView tvScreenName = (TextView) headerLayout.findViewById(R.id.tvScreenName);
+
+        tvName.setText(user.name);
+        tvScreenName.setText("@" + user.screenName);
+
+        Images.loadCircularImage(TimelineActivity.this, ivProfileImage, user.getLargeProfileImageUrl());
+        Images.loadFromUrlWithFixedSize(TimelineActivity.this, ivBannerImage, user.getBannerImageUrl());
+    }
+
+    private void setupDrawerContent() {
+
+        binding.nvMain.setNavigationItemSelectedListener((menuItem) -> {
+
+            selectDrawerItem(menuItem);
+            return true;
+        });
+    }
+
+    private void selectDrawerItem(MenuItem menuItem) {
+
+        Fragment fragment = null;
+
+        Class fragmentClass;
+
+        switch(menuItem.getItemId()) {
+
+            case R.id.nav_direct_messages:
+                Intent intent = new Intent(TimelineActivity.this, DirectMessagesActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_trends:
+                break;
+            case R.id.nav_logout:
+                break;
+        }
+
+        menuItem.setChecked(true);
+
+        binding.dlMain.closeDrawers();
     }
 
     private void setupSearchView(Menu menu) {

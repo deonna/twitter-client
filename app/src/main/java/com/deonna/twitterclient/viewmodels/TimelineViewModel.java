@@ -58,7 +58,9 @@ public class TimelineViewModel implements ViewModel {
 
                 TwitterApplication.setCurrentUser(user);
                 currentUser = user;
+
                 context.loadCurrentUserProfileImage(currentUser.getLargeProfileImageUrl());
+                context.setupNavHeader(user);
             }
 
             @Override

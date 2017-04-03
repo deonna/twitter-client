@@ -14,76 +14,91 @@
 
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/dlMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.deonna.twitterclient.activities.TimelineActivity">
 
-        <RelativeLayout
-            android:id="@+id/rlMain"
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/tbMain"
-                android:minHeight="?attr/actionBarSize"
+            <RelativeLayout
+                android:id="@+id/rlMain"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/tbMain"
+                    android:minHeight="?attr/actionBarSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:titleTextColor="@android:color/white"
+                    android:background="?attr/colorPrimary">
+
+                    <ImageView
+                        android:id="@+id/ivProfileImage"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="left"
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/ic_logo"/>
+
+                    <ImageView
+                        android:id="@+id/ivLogo"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_logo"/>
+
+                </android.support.v7.widget.Toolbar>
+
+                <com.astuetz.PagerSlidingTabStrip
+                    android:id="@+id/pstsTimelines"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/tbMain"
+                    app:pstsIndicatorColor="@color/twitterBlueLight"
+                    app:pstsUnderlineColor="@color/twitterBlueLight"
+                    app:pstsShouldExpand="true"
+                    app:pstsTextAllCaps="true"/>
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vpTimelines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pstsTimelines"
+                    android:background="@android:color/white"/>
+
+            </RelativeLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabCompose"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:titleTextColor="@android:color/white"
-                android:background="?attr/colorPrimary">
+                android:layout_marginBottom="6dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:src="@drawable/ic_compose_new_tweet"
+                tools:src="@drawable/ic_compose_new_tweet"
+                app:fabSize="mini"
+                app:backgroundTint="@color/twitterBlue"
+                app:layout_anchor="@+id/rlMain"
+                app:layout_anchorGravity="right|end|bottom"/>
+        </android.support.design.widget.CoordinatorLayout>
 
-                <ImageView
-                    android:id="@+id/ivProfileImage"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="left"
-                    android:scaleType="fitCenter"
-                    tools:src="@drawable/ic_logo"/>
-
-                <ImageView
-                    android:id="@+id/ivLogo"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_logo"/>
-
-            </android.support.v7.widget.Toolbar>
-
-            <com.astuetz.PagerSlidingTabStrip
-                android:id="@+id/pstsTimelines"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_below="@+id/tbMain"
-                app:pstsIndicatorColor="@color/twitterBlueLight"
-                app:pstsUnderlineColor="@color/twitterBlueLight"
-                app:pstsShouldExpand="true"
-                app:pstsTextAllCaps="true"/>
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/vpTimelines"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/pstsTimelines"
-                android:background="@android:color/white"/>
-
-        </RelativeLayout>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabCompose"
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nvMain"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:src="@drawable/ic_compose_new_tweet"
-            tools:src="@drawable/ic_compose_new_tweet"
-            app:fabSize="mini"
-            app:backgroundTint="@color/twitterBlue"
-            app:layout_anchor="@+id/rlMain"
-            app:layout_anchorGravity="right|end|bottom"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@android:color/white"
+            app:itemIconTint="@color/twitterBlueLight"
+            app:menu="@menu/drawer_view" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </android.support.v4.widget.DrawerLayout>
     
 </layout>
