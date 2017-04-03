@@ -8,6 +8,7 @@ import com.deonna.twitterclient.BuildConfig;
 import com.deonna.twitterclient.callbacks.DirectMessageSentCallback;
 import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
+import com.deonna.twitterclient.callbacks.FollowCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.callbacks.SearchResultsCallback;
 import com.deonna.twitterclient.callbacks.TrendsCallback;
@@ -527,6 +528,58 @@ public class TwitterOauthClient extends OAuthBaseClient {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
 
                 callback.onTrendsError();
+            }
+        });
+
+    }
+
+    public void follow(String screenName, FollowCallback callback) {
+
+        String apiUrl = getApiUrl("friendships/create.json");
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_SCREEN_NAME, screenName);
+        params.put("follow", true);
+
+        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                User user = User.fromJsonSingle(response);
+
+                callback.onFollow(user);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                callback.onFollowFailed();
+            }
+        });
+    }
+
+    public void unfollow(String screenName, FollowCallback callback) {
+
+        String apiUrl = getApiUrl("friendships/destroy.json");
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_SCREEN_NAME, screenName);
+
+        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                User user = User.fromJsonSingle(response);
+
+                callback.onFollow(user);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                callback.onFollowFailed();
             }
         });
 

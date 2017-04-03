@@ -78,6 +78,11 @@ public class User extends BaseModel {
     public String url;
 
     @Column
+    @SerializedName("following")
+    @Expose
+    public Boolean isFollowing;
+
+    @Column
     @SerializedName("description")
     @Expose
     public String description;

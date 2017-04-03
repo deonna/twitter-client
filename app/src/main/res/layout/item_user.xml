@@ -67,6 +67,15 @@
                 android:text="@{userViewModel.getScreenName()}"
                 tools:text="\@verge"/>
 
+            <ImageView
+                android:id="@+id/ivIsFollowing"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@{userViewModel.getIsFollowingIcon()}"
+                tools:src="@drawable/ic_person_followed"/>
         </RelativeLayout>
 
 

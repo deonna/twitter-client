@@ -49,16 +49,28 @@ public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         UsersListViewHolder usersListViewHolder = (UsersListViewHolder) holder;
         ItemUserBinding userBinding = usersListViewHolder.binding;
-        UserViewModel userViewModel = new UserViewModel(context, user);
+        UserViewModel userViewModel = new UserViewModel(context, user, this);
 
         userBinding.setUserViewModel(userViewModel);
         userBinding.executePendingBindings();
 
         inititalizeTextViews(userBinding, userViewModel);
 
+        setupIsFollowingClickListener(userBinding, userViewModel, user, position);
         setupFonts(userBinding);
 
         loadProfileImage(userViewModel.getLargeProfileImageUrl(), userBinding.ivProfileImage);
+    }
+
+    private void setupIsFollowingClickListener(ItemUserBinding userBinding, UserViewModel userViewModel, User user, int position) {
+
+        userBinding.ivIsFollowing.setOnClickListener((view) -> {
+            if (user.isFollowing) {
+                userViewModel.unfollow(user.screenName, position, userBinding.ivIsFollowing);
+            } else {
+                userViewModel.follow(user.screenName, position, userBinding.ivIsFollowing);
+            }
+        });
     }
 
     private void loadProfileImage(String url, ImageView ivProfileImage) {
