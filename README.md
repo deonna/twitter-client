@@ -40,6 +40,7 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
+* [x] Added CoordinatorLayout on the main timeline screen
 * [x] Added Endless scroll for all Tweets list and user views
 * [x] Added ability to follow and unfollow users
 * [x] Added navigation view with header
