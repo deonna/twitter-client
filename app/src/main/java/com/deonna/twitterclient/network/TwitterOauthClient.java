@@ -51,6 +51,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String HOME_TIMELINE_PATH = "statuses/home_timeline.json";
     private static final String MENTIONS_TIMELINE_PATH = "statuses/mentions_timeline.json";
     private static final String USER_TIMELINE_PATH = "statuses/user_timeline.json";
+    private static final String FAVORITES_TIMELINE_PATH = "favorites/list.json";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
     private static final int DEFAULT_SINCE_ID = 1;
@@ -88,6 +89,11 @@ public class TwitterOauthClient extends OAuthBaseClient {
         fetchTimeline(USER_TIMELINE_PATH, screenName, null, null, true, callback);
 	}
 
+	public void getFavoritesTimeline(String screenName, final TweetsReceivedCallback callback) {
+
+        fetchTimeline(FAVORITES_TIMELINE_PATH, screenName, null, null, true, callback);
+	}
+
 	public void getNextOldestTweets(Long maxId, final TweetsReceivedCallback callback) {
 
         fetchTimeline(HOME_TIMELINE_PATH, null, maxId, null, true, callback);
@@ -102,6 +108,12 @@ public class TwitterOauthClient extends OAuthBaseClient {
             callback) {
 
         fetchTimeline(USER_TIMELINE_PATH, screenName, maxId, null, true, callback);
+    }
+
+    public void getNextOldestFavoritesTimelineTweets(String screenName, Long maxId, TweetsReceivedCallback
+            callback) {
+
+        fetchTimeline(FAVORITES_TIMELINE_PATH, screenName, maxId, null, true, callback);
     }
 
     public void getNewestTweets(Long sinceId, TweetsReceivedCallback callback) {
