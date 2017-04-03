@@ -54,6 +54,17 @@ public class Images {
                 .into(ivImage);
     }
 
+    public static void loadFromUrlWithFixedSizeRegularCorners(
+            Context context,
+            ImageView ivImage,
+            String url
+    ) {
+
+        Glide.with(context)
+                .load(url)
+                .into(ivImage);
+    }
+
     public static void loadCircularImage(
             Context context,
             ImageView ivImage,
@@ -69,15 +80,6 @@ public class Images {
                 ivImage.setImageDrawable(circularBitmapDrawable);
             }
         });
-//        Glide.with(context)
-//                .load(url)
-//                .bitmapTransform(
-//                        new RoundedCornersTransformation(
-//                                context,
-//                                ROUNDED_CORNER_RADIUS,
-//                                ROUNDED_CORNER_MARGIN)
-//                )
-//                .into(ivImage);
     }
 
     public static void loadFromUrlWithFixedSizeRoundedTop(

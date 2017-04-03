@@ -114,7 +114,7 @@ public class TimelineActivity extends AppCompatActivity implements NewTweetsList
         tvScreenName.setText("@" + user.screenName);
 
         Images.loadCircularImage(TimelineActivity.this, ivProfileImage, user.getLargeProfileImageUrl());
-        Images.loadFromUrlWithFixedSize(TimelineActivity.this, ivBannerImage, user.getBannerImageUrl());
+        Images.loadFromUrlWithFixedSizeRegularCorners(TimelineActivity.this, ivBannerImage, user.getBannerImageUrl());
     }
 
     private void setupDrawerContent() {
