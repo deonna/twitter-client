@@ -72,9 +72,9 @@ conversion
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/hrbb4O5.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/hrbb4O5.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-[Twitter Demo](http://i.imgur.com/hrbb4O5.gifv)
+[Twitter Demo](http://i.imgur.com/hrbb4O5.gif)
 
 Previous demos:
 
