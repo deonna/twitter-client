@@ -1,9 +1,11 @@
 package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
+import android.view.View;
 
 import com.deonna.twitterclient.models.DirectMessage;
 import com.deonna.twitterclient.utilities.Times;
+import com.deonna.twitterclient.utilities.TwitterApplication;
 
 public class DirectMessageViewModel {
 
@@ -34,5 +36,15 @@ public class DirectMessageViewModel {
     public String getProfileImageUrl() {
 
         return directMessage.sender.getLargeProfileImageUrl();
+    }
+
+    public int getReplyVisibility() {
+
+        if (directMessage.sender.screenName.equals(TwitterApplication.getCurrentUser().screenName)) {
+
+            return View.GONE;
+        }
+
+        return View.VISIBLE;
     }
 }
