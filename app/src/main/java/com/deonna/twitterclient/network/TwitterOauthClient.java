@@ -10,11 +10,13 @@ import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
 import com.deonna.twitterclient.callbacks.FavoriteCallback;
 import com.deonna.twitterclient.callbacks.RetweetCallback;
 import com.deonna.twitterclient.callbacks.SearchResultsCallback;
+import com.deonna.twitterclient.callbacks.TrendsCallback;
 import com.deonna.twitterclient.callbacks.TweetSentCallback;
 import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
 import com.deonna.twitterclient.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.callbacks.UsersListCallback;
 import com.deonna.twitterclient.models.DirectMessage;
+import com.deonna.twitterclient.models.Trend;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -26,6 +28,7 @@ import org.json.JSONObject;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -379,7 +382,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void getSearchResults(String hashtag, Long maxId, SearchResultsCallback callback) {
 
-        String apiUrl = getApiUrl("timeline/tweets.json");
+        String apiUrl = getApiUrl("search/tweets.json");
 
         RequestParams params = new RequestParams();
         params.put("q", hashtag);
@@ -497,5 +500,32 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 callback.onDirectMessageSentFailed();
             }
         });
+    }
+
+    public void getTrends(TrendsCallback callback) {
+        String apiUrl = getApiUrl("trends/place.json");
+
+        final int WOEID = 1;
+
+        RequestParams params = new RequestParams();
+        params.put(KEY_ID, WOEID);
+
+        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                List<Trend> trends = new ArrayList<Trend>();
+
+                callback.onTrendsRecieved(trends);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+                callback.onTrendsError();
+            }
+        });
+
     }
 }
