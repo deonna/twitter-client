@@ -50,6 +50,7 @@ The following **additional** features are implemented:
 * [x] Added incrementation of favorite and retweet count upon selecting for better UX
 * [x] Added ViewPager and PagerSlidingTabStrip for direct messages
 * [x] Added ViewPager and PagerSlidingTabStrip for profile view
+* [x] Added background banner image to Toolbar.
 * [x] Added async database storage
 * [x] Implemented MVVM architecture with data binding
 * [x] Enforced limits for tweets that are too long
@@ -73,8 +74,12 @@ Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/i3vyiEo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-[Twitter Demo - GIF not rendering](http://i.imgur.com/i3vyiEo.gif)
+[Coordinator Layout With Background Image on Profile Demo](http://i.imgur.com/lQoxoLh.gif)
 [Coordinator Layout Demo](http://i.imgur.com/dMJa6ag.gif)
+
+Previous demos:
+
+[Twitter Demo - GIF not rendering](http://i.imgur.com/i3vyiEo.gif)
 [Demo of previous user stories](http://i.imgur.com/DtyQkHM.gif)
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
