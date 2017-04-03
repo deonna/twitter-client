@@ -14,239 +14,269 @@
 
     </data>
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        tools:context="com.deonna.twitterclient.activities.ProfileActivity">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/rlBannerImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/ivBannerImage"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_alignParentTop="true"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:visibility="@{profileViewModel.getBannerImageVisibility()}"
-                tools:src="@drawable/ic_launcher"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rlProfileInfo"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlBannerImage"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <ImageView
-                android:id="@+id/ivProfileImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:layout_marginTop="6dp"
-                tools:src="@drawable/ic_launcher"/>
-
-            <RelativeLayout
-                android:id="@+id/rlName"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tbMain"
+                android:minHeight="?attr/actionBarSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ivProfileImage">
+                app:titleTextColor="@android:color/white"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:background="?attr/colorPrimary"/>
 
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                tools:context="com.deonna.twitterclient.activities.ProfileActivity">
+
+                <RelativeLayout
+                    android:id="@+id/rlBannerImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivBannerImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:visibility="@{profileViewModel.getBannerImageVisibility()}"
+                        tools:src="@drawable/ic_launcher"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlProfileInfo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="2dp"
-                    android:textStyle="bold"
-                    android:text="@{profileViewModel.getName()}"
-                    tools:text="The Verge"/>
+                    android:layout_below="@+id/rlBannerImage"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="16dp">
 
-                <ImageView
-                    android:id="@+id/idIsVerified"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/tvName"
-                    android:layout_toRightOf="@+id/tvName"
-                    android:visibility="@{profileViewModel.getIsVerifiedVisibility()}"
-                    android:src="@drawable/ic_verified"/>
+                    <ImageView
+                        android:id="@+id/ivProfileImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="6dp"
+                        tools:src="@drawable/ic_launcher"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rlName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ivProfileImage">
+
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="2dp"
+                            android:textStyle="bold"
+                            android:text="@{profileViewModel.getName()}"
+                            android:textColor="@color/textDefault"
+                            tools:text="The Verge"/>
+
+                        <ImageView
+                            android:id="@+id/idIsVerified"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_toRightOf="@+id/tvName"
+                            android:visibility="@{profileViewModel.getIsVerifiedVisibility()}"
+                            android:src="@drawable/ic_verified"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tvScreenName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rlName"
+                        android:textSize="10sp"
+                        android:text="@{profileViewModel.getScreenName()}"
+                        android:textColor="@color/textDefault"
+                        tools:text="\@verge"/>
+
+                    <com.deonna.twitterclient.components.LinkifiedTextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvScreenName"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="6dp"
+                        android:visibility="@{profileViewModel.getDescriptionVisibility()}"
+                        android:autoLink="all"
+                        android:linksClickable="true"
+                        android:lineSpacingMultiplier="1.2"
+                        android:text="@{profileViewModel.getDescription()}"
+                        android:textSize="11sp"
+                        android:textColor="@color/textDefault"
+                        tools:text="theverge.com covers life in the future."/>
+
+                    <RelativeLayout
+                        android:id="@+id/rlUserInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvDescription"
+                        android:layout_marginBottom="6dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivLocation"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:alpha=".5"
+                            android:scaleType="fitCenter"
+                            android:visibility="@{profileViewModel.getLocationVisibility()}"
+                            android:src="@drawable/ic_location"/>
+
+                        <TextView
+                            android:id="@+id/tvLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/ivLocation"
+                            android:layout_toRightOf="@+id/ivLocation"
+                            android:layout_marginRight="8dp"
+                            android:text="@{profileViewModel.getLocation()}"
+                            android:visibility="@{profileViewModel.getLocationVisibility()}"
+                            android:textColor="@color/textDefault"
+                            android:textSize="10sp"
+                            tools:text="New York"/>
+
+                        <ImageView
+                            android:id="@+id/ivLink"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/tvLocation"
+                            android:layout_toRightOf="@+id/tvLocation"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:alpha=".5"
+                            android:scaleType="fitCenter"
+                            android:visibility="@{profileViewModel.getUrlVisibility()}"
+                            android:src="@drawable/ic_link"/>
+
+                        <com.deonna.twitterclient.components.LinkifiedTextView
+                            android:id="@+id/tvUrl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/ivLink"
+                            android:layout_toRightOf="@+id/ivLink"
+                            android:text="@{profileViewModel.getUrl()}"
+                            android:visibility="@{profileViewModel.getUrlVisibility()}"
+                            android:lineSpacingMultiplier="1.2"
+                            android:autoLink="all"
+                            android:linksClickable="true"
+                            android:textSize="10sp"
+                            android:textColor="@color/textDefault"
+                            tools:text="theverge.com"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlStats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlUserInfo"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:id="@+id/tvNumFollowing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginRight="3dp"
+                            android:text="@{profileViewModel.getNumFollowing()}"
+                            android:textSize="10sp"
+                            android:textColor="@color/textDefault"
+                            android:textStyle="bold"
+                            tools:text="4,999"/>
+
+                        <TextView
+                            android:id="@+id/tvFollowing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginRight="12dp"
+                            android:layout_toRightOf="@id/tvNumFollowing"
+                            android:textColor="@color/textDefault"
+                            android:text="FOLLOWING"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/tvNumFollowers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginRight="3dp"
+                            android:layout_toEndOf="@+id/tvFollowing"
+                            android:layout_toRightOf="@+id/tvFollowing"
+                            android:text="@{profileViewModel.getNumFollowers()}"
+                            android:textColor="@color/textDefault"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            tools:text="4,999"/>
+
+                        <TextView
+                            android:id="@+id/tvFollowers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginRight="12dp"
+                            android:layout_toEndOf="@+id/tvNumFollowers"
+                            android:layout_toRightOf="@+id/tvNumFollowers"
+                            android:clickable="true"
+                            android:text="FOLLOWERS"
+                            android:textColor="@color/textDefault"
+                            android:textSize="10sp"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tvScreenName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rlName"
-                android:textSize="10sp"
-                android:text="@{profileViewModel.getScreenName()}"
-                tools:text="\@verge"/>
-
-            <com.deonna.twitterclient.components.LinkifiedTextView
-                android:id="@+id/tvDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvScreenName"
-                android:layout_marginBottom="6dp"
-                android:layout_marginTop="6dp"
-                android:visibility="@{profileViewModel.getDescriptionVisibility()}"
-                android:autoLink="all"
-                android:linksClickable="true"
-                android:lineSpacingMultiplier="1.2"
-                android:text="@{profileViewModel.getDescription()}"
-                android:textSize="11sp"
-                tools:text="theverge.com covers life in the future."/>
-
-            <RelativeLayout
-                android:id="@+id/rlUserInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvDescription"
-                android:layout_marginBottom="6dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/ivLocation"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:alpha=".5"
-                    android:scaleType="fitCenter"
-                    android:visibility="@{profileViewModel.getLocationVisibility()}"
-                    android:src="@drawable/ic_location"/>
-
-                <TextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/ivLocation"
-                    android:layout_toRightOf="@+id/ivLocation"
-                    android:layout_marginRight="8dp"
-                    android:text="@{profileViewModel.getLocation()}"
-                    android:visibility="@{profileViewModel.getLocationVisibility()}"
-                    android:textSize="10sp"
-                    tools:text="New York"/>
-
-                <ImageView
-                    android:id="@+id/ivLink"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/tvLocation"
-                    android:layout_toRightOf="@+id/tvLocation"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:alpha=".5"
-                    android:scaleType="fitCenter"
-                    android:visibility="@{profileViewModel.getUrlVisibility()}"
-                    android:src="@drawable/ic_link"/>
-
-                <com.deonna.twitterclient.components.LinkifiedTextView
-                    android:id="@+id/tvUrl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/ivLink"
-                    android:layout_toRightOf="@+id/ivLink"
-                    android:text="@{profileViewModel.getUrl()}"
-                    android:visibility="@{profileViewModel.getUrlVisibility()}"
-                    android:lineSpacingMultiplier="1.2"
-                    android:autoLink="all"
-                    android:linksClickable="true"
-                    android:textSize="10sp"
-                    tools:text="theverge.com"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlStats"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rlUserInfo"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:id="@+id/tvNumFollowing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="3dp"
-                    android:layout_marginRight="3dp"
-                    android:text="@{profileViewModel.getNumFollowing()}"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    tools:text="4,999"/>
-
-                <TextView
-                    android:id="@+id/tvFollowing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_toRightOf="@id/tvNumFollowing"
-                    android:text="FOLLOWING"
-                    android:textSize="10sp"/>
-
-                <TextView
-                    android:id="@+id/tvNumFollowers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_toEndOf="@+id/tvFollowing"
-                    android:layout_toRightOf="@+id/tvFollowing"
-                    android:text="@{profileViewModel.getNumFollowers()}"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    tools:text="4,999"/>
-r
-                <TextView
-                    android:id="@+id/tvFollowers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_toEndOf="@+id/tvNumFollowers"
-                    android:layout_toRightOf="@+id/tvNumFollowers"
-                    android:clickable="true"
-                    android:text="FOLLOWERS"
-                    android:textSize="10sp"/>
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-
-        <com.astuetz.PagerSlidingTabStrip
-            android:id="@+id/pstsTimelines"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/rlProfileInfo"
-            app:pstsIndicatorColor="@color/twitterBlueLight"
-            app:pstsUnderlineColor="@color/twitterBlueLight"
-            app:pstsShouldExpand="true"
-            app:pstsTextAllCaps="true"/>
+            <com.astuetz.PagerSlidingTabStrip
+                    android:id="@+id/pstsTimelines"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    app:pstsIndicatorColor="@color/twitterBlueLight"
+                    app:pstsUnderlineColor="@color/twitterBlueLight"
+                    app:pstsShouldExpand="true"
+                    app:pstsTextAllCaps="true"/>
+        </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/vpTimelines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pstsTimelines"
-            android:background="@android:color/white"/>
+                    android:id="@+id/vpTimelines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pstsTimelines"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:background="@android:color/white"/>
 
-    </RelativeLayout>
-
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

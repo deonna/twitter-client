@@ -2,4 +2,5 @@
 <resources>
     <color name="twitterBlue">#1DA1F2</color>
     <color name="twitterBlueLight">#AA1DA1F2</color>
+    <color name="textDefault">#80000000</color>
 </resources>

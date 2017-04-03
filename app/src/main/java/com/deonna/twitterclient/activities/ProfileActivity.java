@@ -63,6 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.setProfileViewModel(profileViewModel);
 
+        setupToolbar();
+
         loadImage(profileViewModel.getLargeProfileImageUrl(), binding.ivProfileImage);
         loadBackgroundImage(profileViewModel.getBannerImageUrl(), binding.ivBannerImage);
 
@@ -70,6 +72,12 @@ public class ProfileActivity extends AppCompatActivity {
         setupFollowingClickListener();
 
         setupTabs();
+    }
+
+    private void setupToolbar() {
+
+        setSupportActionBar(binding.tbMain);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     public void setupFollowersClickListener(User user) {
