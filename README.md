@@ -46,6 +46,7 @@ The following **additional** features are implemented:
 * [x] Added automatic scroll to top functionality when a new tweet is made
 * [x] Added ability to favorite, unfavorite, retweet, and reply to users
 * [x] Added instant UI feedback upon sucessful favoriting/unfavoriting, retweeting, and replying
+* [x] Added incrementation of favorite and retweet count upon selecting for better UX
 * [x] Implemented MVVM architecture with data binding
 * [x] Enforced limits for tweets that are too long
 * [x] Implemented custom toolbar with iconography of the logged-in user for context
