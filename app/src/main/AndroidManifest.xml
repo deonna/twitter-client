@@ -50,7 +50,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".views.activities.SearchResultsActivity" />
-        <activity android:name=".views.activities.DirectMessagesActivity"></activity>
+        <activity android:name=".views.activities.DirectMessagesActivity" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="9ff48aadf684ac06fb6b9ec054d9f1ac17fefe3d" />
     </application>
-
-</manifest>
+   </manifest>

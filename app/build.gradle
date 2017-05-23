@@ -1,13 +1,31 @@
 apply plugin: "com.android.application"
+apply plugin: 'io.fabric'
 apply plugin: "me.tatarka.retrolambda"
 
 def apiKeyPropertiesFile = rootProject.file("api-key.properties")
 def apiKeyProperties = new Properties()
 apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
 
+
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
+repositories {
+    jcenter()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -41,11 +59,6 @@ android {
     }
 }
 
-repositories {
-    jcenter()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 ext {
     butterknifeVersion = "8.5.1"
     dbFlowVersion = "4.0.0-beta5"
@@ -68,6 +81,11 @@ dependencies {
     compile "com.astuetz:pagerslidingtabstrip:1.0.1"
     compile "com.code-troopers.betterpickers:library:3.1.0"
     compile "com.codepath.libraries:android-oauth-handler:1.1.0"
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+        transitive = true;
+    }
+
     compile "com.google.code.gson:gson:2.8.0"
     compile "com.github.bumptech.glide:glide:3.7.0"
 
