@@ -1,8 +1,4 @@
-package com.deonna.twitterclient.events.callbacks;
-
-/**
- * Created by deonna on 4/2/17.
- */
+package com.deonna.twitterclient.events;
 
 public interface DirectMessageSentCallback {
 

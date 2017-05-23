@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.views.adapters.DirectMessagesAdapter;
-import com.deonna.twitterclient.events.callbacks.NewTweetsListener;
+import com.deonna.twitterclient.events.NewTweetsListener;
 import com.deonna.twitterclient.databinding.ActivityDirectMessagesBinding;
 import com.deonna.twitterclient.views.fragments.DirectMessagesListFragment;
 import com.deonna.twitterclient.views.fragments.DirectMessagesReceivedFragment;

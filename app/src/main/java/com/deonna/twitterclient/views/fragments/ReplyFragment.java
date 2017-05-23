@@ -14,9 +14,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.views.activities.TimelineActivity;
-import com.deonna.twitterclient.events.callbacks.NewTweetsListener;
 import com.deonna.twitterclient.databinding.FragmentReplyBinding;
+import com.deonna.twitterclient.events.NewTweetsListener;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.ReplyViewModel;

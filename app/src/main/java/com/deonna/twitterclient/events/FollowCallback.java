@@ -1,10 +1,6 @@
-package com.deonna.twitterclient.events.callbacks;
+package com.deonna.twitterclient.events;
 
 import com.deonna.twitterclient.models.User;
-
-/**
- * Created by deonna on 4/2/17.
- */
 
 public interface FollowCallback {
 

@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.events.callbacks.NewTweetsListener;
+import com.deonna.twitterclient.events.NewTweetsListener;
 import com.deonna.twitterclient.databinding.ActivityTimelineBinding;
 import com.deonna.twitterclient.views.fragments.ComposeFragment;
 import com.deonna.twitterclient.views.fragments.HomeTimelineFragment;

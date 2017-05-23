@@ -1,12 +1,8 @@
-package com.deonna.twitterclient.events.callbacks;
+package com.deonna.twitterclient.events;
 
 import com.deonna.twitterclient.models.Trend;
 
 import java.util.List;
-
-/**
- * Created by deonna on 4/2/17.
- */
 
 public interface TrendsCallback {
 

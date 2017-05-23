@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.views.adapters.UsersListAdapter;
-import com.deonna.twitterclient.events.callbacks.FollowCallback;
+import com.deonna.twitterclient.events.FollowCallback;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;

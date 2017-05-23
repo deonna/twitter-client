@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.events.callbacks.NewTweetsListener;
+import com.deonna.twitterclient.events.NewTweetsListener;
 import com.deonna.twitterclient.databinding.ActivityTweetDetailBinding;
 import com.deonna.twitterclient.views.fragments.ReplyFragment;
 import com.deonna.twitterclient.models.Tweet;

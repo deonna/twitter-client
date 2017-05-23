@@ -3,14 +3,10 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
-import com.deonna.twitterclient.events.callbacks.DirectMessagesCallback;
+import com.deonna.twitterclient.events.DirectMessagesCallback;
 import com.deonna.twitterclient.models.DirectMessage;
 
 import java.util.List;
-
-/**
- * Created by deonna on 4/2/17.
- */
 
 public class DirectMessagesSentViewModel extends DirectMessagesListViewModel {
 

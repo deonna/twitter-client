@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.deonna.twitterclient.views.adapters.TweetsAdapter;
-import com.deonna.twitterclient.events.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.events.TweetsReceivedCallback;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.TwitterOauthClient;

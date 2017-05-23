@@ -1,5 +1,4 @@
-package com.deonna.twitterclient.events.callbacks;
-
+package com.deonna.twitterclient.events;
 
 import com.deonna.twitterclient.models.Tweet;
 

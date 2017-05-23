@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
-import com.deonna.twitterclient.events.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.events.TweetsReceivedCallback;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 

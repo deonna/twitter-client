@@ -3,8 +3,8 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.deonna.twitterclient.events.callbacks.FavoriteCallback;
-import com.deonna.twitterclient.events.callbacks.RetweetCallback;
+import com.deonna.twitterclient.events.FavoriteCallback;
+import com.deonna.twitterclient.events.RetweetCallback;
 import com.deonna.twitterclient.models.Tweet;
 
 public class TweetDetailViewModel extends TweetViewModel {

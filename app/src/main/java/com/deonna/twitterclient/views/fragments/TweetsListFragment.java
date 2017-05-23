@@ -1,6 +1,5 @@
 package com.deonna.twitterclient.views.fragments;
 
-
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.events.callbacks.ProgressBarListener;
+import com.deonna.twitterclient.events.ProgressBarListener;
 import com.deonna.twitterclient.databinding.FragmentTweetsListBinding;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
 import com.deonna.twitterclient.viewmodels.TweetsTimelineViewModel;

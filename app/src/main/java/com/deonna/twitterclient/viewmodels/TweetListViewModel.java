@@ -9,9 +9,9 @@ import com.deonna.twitterclient.views.activities.ProfileActivity;
 import com.deonna.twitterclient.views.activities.SearchResultsActivity;
 import com.deonna.twitterclient.views.activities.TimelineActivity;
 import com.deonna.twitterclient.views.adapters.TweetsAdapter;
-import com.deonna.twitterclient.events.callbacks.FavoriteCallback;
-import com.deonna.twitterclient.events.callbacks.RetweetCallback;
-import com.deonna.twitterclient.events.callbacks.UserInfoCallback;
+import com.deonna.twitterclient.events.FavoriteCallback;
+import com.deonna.twitterclient.events.RetweetCallback;
+import com.deonna.twitterclient.events.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 

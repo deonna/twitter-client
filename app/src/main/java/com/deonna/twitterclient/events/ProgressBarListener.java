@@ -1,4 +1,4 @@
-package com.deonna.twitterclient.events.callbacks;
+package com.deonna.twitterclient.events;
 
 public interface ProgressBarListener {
 
