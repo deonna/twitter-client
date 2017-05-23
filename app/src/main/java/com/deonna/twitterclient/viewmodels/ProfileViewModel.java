@@ -2,7 +2,7 @@ package com.deonna.twitterclient.viewmodels;
 
 import android.view.View;
 
-import com.deonna.twitterclient.activities.ProfileActivity;
+import com.deonna.twitterclient.views.activities.ProfileActivity;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;

@@ -2,11 +2,9 @@ package com.deonna.twitterclient.viewmodels;
 
 import android.support.v4.app.FragmentManager;
 
-import com.deonna.twitterclient.activities.TimelineActivity;
-import com.deonna.twitterclient.adapters.TweetsAdapter;
-import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
-import com.deonna.twitterclient.callbacks.UserInfoCallback;
-import com.deonna.twitterclient.models.DirectMessage;
+import com.deonna.twitterclient.views.activities.TimelineActivity;
+import com.deonna.twitterclient.views.adapters.TweetsAdapter;
+import com.deonna.twitterclient.events.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;

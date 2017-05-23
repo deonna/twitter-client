@@ -2,7 +2,7 @@ package com.deonna.twitterclient.viewmodels;
 
 import android.content.Context;
 
-import com.deonna.twitterclient.activities.DirectMessagesActivity;
+import com.deonna.twitterclient.views.activities.DirectMessagesActivity;
 
 /**
  * Created by deonna on 4/2/17.

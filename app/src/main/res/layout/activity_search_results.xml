@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragment_tweets_list"
-        android:name="com.deonna.twitterclient.fragments.SearchResultsFragment"
+        android:name="com.deonna.twitterclient.views.fragments.SearchResultsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"

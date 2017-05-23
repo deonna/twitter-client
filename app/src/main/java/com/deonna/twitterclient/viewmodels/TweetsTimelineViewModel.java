@@ -6,9 +6,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.deonna.twitterclient.adapters.TweetsAdapter;
-import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
-import com.deonna.twitterclient.fragments.TweetsListFragment;
+import com.deonna.twitterclient.views.adapters.TweetsAdapter;
+import com.deonna.twitterclient.events.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;

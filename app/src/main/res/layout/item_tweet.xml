@@ -104,7 +104,7 @@
 
             </RelativeLayout>
 
-            <com.deonna.twitterclient.components.LinkifiedTextView
+            <com.deonna.twitterclient.utilities.components.LinkifiedTextView
                 android:id="@+id/tvTweet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

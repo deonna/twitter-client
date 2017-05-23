@@ -1,10 +1,8 @@
 package com.deonna.twitterclient.viewmodels;
 
-import android.content.Context;
-
-import com.deonna.twitterclient.activities.TimelineActivity;
-import com.deonna.twitterclient.callbacks.DirectMessageSentCallback;
-import com.deonna.twitterclient.callbacks.NewTweetsListener;
+import com.deonna.twitterclient.views.activities.TimelineActivity;
+import com.deonna.twitterclient.events.callbacks.DirectMessageSentCallback;
+import com.deonna.twitterclient.events.callbacks.NewTweetsListener;
 import com.deonna.twitterclient.models.User;
 
 public class ReplyViewModel extends ComposeViewModel {

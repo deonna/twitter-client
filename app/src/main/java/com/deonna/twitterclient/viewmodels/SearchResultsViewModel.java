@@ -3,8 +3,8 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
-import com.deonna.twitterclient.callbacks.SearchResultsCallback;
-import com.deonna.twitterclient.fragments.TweetsListFragment;
+import com.deonna.twitterclient.events.callbacks.SearchResultsCallback;
+import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;

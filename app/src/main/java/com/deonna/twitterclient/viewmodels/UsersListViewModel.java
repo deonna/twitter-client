@@ -4,8 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.deonna.twitterclient.adapters.UsersListAdapter;
-import com.deonna.twitterclient.callbacks.UsersListCallback;
+import com.deonna.twitterclient.views.adapters.UsersListAdapter;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;

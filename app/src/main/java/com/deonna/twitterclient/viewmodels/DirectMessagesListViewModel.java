@@ -3,8 +3,7 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
-import com.deonna.twitterclient.adapters.DirectMessagesAdapter;
-import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
+import com.deonna.twitterclient.views.adapters.DirectMessagesAdapter;
 import com.deonna.twitterclient.models.DirectMessage;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;

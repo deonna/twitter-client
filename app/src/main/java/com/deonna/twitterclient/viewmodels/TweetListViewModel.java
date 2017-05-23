@@ -5,20 +5,17 @@ import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.deonna.twitterclient.activities.ProfileActivity;
-import com.deonna.twitterclient.activities.SearchResultsActivity;
-import com.deonna.twitterclient.activities.TimelineActivity;
-import com.deonna.twitterclient.adapters.TweetsAdapter;
-import com.deonna.twitterclient.callbacks.FavoriteCallback;
-import com.deonna.twitterclient.callbacks.RetweetCallback;
-import com.deonna.twitterclient.callbacks.SearchResultsCallback;
-import com.deonna.twitterclient.callbacks.UserInfoCallback;
+import com.deonna.twitterclient.views.activities.ProfileActivity;
+import com.deonna.twitterclient.views.activities.SearchResultsActivity;
+import com.deonna.twitterclient.views.activities.TimelineActivity;
+import com.deonna.twitterclient.views.adapters.TweetsAdapter;
+import com.deonna.twitterclient.events.callbacks.FavoriteCallback;
+import com.deonna.twitterclient.events.callbacks.RetweetCallback;
+import com.deonna.twitterclient.events.callbacks.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 
 import org.parceler.Parcels;
-
-import java.util.List;
 
 public class TweetListViewModel extends TweetViewModel {
 

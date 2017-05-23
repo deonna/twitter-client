@@ -4,13 +4,10 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.adapters.UsersListAdapter;
-import com.deonna.twitterclient.callbacks.FavoriteCallback;
-import com.deonna.twitterclient.callbacks.FollowCallback;
-import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.views.adapters.UsersListAdapter;
+import com.deonna.twitterclient.events.callbacks.FollowCallback;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;

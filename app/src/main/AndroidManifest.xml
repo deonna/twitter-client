@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".views.activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -35,11 +35,11 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.TimelineActivity" />
-        <activity android:name=".activities.TweetDetailActivity" />
-        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".views.activities.TimelineActivity" />
+        <activity android:name=".views.activities.TweetDetailActivity" />
+        <activity android:name=".views.activities.ProfileActivity" />
         <activity
-            android:name=".activities.ReceiveDataActivity"
+            android:name=".views.activities.ReceiveDataActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -49,8 +49,8 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SearchResultsActivity" />
-        <activity android:name=".activities.DirectMessagesActivity"></activity>
+        <activity android:name=".views.activities.SearchResultsActivity" />
+        <activity android:name=".views.activities.DirectMessagesActivity"></activity>
     </application>
 
 </manifest>

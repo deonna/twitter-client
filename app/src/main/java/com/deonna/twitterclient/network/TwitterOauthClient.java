@@ -1,21 +1,20 @@
 package com.deonna.twitterclient.network;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
-import com.deonna.twitterclient.callbacks.DirectMessageSentCallback;
-import com.deonna.twitterclient.callbacks.DirectMessagesCallback;
-import com.deonna.twitterclient.callbacks.FavoriteCallback;
-import com.deonna.twitterclient.callbacks.FollowCallback;
-import com.deonna.twitterclient.callbacks.RetweetCallback;
-import com.deonna.twitterclient.callbacks.SearchResultsCallback;
-import com.deonna.twitterclient.callbacks.TrendsCallback;
-import com.deonna.twitterclient.callbacks.TweetSentCallback;
-import com.deonna.twitterclient.callbacks.TweetsReceivedCallback;
-import com.deonna.twitterclient.callbacks.UserInfoCallback;
-import com.deonna.twitterclient.callbacks.UsersListCallback;
+import com.deonna.twitterclient.events.callbacks.DirectMessageSentCallback;
+import com.deonna.twitterclient.events.callbacks.DirectMessagesCallback;
+import com.deonna.twitterclient.events.callbacks.FavoriteCallback;
+import com.deonna.twitterclient.events.callbacks.FollowCallback;
+import com.deonna.twitterclient.events.callbacks.RetweetCallback;
+import com.deonna.twitterclient.events.callbacks.SearchResultsCallback;
+import com.deonna.twitterclient.events.callbacks.TrendsCallback;
+import com.deonna.twitterclient.events.callbacks.TweetSentCallback;
+import com.deonna.twitterclient.events.callbacks.TweetsReceivedCallback;
+import com.deonna.twitterclient.events.callbacks.UserInfoCallback;
+import com.deonna.twitterclient.events.callbacks.UsersListCallback;
 import com.deonna.twitterclient.models.DirectMessage;
 import com.deonna.twitterclient.models.Trend;
 import com.deonna.twitterclient.models.Tweet;
