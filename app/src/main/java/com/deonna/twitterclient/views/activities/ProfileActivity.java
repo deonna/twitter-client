@@ -42,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        user = (User) Parcels.unwrap(getIntent().getParcelableExtra(KEY_USER));
+        user = Parcels.unwrap(getIntent().getParcelableExtra(KEY_USER));
 
         profileViewModel = new ProfileViewModel(ProfileActivity.this, user);
         profileViewModel.onCreate();

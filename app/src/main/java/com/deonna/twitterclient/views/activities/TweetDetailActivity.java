@@ -27,7 +27,7 @@ public class TweetDetailActivity extends AppCompatActivity implements NewTweetsL
 
         super.onCreate(savedInstanceState);
 
-        Tweet tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(KEY_TWEET));
+        Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra(KEY_TWEET));
 
         tweetDetailViewModel = new TweetDetailViewModel(TweetDetailActivity.this, tweet);
 

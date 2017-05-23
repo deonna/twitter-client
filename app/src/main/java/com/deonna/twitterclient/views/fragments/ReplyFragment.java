@@ -51,7 +51,7 @@ public class ReplyFragment extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().setCanceledOnTouchOutside(false);
 
-        User currentUser = (User) Parcels.unwrap(getArguments().getParcelable(KEY_CURRENT_USER));
+        User currentUser = Parcels.unwrap(getArguments().getParcelable(KEY_CURRENT_USER));
 
         // Setup bindings
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_reply, container, false);

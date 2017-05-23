@@ -15,6 +15,7 @@ public class ReceiveDataActivity extends AppCompatActivity {
     private String title;
     private String url;
     private Uri imageUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class ReceiveDataActivity extends AppCompatActivity {
                 // Make sure to check whether returned data will be null.
                 title = intent.getStringExtra(Intent.EXTRA_SUBJECT);
                 url = intent.getStringExtra(Intent.EXTRA_TEXT);
-                imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
 

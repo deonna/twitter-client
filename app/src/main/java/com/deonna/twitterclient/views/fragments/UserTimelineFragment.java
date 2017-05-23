@@ -40,7 +40,7 @@ public class UserTimelineFragment extends TweetsListFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        User user = (User) Parcels.unwrap(getActivity().getIntent().getParcelableExtra(ProfileActivity.KEY_USER));
+        User user = Parcels.unwrap(getActivity().getIntent().getParcelableExtra(ProfileActivity.KEY_USER));
         userTimelineViewModel.setScreenName(user.screenName);
 
         userTimelineViewModel.getUserTimeline();

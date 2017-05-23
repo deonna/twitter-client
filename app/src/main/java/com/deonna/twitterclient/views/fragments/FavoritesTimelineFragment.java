@@ -44,7 +44,7 @@ public class FavoritesTimelineFragment extends TweetsListFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        User user = (User) Parcels.unwrap(getActivity().getIntent().getParcelableExtra(ProfileActivity.KEY_USER));
+        User user = Parcels.unwrap(getActivity().getIntent().getParcelableExtra(ProfileActivity.KEY_USER));
         favoritesTimelineViewModel.setScreenName(user.screenName);
 
         favoritesTimelineViewModel.getFavoritesTimeline();

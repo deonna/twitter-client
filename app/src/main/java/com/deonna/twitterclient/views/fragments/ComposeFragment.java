@@ -72,7 +72,7 @@ public class ComposeFragment extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().setCanceledOnTouchOutside(false);
 
-        User currentUser = (User) Parcels.unwrap(getArguments().getParcelable(KEY_CURRENT_USER));
+        User currentUser = Parcels.unwrap(getArguments().getParcelable(KEY_CURRENT_USER));
 
         String title = getArguments().getString(KEY_TITLE);
         String url = getArguments().getString(KEY_URL);
