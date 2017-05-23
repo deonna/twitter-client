@@ -12,10 +12,6 @@ import com.deonna.twitterclient.viewmodels.FavoritesTimelineViewModel;
 
 import org.parceler.Parcels;
 
-/**
- * Created by deonna on 4/2/17.
- */
-
 public class FavoritesTimelineFragment extends TweetsListFragment {
 
     private FavoritesTimelineViewModel favoritesTimelineViewModel;

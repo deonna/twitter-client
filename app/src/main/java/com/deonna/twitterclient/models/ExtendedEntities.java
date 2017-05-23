@@ -19,10 +19,6 @@ import org.parceler.Parcel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by deonna on 3/26/17.
- */
-
 @Parcel(analyze = ExtendedEntities.class)
 @Table(database = TwitterClientDatabase.class)
 public class ExtendedEntities {

@@ -18,10 +18,6 @@ import org.parceler.Parcel;
 
 import java.util.List;
 
-/**
- * Created by deonna on 4/2/17.
- */
-
 @Parcel(analyze = VideoInfo.class)
 @Table(database = TwitterClientDatabase.class)
 public class VideoInfo {

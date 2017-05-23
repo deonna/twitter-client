@@ -7,10 +7,6 @@ import com.deonna.twitterclient.viewmodels.ReplyViewModel;
 
 import org.parceler.Parcels;
 
-/**
- * Created by deonna on 4/2/17.
- */
-
 public class DirectMessageReplyFragment extends ReplyFragment {
 
     public static DirectMessageReplyFragment newInstance(User currentUser) {

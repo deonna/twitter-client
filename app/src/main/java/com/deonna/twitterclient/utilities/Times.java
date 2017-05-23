@@ -6,10 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-/**
- * Created by deonna on 4/2/17.
- */
-
 public class Times {
 
     private static final String DATE_PATTERN = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";

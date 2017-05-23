@@ -9,10 +9,6 @@ import com.raizlabs.android.dbflow.annotation.Table;
 
 import org.parceler.Parcel;
 
-/**
- * Created by deonna on 4/2/17.
- */
-
 @Parcel(analyze = VideoStats.class)
 @Table(database = TwitterClientDatabase.class)
 public class VideoStats {

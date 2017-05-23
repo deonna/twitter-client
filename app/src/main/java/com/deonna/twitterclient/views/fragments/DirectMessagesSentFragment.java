@@ -8,10 +8,6 @@ import android.view.ViewGroup;
 
 import com.deonna.twitterclient.viewmodels.DirectMessagesSentViewModel;
 
-/**
- * Created by deonna on 4/2/17.
- */
-
 public class DirectMessagesSentFragment extends DirectMessagesListFragment {
 
     @Nullable
