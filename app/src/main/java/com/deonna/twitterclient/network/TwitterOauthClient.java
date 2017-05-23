@@ -75,95 +75,112 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
 	public void getHomeTimeline(final TweetsReceivedCallback callback) {
 
-        fetchTimeline(HOME_TIMELINE_PATH, null, null, null, true, callback);
-	}
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(HOME_TIMELINE_PATH)
+                .callback(callback)
+                .build();
+
+        request.execute();
+    }
 
 	public void getMentionsTimeline(final TweetsReceivedCallback callback) {
 
-        fetchTimeline(MENTIONS_TIMELINE_PATH, null, null, null, true, callback);
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(MENTIONS_TIMELINE_PATH)
+                .callback(callback)
+                .build();
+
+        request.execute();
     }
 
 	public void getUserTimeline(String screenName, final TweetsReceivedCallback callback) {
 
-        fetchTimeline(USER_TIMELINE_PATH, screenName, null, null, true, callback);
-	}
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(USER_TIMELINE_PATH)
+                .screenName(screenName)
+                .callback(callback)
+                .build();
+
+        request.execute();
+    }
 
 	public void getFavoritesTimeline(String screenName, final TweetsReceivedCallback callback) {
 
-        fetchTimeline(FAVORITES_TIMELINE_PATH, screenName, null, null, true, callback);
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(FAVORITES_TIMELINE_PATH)
+                .screenName(screenName)
+                .callback(callback)
+                .build();
+
+        request.execute();
 	}
 
 	public void getNextOldestTweets(Long maxId, final TweetsReceivedCallback callback) {
 
-        fetchTimeline(HOME_TIMELINE_PATH, null, maxId, null, true, callback);
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(HOME_TIMELINE_PATH)
+                .maxId(maxId)
+                .callback(callback)
+                .build();
+
+        request.execute();
     }
 
     public void getNextOldestMentions(Long maxId, final TweetsReceivedCallback callback) {
 
-        fetchTimeline(MENTIONS_TIMELINE_PATH, null, maxId, null, true, callback);
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(MENTIONS_TIMELINE_PATH)
+                .maxId(maxId)
+                .callback(callback)
+                .build();
+
+        request.execute();
     }
 
     public void getNextOldestUserTimelineTweets(String screenName, Long maxId, TweetsReceivedCallback
             callback) {
 
-        fetchTimeline(USER_TIMELINE_PATH, screenName, maxId, null, true, callback);
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(USER_TIMELINE_PATH)
+                .screenName(screenName)
+                .maxId(maxId)
+                .callback(callback)
+                .build();
+
+        request.execute();
     }
 
     public void getNextOldestFavoritesTimelineTweets(String screenName, Long maxId, TweetsReceivedCallback
             callback) {
 
-        fetchTimeline(FAVORITES_TIMELINE_PATH, screenName, maxId, null, true, callback);
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(FAVORITES_TIMELINE_PATH)
+                .screenName(screenName)
+                .maxId(maxId)
+                .callback(callback)
+                .build();
+
+        request.execute();
     }
 
     public void getNewestTweets(Long sinceId, TweetsReceivedCallback callback) {
 
-        fetchTimeline(HOME_TIMELINE_PATH, null, null, sinceId, true, callback);
+        TimelineRequest request = TimelineRequest.builder()
+                .apiUrl(HOME_TIMELINE_PATH)
+                .sinceId(sinceId)
+                .callback(callback)
+                .build();
+
+        request.execute();
     }
 
-	private void fetchTimeline(String apiUrl, String screenName, Long maxId, Long sinceId, Boolean entities, final TweetsReceivedCallback callback) {
+    public void fetchTimeline(TwitterRequest request) {
 
-        RequestParams params = new RequestParams();
-        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-
-        if (screenName != null) {
-            params.put(KEY_SCREEN_NAME, screenName);
-        }
-
-        if (maxId != null) {
-            params.put(KEY_MAX_ID, maxId);
-        }
-
-        if (sinceId != null) {
-            params.put(KEY_SINCE_ID, sinceId);
-        } else {
-            params.put(KEY_SINCE_ID, DEFAULT_SINCE_ID);
-        }
-
-        if (entities != null) {
-            params.put(KEY_ENTITIES, entities);
-        } else {
-            params.put(KEY_ENTITIES, true);
-        }
-
-        getClient().get(getApiUrl(apiUrl), params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                List<Tweet> tweets = Tweet.fromJsonMultiple(response);
-
-                callback.onTweetsReceived(tweets);
-                Tweet.saveAll(tweets);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onTweetsReceivedError();
-            }
-        });
+        getClient().get(
+            getApiUrl(request.getPath()),
+            request.getParams(),
+            request.getHandler()
+        );
     }
 
 	public void getLoggedInUserInfo(UserInfoCallback callback ) {
