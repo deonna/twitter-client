@@ -29,7 +29,7 @@ public class TweetsTimelineViewModel implements ViewModel {
 
     protected final TwitterOauthClient client;
 
-    protected Long maxId;
+    protected Long maxId = Long.MAX_VALUE;
 
     protected TweetsListFragment fragment;
 
@@ -96,6 +96,7 @@ public class TweetsTimelineViewModel implements ViewModel {
             //want to get the lowest number
             return tweets.get(tweets.size() - 1).id - 1;
         } else {
+
             return maxId - 1;
         }
     }
