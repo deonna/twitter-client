@@ -67,3 +67,9 @@ freeline_project_description.json
 ### Android Patch ###
 
 /api-key.properties
+
+# Crashlytics
+
+app/fabric.properties
+app/src/main/assets/crashlytics-build.properties
+app/src/main/res/values/com_crashlytics_export_strings.xml
