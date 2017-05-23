@@ -1,6 +1,7 @@
 package com.deonna.twitterclient.utilities.components;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.Layout;
 import android.text.Selection;
 import android.text.Spannable;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 
 /* Attribution: http://michaelevans.org/blog/2013/03/29/clickable-links-in-android-listviews/ */
 
-public class LinkifiedTextView extends TextView {
+public class LinkifiedTextView extends AppCompatTextView {
     public LinkifiedTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
