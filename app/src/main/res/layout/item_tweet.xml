@@ -3,12 +3,16 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
+
         <variable
             name="tweetListViewModel"
-            type="com.deonna.twitterclient.viewmodels.TweetListViewModel"/>
+            type="com.deonna.twitterclient.viewmodels.TweetListViewModel"
+            />
+
     </data>
 
     <RelativeLayout
@@ -16,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="6dp"
-        android:layout_marginRight="4dp"
-        android:background="@android:color/white">
+        android:layout_marginEnd="4dp"
+        android:background="@android:color/white"
+        >
 
         <RelativeLayout
             android:id="@+id/rlProfileImage"
@@ -25,19 +30,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginEnd="6dp"
-            android:layout_marginRight="6dp">
+            >
 
             <ImageView
                 android:id="@+id/ivProfileImage"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:scaleType="fitCenter"
-                tools:src="@drawable/ic_launcher"/>
+                tools:src="@drawable/ic_launcher"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -46,61 +50,62 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/rlProfileImage"
-            android:layout_toRightOf="@+id/rlProfileImage">
+            >
 
             <RelativeLayout
                 android:id="@+id/rlHeader"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                >
 
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="2dp"
+                    android:layout_marginEnd="2dp"
                     android:text="@{tweetListViewModel.getName()}"
                     android:textStyle="bold"
                     android:textSize="14sp"
-                    tools:text="James Altucher"
-                    tools:textStyle="bold"/>
+                    tools:text="@string/james_altucher"
+                    tools:textStyle="bold"
+                    />
 
                 <ImageView
                     android:id="@+id/ivIsVerfied"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_toEndOf="@id/tvName"
-                    android:layout_toRightOf="@id/tvName"
                     android:layout_centerVertical="true"
                     android:visibility="@{tweetListViewModel.getIsVerifiedVisibility()}"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_verified"/>
+                    android:src="@drawable/ic_verified"
+                    />
 
                 <TextView
                     android:id="@+id/tvScreenName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/ivIsVerfied"
-                    android:layout_toRightOf="@+id/ivIsVerfied"
                     android:layout_marginStart="2dp"
-                    android:layout_marginLeft="2dp"
                     android:layout_centerVertical="true"
                     android:text="@{tweetListViewModel.getScreenName()}"
                     android:textSize="10sp"
-                    tools:text="\@jaltucher"/>
+                    tools:text="@string/jaltucher"
+                    />
 
                 <TextView
                     android:id="@+id/tvTimestamp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:text="@{tweetListViewModel.getRelativeTimestamp()}"
                     android:textSize="10sp"
-                    tools:text="May 10"/>
+                    tools:text="@string/timestamp"
+                    />
 
             </RelativeLayout>
 
@@ -115,7 +120,8 @@
                 android:linksClickable="true"
                 android:text="@{tweetListViewModel.getTweetText()}"
                 android:textSize="12sp"
-                tools:text="I am a tweet."/>
+                tools:text="@string/test_tweet"
+                />
 
             <ImageView
                 android:id="@+id/ivMedia"
@@ -128,7 +134,8 @@
                 android:scaleType="fitXY"
                 android:visibility="@{tweetListViewModel.getMediaVisibility()}"
                 tools:src="@drawable/ic_launcher"
-                app:scalableType="fitCenter"/>
+                app:scalableType="fitCenter"
+                />
 
             <RelativeLayout
                 android:id="@+id/llOptions"
@@ -136,82 +143,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ivMedia"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                >
 
                 <ImageView
                     android:id="@+id/ivReplies"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginEnd="2dp"
-                    android:layout_marginRight="2dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_reply"/>
+                    android:src="@drawable/ic_reply"
+                    />
 
                 <TextView
                     android:id="@+id/tvReplies"
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/ivReplies"
-                    android:layout_toRightOf="@+id/ivReplies"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="12dp"
-                    android:layout_marginRight="12dp"
                     android:alpha=".5"
                     android:textSize="10sp"
-                    tools:text="4,999"/>
+                    tools:text="@string/num_followers"
+                    />
 
                 <ImageView
                     android:id="@+id/ivRetweets"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_toEndOf="@+id/tvReplies"
-                    android:layout_toRightOf="@+id/tvReplies"
                     android:layout_marginEnd="2dp"
-                    android:layout_marginRight="2dp"
                     android:scaleType="fitCenter"
                     android:src="@{tweetListViewModel.getRetweetIcon()}"
-                    tools:src="@drawable/ic_retweet_selected"/>
+                    tools:src="@drawable/ic_retweet_selected"
+                    />
 
                 <TextView
                     android:id="@+id/tvRetweets"
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/ivRetweets"
-                    android:layout_toRightOf="@+id/ivRetweets"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="12dp"
-                    android:layout_marginRight="12dp"
                     android:alpha=".5"
                     android:text="@{tweetListViewModel.getRetweetCount()}"
                     android:textSize="10sp"
-                    tools:text="4,999"/>
+                    tools:text="@string/num_followers"
+                    />
 
                 <ImageView
                     android:id="@+id/ivFavorites"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_toEndOf="@id/tvRetweets"
-                    android:layout_toRightOf="@id/tvRetweets"
                     android:layout_marginEnd="2dp"
-                    android:layout_marginRight="2dp"
                     android:scaleType="fitCenter"
                     android:src="@{tweetListViewModel.getFavoriteIcon()}"
-                    tools:src="@drawable/ic_favorite_selected"/>
+                    tools:src="@drawable/ic_favorite_selected"
+                    />
 
                 <TextView
                     android:id="@+id/tvFavorites"
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/ivFavorites"
-                    android:layout_toRightOf="@+id/ivFavorites"
                     android:layout_centerVertical="true"
                     android:alpha=".5"
                     android:text="@{tweetListViewModel.getFavoriteCount()}"
                     android:textSize="10sp"
-                    tools:text="4,999"/>
+                    tools:text="@string/num_followers"
+                    />
 
             </RelativeLayout>
-
 
         </RelativeLayout>
 

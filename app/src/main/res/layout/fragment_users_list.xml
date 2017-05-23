@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="usersListViewModel"
-            type="com.deonna.twitterclient.viewmodels.UsersListViewModel"/>
+            type="com.deonna.twitterclient.viewmodels.UsersListViewModel"
+            />
 
     </data>
 
@@ -17,14 +16,15 @@
         android:id="@+id/llUsers"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvUsers"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tbMain"/>
+            android:layout_below="@id/tbMain"
+            />
 
     </LinearLayout>
 

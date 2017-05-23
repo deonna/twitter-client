@@ -5,9 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="directMessageViewModel"
-            type="com.deonna.twitterclient.viewmodels.DirectMessageViewModel"/>
+            type="com.deonna.twitterclient.viewmodels.DirectMessageViewModel"
+            />
+
     </data>
 
     <RelativeLayout
@@ -15,65 +18,67 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp">
+        android:layout_margin="6dp"
+        >
 
         <ImageView
             android:id="@+id/ivProfileImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp"
             android:layout_centerVertical="true"
-            tools:src="@drawable/ic_launcher"/>
+            tools:src="@drawable/ic_launcher"
+            />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivProfileImage"
             android:layout_toEndOf="@+id/ivProfileImage"
             android:text="@{directMessageViewModel.getName()}"
             android:textStyle="bold"
             android:textSize="12sp"
-            tools:text="James Altucher"/>
+            tools:text="@string/james_altucher"
+            />
 
         <TextView
             android:id="@+id/tvTimestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:text="@{directMessageViewModel.getRelativeTimestamp()}"
             android:textSize="10sp"
-            tools:text="21m"/>
+            tools:text="@string/relative_timestamp"
+            />
 
         <TextView
             android:id="@+id/tvText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivProfileImage"
             android:layout_toEndOf="@+id/ivProfileImage"
             android:layout_below="@id/tvName"
             android:layout_marginTop="2dp"
             android:text="@{directMessageViewModel.getText()}"
             android:textSize="10sp"
             android:maxLines="2"
-            tools:text="I'm doing really well this weekend. I'm actually working on a new book that will be released soon, and preparing a blog post that will most certainly go viral."/>
+            tools:text="@string/long_tweet"
+            />
 
         <ImageView
             android:id="@+id/ivReply"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_toRightOf="@+id/ivProfileImage"
             android:layout_toEndOf="@+id/ivProfileImage"
             android:layout_below="@+id/tvText"
             android:layout_marginTop="2dp"
             android:visibility="@{directMessageViewModel.getReplyVisibility()}"
-            android:src="@drawable/ic_reply"/>
+            android:src="@drawable/ic_reply"
+            />
 
     </RelativeLayout>
+
 </layout>

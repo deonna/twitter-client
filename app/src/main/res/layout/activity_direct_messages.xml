@@ -3,24 +3,29 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
+
         <variable
             name="directMessagesViewModel"
-            type="com.deonna.twitterclient.viewmodels.DirectMessagesViewModel"/>
+            type="com.deonna.twitterclient.viewmodels.DirectMessagesViewModel"
+            />
+
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.activities.DirectMessagesActivity">
+        tools:context=".views.activities.DirectMessagesActivity"
+        >
 
         <include
             android:id="@+id/tbMain"
-            layout="@layout/toolbar_main"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            layout="@layout/toolbar_main"
             />
 
         <com.astuetz.PagerSlidingTabStrip
@@ -31,14 +36,16 @@
             app:pstsIndicatorColor="@color/twitterBlueLight"
             app:pstsUnderlineColor="@color/twitterBlueLight"
             app:pstsShouldExpand="true"
-            app:pstsTextAllCaps="true"/>
+            app:pstsTextAllCaps="true"
+            />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpTimelines"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/pstsTimelines"
-            android:background="@android:color/white"/>
+            android:background="@android:color/white"
+            />
 
     </RelativeLayout>
 

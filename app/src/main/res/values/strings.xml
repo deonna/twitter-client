@@ -4,8 +4,27 @@
     <string name="app_name">Twitter Client</string>
     <string name="login_label">Connect to Twitter</string>
     <string name="title_activity_timeline">Home Timeline</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="the_verge">The Verge</string>
+    <string name="the_verge_description">theverge.com covers life in the future.</string>
+    <string name="num_followers">4,999</string>
+    <string name="following">following</string>
+    <string name="followers">followers</string>
+    <string name="james_altucher">James Altucher</string>
+    <string name="jaltucher">\@jaltucher</string>
+    <string name="test_tweet">I am a tweet.</string>
+    <string name="timestamp">May 10</string>
+    <string name="retweets">retweets</string>
+    <string name="favorites">favorites</string>
+    <string name="new_tweet_hint">What\'s happening?</string>
+    <string name="save">Save</string>
+    <string name="tweet">Tweet</string>
+    <string name="max_characters">140</string>
+    <string name="in_reply_to">In reply to Tech Crunch</string>
+    <string name="tech_crunch">\@TechCrunch</string>
+    <string name="relative_timestamp">21m</string>
+    <string name="long_tweet">I\'m doing really well this weekend. I\'m actually working on a new book that will be released soon, and preparing a blog post that will most certainly go viral.</string>
+    <string name="verge">\@verge</string>
+    <string name="deonna_hodges">Deonna Hodges</string>
+    <string name="deonnahodges">\@DeonnaHodges</string>
 
 </resources>

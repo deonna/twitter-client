@@ -6,9 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="replyViewModel"
-            type="com.deonna.twitterclient.viewmodels.ReplyViewModel" />
+            type="com.deonna.twitterclient.viewmodels.ReplyViewModel"
+            />
+
     </data>
 
     <RelativeLayout
@@ -19,7 +22,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tbCompose"
@@ -27,28 +31,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:paddingRight="8dp"
+            android:paddingEnd="8dp"
             android:background="?attr/colorPrimary"
-            app:titleTextColor="@android:color/white">
+            app:titleTextColor="@android:color/white"
+            >
 
             <ImageView
                 android:id="@+id/ivCloseDialog"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_close_dialog"/>
+                android:src="@drawable/ic_close_dialog"
+                />
 
             <ImageView
                 android:id="@+id/ivUserProfile"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:scaleType="fitCenter"
                 tools:src="@drawable/ic_logo"
                 android:layout_alignTop="@+id/ivCloseDialog"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                />
 
 
         </android.support.v7.widget.Toolbar>
@@ -59,12 +65,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tbCompose"
-            android:layout_alignLeft="@id/tbCompose"
+            android:layout_alignStart="@id/tbCompose"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="16dp"
+            >
 
             <ImageView
                 android:id="@+id/ivInReplyTo"
@@ -73,19 +80,21 @@
                 android:layout_centerVertical="true"
                 android:scaleType="fitCenter"
                 android:alpha=".5"
-                android:src="@drawable/ic_down_arrow"/>
+                android:src="@drawable/ic_down_arrow"
+                />
 
             <TextView
                 android:id="@+id/tvInReplyTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="16dp"
                 android:layout_centerVertical="true"
                 android:textSize="10sp"
                 android:text="@{replyViewModel.getInReplyToString()}"
-                tools:text="In reply to Tech Crunch"/>
+                tools:text="@string/in_reply_to"
+                />
 
         </RelativeLayout>
 
@@ -94,8 +103,7 @@
             android:id="@+id/etNewTweet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/rlInReplyTo"
-            android:layout_alignParentLeft="true"
+            android:layout_alignStart="@+id/rlInReplyTo"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/rlInReplyTo"
             android:layout_marginEnd="16dp"
@@ -107,7 +115,8 @@
             android:paddingTop="2dp"
             android:text="@{replyViewModel.getScreenName()}"
             android:textCursorDrawable="@drawable/color_cursor"
-            tools:text="\@TechCrunch"/>
+            tools:text="@string/tech_crunch"
+            />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tbComposeOptions"
@@ -117,20 +126,21 @@
             android:layout_below="@id/tbComposeOptions"
             android:layout_alignParentBottom="true"
             app:titleTextColor="@android:color/white"
-            android:background="?attr/colorPrimary">
+            android:background="?attr/colorPrimary"
+            >
 
             <RelativeLayout
                 android:id="@+id/rlComposeFooter"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <Button
                     android:id="@+id/btSendTweet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="8dp"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
                     android:paddingTop="6dp"
@@ -141,23 +151,25 @@
                     android:textColor="@android:color/white"
                     android:textAllCaps="false"
                     android:textSize="10sp"
-                    android:text="Tweet" />
+                    android:text="@string/tweet"
+                    />
 
                 <TextView
                     android:id="@+id/tvCharacterCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/btSendTweet"
                     android:layout_toStartOf="@+id/btSendTweet"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="8dp"
                     android:textSize="10sp"
                     android:text="@{replyViewModel.getCharacterCount()}"
-                    tools:text="140"/>
+                    tools:text="140"
+                    />
 
             </RelativeLayout>
 
         </android.support.v7.widget.Toolbar>
 
     </RelativeLayout>
+
 </layout>

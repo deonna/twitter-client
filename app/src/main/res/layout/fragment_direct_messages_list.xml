@@ -2,11 +2,15 @@
 
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    >
+
     <data>
+
         <variable
             name="directMessagesListViewModel"
-            type="com.deonna.twitterclient.viewmodels.DirectMessagesListViewModel" />
+            type="com.deonna.twitterclient.viewmodels.DirectMessagesListViewModel"
+            />
+
     </data>
 
 
@@ -14,13 +18,15 @@
         android:id="@+id/rlDirectMessages"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvDirectMessages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tbMain"/>
+            android:layout_below="@+id/tbMain"
+            />
 
     </RelativeLayout>
 
