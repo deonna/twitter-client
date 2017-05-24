@@ -33,6 +33,8 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.deonna.twitterclient.network.DirectMessagesRequest.RECIEVED_DIRECT_MESSAGES_PATH;
+import static com.deonna.twitterclient.network.DirectMessagesRequest.SENT_DIRECT_MESSAGES_PATH;
 import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
 import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
 import static com.deonna.twitterclient.network.TimelineRequest.FAVORITES_TIMELINE_PATH;
@@ -150,64 +152,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
                 callback.onSearchResultsError();
-            }
-        });
-    }
-
-    public void getDirectMessagesReceived(Long maxId, DirectMessagesCallback callback) {
-
-        String apiUrl = getApiUrl("direct_messages.json");
-
-        RequestParams params = new RequestParams();
-        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-
-        if (maxId != null) {
-            params.put(KEY_MAX_ID, maxId);
-        }
-
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                List<DirectMessage> directMessages = DirectMessage.fromJsonMultiple(response);
-
-                callback.onDirectMessagesReceived(directMessages);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                callback.onDirectMessagesError();
-            }
-        });
-    }
-
-    public void getDirectMessagesSent(Long maxId, DirectMessagesCallback callback) {
-
-        String apiUrl = getApiUrl("direct_messages/sent.json");
-
-        RequestParams params = new RequestParams();
-        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-
-        if (maxId != null) {
-            params.put(KEY_MAX_ID, maxId);
-        }
-
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                List<DirectMessage> directMessages = DirectMessage.fromJsonMultiple(response);
-
-                callback.onDirectMessagesReceived(directMessages);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                callback.onDirectMessagesError();
             }
         });
     }

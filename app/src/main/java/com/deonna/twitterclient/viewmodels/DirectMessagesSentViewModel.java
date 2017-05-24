@@ -5,8 +5,11 @@ import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.events.DirectMessagesCallback;
 import com.deonna.twitterclient.models.DirectMessage;
+import com.deonna.twitterclient.network.DirectMessagesRequest;
 
 import java.util.List;
+
+import static com.deonna.twitterclient.network.DirectMessagesRequest.SENT_DIRECT_MESSAGES_PATH;
 
 public class DirectMessagesSentViewModel extends DirectMessagesListViewModel {
 
@@ -23,7 +26,7 @@ public class DirectMessagesSentViewModel extends DirectMessagesListViewModel {
 
     public void getDirectMessagesSent() {
 
-        client.getDirectMessagesSent(maxId, new DirectMessagesCallback() {
+        DirectMessagesCallback callback = new DirectMessagesCallback() {
 
             @Override
             public void onDirectMessagesReceived(List<DirectMessage> messages) {
@@ -38,7 +41,14 @@ public class DirectMessagesSentViewModel extends DirectMessagesListViewModel {
             public void onDirectMessagesError() {
 
             }
-        });
+        };
+
+        DirectMessagesRequest.builder()
+                .apiUrl(SENT_DIRECT_MESSAGES_PATH)
+                .maxId(maxId)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     protected Long getMaxIdForNextFetch(List<DirectMessage> directMessages) {
