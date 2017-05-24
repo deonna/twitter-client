@@ -86,6 +86,7 @@ public class TimelineRequest implements TwitterRequest {
 
     private void setNumTweetsPerFetch(int numTweetsPerFetch) {
 
+        params.remove(KEY_COUNT);
         params.put(KEY_COUNT, numTweetsPerFetch);
     }
 
@@ -106,11 +107,13 @@ public class TimelineRequest implements TwitterRequest {
 
     private void setSinceId(Long sinceId) {
 
+        params.remove(KEY_SINCE_ID);
         params.put(KEY_SINCE_ID, sinceId);
     }
 
     private void setIncludeEntities(Boolean includeEntities) {
 
+        params.remove(KEY_INCLUDE_ENTITIES);
         params.put(KEY_INCLUDE_ENTITIES, includeEntities);
     }
 

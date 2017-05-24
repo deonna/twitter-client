@@ -88,6 +88,7 @@ public class UserInfoRequest implements TwitterRequest {
 
     private void setIncludeEmail(Boolean includeEmail) {
 
+        params.remove(KEY_INCLUDE_EMAIL);
         params.put(KEY_INCLUDE_EMAIL, includeEmail);
     }
 

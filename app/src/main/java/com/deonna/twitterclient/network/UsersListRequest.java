@@ -96,6 +96,7 @@ public class UsersListRequest implements TwitterRequest {
     private void setCursor(Long cursor) {
 
         if (cursor != null) {
+            params.remove(KEY_CURSOR);
             params.put(KEY_CURSOR, cursor);
         }
     }
