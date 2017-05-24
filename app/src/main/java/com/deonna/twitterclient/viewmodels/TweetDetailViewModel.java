@@ -7,6 +7,7 @@ import com.deonna.twitterclient.events.FavoriteCallback;
 import com.deonna.twitterclient.events.RetweetCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.requests.FavoriteRequest;
+import com.deonna.twitterclient.network.requests.RetweetRequest;
 
 import static com.deonna.twitterclient.network.requests.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
 import static com.deonna.twitterclient.network.requests.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
@@ -20,7 +21,7 @@ public class TweetDetailViewModel extends TweetViewModel {
 
     public void retweet(long id, ImageView ivRetweetIcon) {
 
-        client.retweet(id, new RetweetCallback() {
+        RetweetCallback callback = new RetweetCallback() {
             @Override
             public void onRetweet(Tweet newTweet) {
 
@@ -35,7 +36,13 @@ public class TweetDetailViewModel extends TweetViewModel {
 
                 setRetweetIcon(false);
             }
-        });
+        };
+
+        RetweetRequest.builder()
+                .id(id)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     public void favorite(long id, ImageView ivFavoriteIcon) {

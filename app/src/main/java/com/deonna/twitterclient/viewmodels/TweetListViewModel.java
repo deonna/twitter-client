@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deonna.twitterclient.network.requests.FavoriteRequest;
+import com.deonna.twitterclient.network.requests.RetweetRequest;
 import com.deonna.twitterclient.network.requests.UserInfoRequest;
 import com.deonna.twitterclient.views.activities.ProfileActivity;
 import com.deonna.twitterclient.views.activities.SearchResultsActivity;
@@ -36,7 +37,7 @@ public class TweetListViewModel extends TweetViewModel {
 
     public void retweet(long id, int position, ImageView ivRetweetIcon, TextView tvRetweetCount) {
 
-        client.retweet(id, new RetweetCallback() {
+         RetweetCallback callback = new RetweetCallback() {
             @Override
             public void onRetweet(Tweet newTweet) {
 
@@ -62,7 +63,13 @@ public class TweetListViewModel extends TweetViewModel {
 
                 setRetweetIcon(false);
             }
-        });
+        };
+
+        RetweetRequest.builder()
+                .id(id)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     public void favorite(long id, int position, ImageView ivFavoriteIcon, TextView tvFavoriteCount) {

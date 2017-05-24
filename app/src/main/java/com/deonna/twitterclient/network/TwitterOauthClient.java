@@ -7,6 +7,7 @@ import com.deonna.twitterclient.BuildConfig;
 import com.deonna.twitterclient.events.RetweetCallback;
 import com.deonna.twitterclient.events.SearchResultsCallback;
 import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.network.requests.RetweetRequest;
 import com.deonna.twitterclient.network.requests.TwitterRequest;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -33,7 +34,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String KEY_MAX_ID = "max_id";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
-    public static final String KEY_ID = "id";
 
     public TwitterOauthClient(Context context) {
 
@@ -60,33 +60,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void logOut() {
         super.clearAccessToken();
-    }
-
-    public void retweet(long id, RetweetCallback callback) {
-
-        String apiUrl = getApiUrl("statuses/retweet/" + id + ".json");
-
-        RequestParams params = new RequestParams();
-        params.put(KEY_ID, id);
-
-        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                Tweet tweet = Tweet.fromJsonSingle(response);
-
-                callback.onRetweet(tweet);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onRetweetFailed();
-            }
-        });
     }
 
     public void getSearchResults(String hashtag, Long maxId, SearchResultsCallback callback) {
