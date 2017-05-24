@@ -6,7 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.deonna.twitterclient.network.TimelineRequest;
+import com.deonna.twitterclient.network.requests.TimelineRequest;
 import com.deonna.twitterclient.views.adapters.TweetsAdapter;
 import com.deonna.twitterclient.events.TweetsReceivedCallback;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
@@ -18,7 +18,7 @@ import com.deonna.twitterclient.utilities.TwitterApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.deonna.twitterclient.network.TimelineRequest.HOME_TIMELINE_PATH;
+import static com.deonna.twitterclient.network.requests.TimelineRequest.HOME_TIMELINE_PATH;
 
 public class TweetsTimelineViewModel implements ViewModel {
 

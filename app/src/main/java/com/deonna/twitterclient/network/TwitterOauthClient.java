@@ -5,20 +5,12 @@ import android.content.Context;
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
 import com.deonna.twitterclient.events.DirectMessageSentCallback;
-import com.deonna.twitterclient.events.DirectMessagesCallback;
-import com.deonna.twitterclient.events.FavoriteCallback;
-import com.deonna.twitterclient.events.FollowCallback;
 import com.deonna.twitterclient.events.RetweetCallback;
 import com.deonna.twitterclient.events.SearchResultsCallback;
 import com.deonna.twitterclient.events.TrendsCallback;
-import com.deonna.twitterclient.events.TweetSentCallback;
-import com.deonna.twitterclient.events.TweetsReceivedCallback;
-import com.deonna.twitterclient.events.UserInfoCallback;
-import com.deonna.twitterclient.events.UsersListCallback;
-import com.deonna.twitterclient.models.DirectMessage;
 import com.deonna.twitterclient.models.Trend;
 import com.deonna.twitterclient.models.Tweet;
-import com.deonna.twitterclient.models.User;
+import com.deonna.twitterclient.network.requests.TwitterRequest;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -32,21 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-
-import static com.deonna.twitterclient.network.DirectMessagesRequest.RECIEVED_DIRECT_MESSAGES_PATH;
-import static com.deonna.twitterclient.network.DirectMessagesRequest.SENT_DIRECT_MESSAGES_PATH;
-import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
-import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
-import static com.deonna.twitterclient.network.FollowRequest.FOLLOW_PATH;
-import static com.deonna.twitterclient.network.FollowRequest.UNFOLLOW_PATH;
-import static com.deonna.twitterclient.network.TimelineRequest.FAVORITES_TIMELINE_PATH;
-import static com.deonna.twitterclient.network.TimelineRequest.HOME_TIMELINE_PATH;
-import static com.deonna.twitterclient.network.TimelineRequest.MENTIONS_TIMELINE_PATH;
-import static com.deonna.twitterclient.network.TimelineRequest.USER_TIMELINE_PATH;
-import static com.deonna.twitterclient.network.UserInfoRequest.SHOW_USER_PATH;
-import static com.deonna.twitterclient.network.UserInfoRequest.VERIFY_CREDENTIALS_PATH;
-import static com.deonna.twitterclient.network.UsersListRequest.SHOW_FOLLOWERS_PATH;
-import static com.deonna.twitterclient.network.UsersListRequest.SHOW_FOLLOWING_PATH;
 
 public class TwitterOauthClient extends OAuthBaseClient {
 
@@ -69,7 +46,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
 
-    protected void fetch(TwitterRequest request) {
+    public void fetch(TwitterRequest request) {
 
         getClient().get(
                 getApiUrl(request.getPath()),
@@ -78,7 +55,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
         );
     }
 
-    protected void post(TwitterRequest request) {
+    public void post(TwitterRequest request) {
 
         getClient().post(
             getApiUrl(request.getPath()),

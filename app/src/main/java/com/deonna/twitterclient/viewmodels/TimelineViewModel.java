@@ -6,14 +6,14 @@ import com.deonna.twitterclient.events.UserInfoCallback;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
-import com.deonna.twitterclient.network.UserInfoRequest;
+import com.deonna.twitterclient.network.requests.UserInfoRequest;
 import com.deonna.twitterclient.utilities.TwitterApplication;
 import com.deonna.twitterclient.views.activities.TimelineActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.deonna.twitterclient.network.UserInfoRequest.VERIFY_CREDENTIALS_PATH;
+import static com.deonna.twitterclient.network.requests.UserInfoRequest.VERIFY_CREDENTIALS_PATH;
 
 
 public class TimelineViewModel implements ViewModel {

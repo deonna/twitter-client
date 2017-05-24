@@ -1,4 +1,4 @@
-package com.deonna.twitterclient.network;
+package com.deonna.twitterclient.network.requests;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;

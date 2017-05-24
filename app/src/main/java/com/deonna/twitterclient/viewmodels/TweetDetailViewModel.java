@@ -6,10 +6,10 @@ import android.widget.ImageView;
 import com.deonna.twitterclient.events.FavoriteCallback;
 import com.deonna.twitterclient.events.RetweetCallback;
 import com.deonna.twitterclient.models.Tweet;
-import com.deonna.twitterclient.network.FavoriteRequest;
+import com.deonna.twitterclient.network.requests.FavoriteRequest;
 
-import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
-import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
+import static com.deonna.twitterclient.network.requests.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
+import static com.deonna.twitterclient.network.requests.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
 
 public class TweetDetailViewModel extends TweetViewModel {
 

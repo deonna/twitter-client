@@ -4,13 +4,13 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.events.TweetsReceivedCallback;
-import com.deonna.twitterclient.network.TimelineRequest;
+import com.deonna.twitterclient.network.requests.TimelineRequest;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;
 
-import static com.deonna.twitterclient.network.TimelineRequest.USER_TIMELINE_PATH;
+import static com.deonna.twitterclient.network.requests.TimelineRequest.USER_TIMELINE_PATH;
 
 public class UserTimelineViewModel extends TweetsTimelineViewModel {
 

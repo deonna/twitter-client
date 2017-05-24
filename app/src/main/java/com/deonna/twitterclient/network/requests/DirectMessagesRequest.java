@@ -1,4 +1,4 @@
-package com.deonna.twitterclient.network;
+package com.deonna.twitterclient.network.requests;
 
 import com.deonna.twitterclient.events.DirectMessagesCallback;
 import com.deonna.twitterclient.models.DirectMessage;

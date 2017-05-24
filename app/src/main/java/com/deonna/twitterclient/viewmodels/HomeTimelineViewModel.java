@@ -5,14 +5,14 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import com.deonna.twitterclient.events.TweetsReceivedCallback;
-import com.deonna.twitterclient.network.TimelineRequest;
+import com.deonna.twitterclient.network.requests.TimelineRequest;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.NetworkStatus;
 
 import java.util.List;
 
-import static com.deonna.twitterclient.network.TimelineRequest.HOME_TIMELINE_PATH;
+import static com.deonna.twitterclient.network.requests.TimelineRequest.HOME_TIMELINE_PATH;
 
 public class HomeTimelineViewModel extends TweetsTimelineViewModel {
 

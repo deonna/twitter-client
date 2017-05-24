@@ -5,11 +5,11 @@ import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.events.DirectMessagesCallback;
 import com.deonna.twitterclient.models.DirectMessage;
-import com.deonna.twitterclient.network.DirectMessagesRequest;
+import com.deonna.twitterclient.network.requests.DirectMessagesRequest;
 
 import java.util.List;
 
-import static com.deonna.twitterclient.network.DirectMessagesRequest.SENT_DIRECT_MESSAGES_PATH;
+import static com.deonna.twitterclient.network.requests.DirectMessagesRequest.SENT_DIRECT_MESSAGES_PATH;
 
 public class DirectMessagesSentViewModel extends DirectMessagesListViewModel {
 

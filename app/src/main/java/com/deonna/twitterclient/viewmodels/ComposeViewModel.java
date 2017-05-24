@@ -3,8 +3,7 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.deonna.twitterclient.network.TweetSentRequest;
-import com.deonna.twitterclient.views.activities.TimelineActivity;
+import com.deonna.twitterclient.network.requests.TweetSentRequest;
 import com.deonna.twitterclient.events.NewTweetsListener;
 import com.deonna.twitterclient.events.TweetSentCallback;
 import com.deonna.twitterclient.models.User;

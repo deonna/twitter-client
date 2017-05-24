@@ -6,15 +6,15 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.deonna.twitterclient.R;
-import com.deonna.twitterclient.network.FollowRequest;
+import com.deonna.twitterclient.network.requests.FollowRequest;
 import com.deonna.twitterclient.views.adapters.UsersListAdapter;
 import com.deonna.twitterclient.events.FollowCallback;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;
 
-import static com.deonna.twitterclient.network.FollowRequest.FOLLOW_PATH;
-import static com.deonna.twitterclient.network.FollowRequest.UNFOLLOW_PATH;
+import static com.deonna.twitterclient.network.requests.FollowRequest.FOLLOW_PATH;
+import static com.deonna.twitterclient.network.requests.FollowRequest.UNFOLLOW_PATH;
 
 public class UserViewModel {
 

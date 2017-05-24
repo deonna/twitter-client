@@ -6,13 +6,13 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import com.deonna.twitterclient.events.TweetsReceivedCallback;
-import com.deonna.twitterclient.network.TimelineRequest;
+import com.deonna.twitterclient.network.requests.TimelineRequest;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;
 
-import static com.deonna.twitterclient.network.TimelineRequest.MENTIONS_TIMELINE_PATH;
+import static com.deonna.twitterclient.network.requests.TimelineRequest.MENTIONS_TIMELINE_PATH;
 
 public class MentionsTimelineViewModel extends TweetsTimelineViewModel {
 

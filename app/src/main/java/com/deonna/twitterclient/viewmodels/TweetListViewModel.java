@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.deonna.twitterclient.network.FavoriteRequest;
-import com.deonna.twitterclient.network.UserInfoRequest;
+import com.deonna.twitterclient.network.requests.FavoriteRequest;
+import com.deonna.twitterclient.network.requests.UserInfoRequest;
 import com.deonna.twitterclient.views.activities.ProfileActivity;
 import com.deonna.twitterclient.views.activities.SearchResultsActivity;
 import com.deonna.twitterclient.views.activities.TimelineActivity;
@@ -19,9 +19,9 @@ import com.deonna.twitterclient.models.User;
 
 import org.parceler.Parcels;
 
-import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
-import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
-import static com.deonna.twitterclient.network.UserInfoRequest.SHOW_USER_PATH;
+import static com.deonna.twitterclient.network.requests.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
+import static com.deonna.twitterclient.network.requests.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
+import static com.deonna.twitterclient.network.requests.UserInfoRequest.SHOW_USER_PATH;
 
 public class TweetListViewModel extends TweetViewModel {
 

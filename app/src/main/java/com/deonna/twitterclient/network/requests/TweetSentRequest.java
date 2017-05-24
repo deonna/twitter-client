@@ -1,7 +1,6 @@
-package com.deonna.twitterclient.network;
+package com.deonna.twitterclient.network.requests;
 
-import com.deonna.twitterclient.events.FavoriteCallback;
-import com.deonna.twitterclient.models.Tweet;
+import com.deonna.twitterclient.events.TweetSentCallback;
 import com.deonna.twitterclient.utilities.TwitterApplication;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -10,21 +9,24 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class FavoriteRequest implements TwitterRequest {
+public class TweetSentRequest implements TwitterRequest {
 
-    public static final String KEY_ID = "id";
+    public static final String KEY_STATUS = "status";
 
-    public static final String FAVORITES_CREATE_ENDPOINT = "favorites/create.json";
-    public static final String FAVORITES_DESTROY_ENDPOINT = "favorites/destroy.json";
+    public static final String STATUS_UPDATE_ENDPOINT = "statuses/update.json";
 
     private String apiUrl;
-    private FavoriteCallback callback;
+    private TweetSentCallback callback;
+
+    private String newTweet;
 
     private RequestParams params;
 
-    private FavoriteRequest() {
+    private TweetSentRequest() {
 
         params = new RequestParams();
+
+        apiUrl = STATUS_UPDATE_ENDPOINT;
     }
 
     @Override
@@ -47,9 +49,7 @@ public class FavoriteRequest implements TwitterRequest {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                Tweet tweet = Tweet.fromJsonSingle(response);
-
-                callback.onFavorite(tweet);
+                callback.onTweetSent(newTweet);
             }
 
             @Override
@@ -57,19 +57,16 @@ public class FavoriteRequest implements TwitterRequest {
 
                 super.onFailure(statusCode, headers, throwable, errorResponse);
 
-                callback.onFavoriteFailed();
+                callback.onTweetSentFailed();
             }
         };
     }
 
-    private void setApiUrl(String apiUrl) {
+    private void setStatus(String newTweet) {
 
-        this.apiUrl = apiUrl;
-    }
+        this.newTweet = newTweet;
 
-    private void setId(long id) {
-
-        params.put(KEY_ID, id);
+        params.put(KEY_STATUS, newTweet);
     }
 
     public void execute() {
@@ -81,35 +78,28 @@ public class FavoriteRequest implements TwitterRequest {
 
     public static Builder builder() {
 
-        return new FavoriteRequest.Builder();
+        return new TweetSentRequest.Builder();
     }
 
     public static class Builder {
 
-        private FavoriteRequest request = new FavoriteRequest();
+        private TweetSentRequest request = new TweetSentRequest();
 
-        public Builder apiUrl(String apiUrl) {
+        public Builder status(String newTweet) {
 
-            request.setApiUrl(apiUrl);
-
-            return this;
-        }
-
-        public Builder id(long id) {
-
-            request.setId(id);
+            request.setStatus(newTweet);
 
             return this;
         }
 
-        public Builder callback(FavoriteCallback callback) {
+        public Builder callback(TweetSentCallback callback) {
 
             request.callback = callback;
 
             return this;
         }
 
-        public FavoriteRequest build() {
+        public TweetSentRequest build() {
 
             return request;
         }
