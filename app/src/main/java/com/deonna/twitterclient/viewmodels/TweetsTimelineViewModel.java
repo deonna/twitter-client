@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.deonna.twitterclient.network.TimelineRequest;
 import com.deonna.twitterclient.views.adapters.TweetsAdapter;
 import com.deonna.twitterclient.events.TweetsReceivedCallback;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
@@ -16,6 +17,8 @@ import com.deonna.twitterclient.utilities.TwitterApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.deonna.twitterclient.network.TimelineRequest.HOME_TIMELINE_PATH;
 
 public class TweetsTimelineViewModel implements ViewModel {
 
@@ -69,7 +72,7 @@ public class TweetsTimelineViewModel implements ViewModel {
 
         fragment.showProgressBar();
 
-        client.getNextOldestTweets(maxId, new TweetsReceivedCallback() {
+        TweetsReceivedCallback callback = new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -87,7 +90,14 @@ public class TweetsTimelineViewModel implements ViewModel {
 
                 fragment.hideProgressBar();
             }
-        });
+        };
+
+        TimelineRequest.builder()
+                .apiUrl(HOME_TIMELINE_PATH)
+                .maxId(maxId)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     protected Long getMaxIdForNextFetch(List<Tweet> tweets) {
@@ -111,7 +121,7 @@ public class TweetsTimelineViewModel implements ViewModel {
             sinceId = 1L;
         }
 
-        client.getNewestTweets(sinceId, new TweetsReceivedCallback() {
+        TweetsReceivedCallback callback = new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -127,7 +137,14 @@ public class TweetsTimelineViewModel implements ViewModel {
 
                srlTimeline.setRefreshing(false);
             }
-        });
+        };
+
+        TimelineRequest.builder()
+                .apiUrl(HOME_TIMELINE_PATH)
+                .sinceId(sinceId)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     public void addNewlyComposedTweet() {
@@ -140,7 +157,7 @@ public class TweetsTimelineViewModel implements ViewModel {
             sinceId = 1L;
         }
 
-        client.getNewestTweets(sinceId, new TweetsReceivedCallback() {
+        TweetsReceivedCallback callback = new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -153,7 +170,14 @@ public class TweetsTimelineViewModel implements ViewModel {
             public void onTweetsReceivedError() {
 
             }
-        });
+        };
+
+        TimelineRequest.builder()
+                .apiUrl(HOME_TIMELINE_PATH)
+                .sinceId(sinceId)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     public void loadTweetsFromDb() {

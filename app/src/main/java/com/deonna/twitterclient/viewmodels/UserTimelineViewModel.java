@@ -4,10 +4,13 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.events.TweetsReceivedCallback;
+import com.deonna.twitterclient.network.TimelineRequest;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 
 import java.util.List;
+
+import static com.deonna.twitterclient.network.TimelineRequest.USER_TIMELINE_PATH;
 
 public class UserTimelineViewModel extends TweetsTimelineViewModel {
 
@@ -24,7 +27,7 @@ public class UserTimelineViewModel extends TweetsTimelineViewModel {
 
     public void getUserTimeline() {
 
-        client.getUserTimeline(screenName, new TweetsReceivedCallback() {
+        TweetsReceivedCallback callback = new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -39,13 +42,20 @@ public class UserTimelineViewModel extends TweetsTimelineViewModel {
             public void onTweetsReceivedError() {
 
             }
-        });
+        };
+
+        TimelineRequest.builder()
+                .apiUrl(USER_TIMELINE_PATH)
+                .screenName(screenName)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     @Override
     protected void getNextOldestTweets() {
 
-        client.getNextOldestUserTimelineTweets(screenName, maxId, new TweetsReceivedCallback() {
+        TweetsReceivedCallback callback = new TweetsReceivedCallback() {
 
             @Override
             public void onTweetsReceived(List<Tweet> newTweets) {
@@ -60,6 +70,14 @@ public class UserTimelineViewModel extends TweetsTimelineViewModel {
             public void onTweetsReceivedError() {
 
             }
-        });
+        };
+
+        TimelineRequest.builder()
+                .apiUrl(USER_TIMELINE_PATH)
+                .screenName(screenName)
+                .maxId(maxId)
+                .callback(callback)
+                .build()
+                .execute();
     }
 }

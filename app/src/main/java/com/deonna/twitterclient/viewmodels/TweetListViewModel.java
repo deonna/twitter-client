@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.deonna.twitterclient.network.UserInfoRequest;
 import com.deonna.twitterclient.views.activities.ProfileActivity;
 import com.deonna.twitterclient.views.activities.SearchResultsActivity;
 import com.deonna.twitterclient.views.activities.TimelineActivity;
@@ -16,6 +17,8 @@ import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.models.User;
 
 import org.parceler.Parcels;
+
+import static com.deonna.twitterclient.network.UserInfoRequest.SHOW_USER_PATH;
 
 public class TweetListViewModel extends TweetViewModel {
 
@@ -113,7 +116,7 @@ public class TweetListViewModel extends TweetViewModel {
 
     public void openProfileForUser(String screenName) {
 
-        client.getUserInfo(screenName, new UserInfoCallback() {
+        UserInfoCallback callback = new UserInfoCallback() {
             @Override
             public void onUserInfoReceived(User user) {
 
@@ -127,7 +130,14 @@ public class TweetListViewModel extends TweetViewModel {
             public void onUserInfoError() {
 
             }
-        });
+        };
+
+        UserInfoRequest.builder()
+                .apiUrl(SHOW_USER_PATH)
+                .screenName(screenName)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     public void getSearchResultsForHashtag(String hashtag) {
