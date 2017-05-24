@@ -3,6 +3,7 @@ package com.deonna.twitterclient.viewmodels;
 import com.deonna.twitterclient.events.DirectMessageSentCallback;
 import com.deonna.twitterclient.events.NewTweetsListener;
 import com.deonna.twitterclient.models.User;
+import com.deonna.twitterclient.network.requests.DirectMessageSentRequest;
 
 public class ReplyViewModel extends ComposeViewModel {
 
@@ -27,7 +28,7 @@ public class ReplyViewModel extends ComposeViewModel {
 
     public void sendDirectMessage(String text) {
 
-        client.sendDirectMessage(currentUser.screenName, text, new DirectMessageSentCallback() {
+        DirectMessageSentCallback callback = new DirectMessageSentCallback() {
 
             @Override
             public void onDirectMessageSent() {
@@ -38,6 +39,13 @@ public class ReplyViewModel extends ComposeViewModel {
             public void onDirectMessageSentFailed() {
 
             }
-        });
+        };
+
+        DirectMessageSentRequest.builder()
+                .screenName(currentUser.screenName)
+                .text(text)
+                .callback(callback)
+                .build()
+                .execute();
     }
 }
