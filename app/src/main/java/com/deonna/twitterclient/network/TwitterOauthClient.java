@@ -4,11 +4,8 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
-import com.deonna.twitterclient.events.DirectMessageSentCallback;
 import com.deonna.twitterclient.events.RetweetCallback;
 import com.deonna.twitterclient.events.SearchResultsCallback;
-import com.deonna.twitterclient.events.TrendsCallback;
-import com.deonna.twitterclient.models.Trend;
 import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.network.requests.TwitterRequest;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -20,7 +17,6 @@ import org.json.JSONObject;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -35,11 +31,9 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     private static final String KEY_COUNT = "count";
     private static final String KEY_MAX_ID = "max_id";
-    private static final String KEY_SCREEN_NAME = "screen_name";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
     public static final String KEY_ID = "id";
-    private static final String KEY_TEXT = "text";
 
     public TwitterOauthClient(Context context) {
 
@@ -133,57 +127,5 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 callback.onSearchResultsError();
             }
         });
-    }
-
-    public void sendDirectMessage(String screenName, String text, DirectMessageSentCallback callback) {
-
-        String apiUrl = getApiUrl("direct_messages/new.json");
-
-        RequestParams params = new RequestParams();
-        params.put(KEY_SCREEN_NAME, screenName);
-        params.put(KEY_TEXT, text);
-
-        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                callback.onDirectMessageSent();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                callback.onDirectMessageSentFailed();
-            }
-        });
-    }
-
-    public void getTrends(TrendsCallback callback) {
-
-        String apiUrl = getApiUrl("trends/place.json");
-
-        final int WOEID = 1;
-
-        RequestParams params = new RequestParams();
-        params.put(KEY_ID, WOEID);
-
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                List<Trend> trends = new ArrayList<Trend>();
-
-                callback.onTrendsRecieved(trends);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                callback.onTrendsError();
-            }
-        });
-
     }
 }
