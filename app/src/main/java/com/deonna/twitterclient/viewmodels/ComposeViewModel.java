@@ -3,6 +3,7 @@ package com.deonna.twitterclient.viewmodels;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.deonna.twitterclient.network.TweetSentRequest;
 import com.deonna.twitterclient.views.activities.TimelineActivity;
 import com.deonna.twitterclient.events.NewTweetsListener;
 import com.deonna.twitterclient.events.TweetSentCallback;
@@ -39,7 +40,7 @@ public class ComposeViewModel {
 
     public void sendNewTweet(String newTweet) {
 
-        client.sendNewTweet(newTweet, new TweetSentCallback() {
+        TweetSentCallback callback = new TweetSentCallback() {
 
             @Override
             public void onTweetSent(String newTweet) {
@@ -52,6 +53,12 @@ public class ComposeViewModel {
 
                 Toast.makeText((Context) context, "Please try again.", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+
+        TweetSentRequest.builder()
+                .status(newTweet)
+                .callback(callback)
+                .build()
+                .execute();
     }
 }

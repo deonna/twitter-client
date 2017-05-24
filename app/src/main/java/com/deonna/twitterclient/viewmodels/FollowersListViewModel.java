@@ -6,9 +6,12 @@ import android.support.v7.widget.RecyclerView;
 
 import com.deonna.twitterclient.events.UsersListCallback;
 import com.deonna.twitterclient.models.User;
+import com.deonna.twitterclient.network.UsersListRequest;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
 
 import java.util.List;
+
+import static com.deonna.twitterclient.network.UsersListRequest.SHOW_FOLLOWERS_PATH;
 
 public class FollowersListViewModel extends UsersListViewModel {
 
@@ -27,27 +30,12 @@ public class FollowersListViewModel extends UsersListViewModel {
 
     public void getFollowersList() {
 
-        client.getFollowersList(profileUser.screenName, cursor, new UsersListCallback() {
-
-            @Override
-            public void onUsersReceived(List<User> newUsers, Long nextCursor) {
-
-                users.addAll(newUsers);
-                usersListAdapter.notifyDataSetChanged();
-
-                cursor = nextCursor;
-            }
-
-            @Override
-            public void onUsersReceivedError() {
-
-            }
-        });
+        getNextOldestFollowersList();
     }
 
     public void getNextOldestFollowersList() {
 
-        client.getFollowersList(profileUser.screenName, cursor, new UsersListCallback() {
+        UsersListCallback callback = new UsersListCallback() {
 
             @Override
             public void onUsersReceived(List<User> newUsers, Long nextCursor) {
@@ -62,7 +50,15 @@ public class FollowersListViewModel extends UsersListViewModel {
             public void onUsersReceivedError() {
 
             }
-        });
+        };
+
+        UsersListRequest.builder()
+                .apiUrl(SHOW_FOLLOWERS_PATH)
+                .cursor(cursor)
+                .screenName(profileUser.screenName)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     public EndlessRecyclerViewScrollListener initializeEndlessScrollListener(LinearLayoutManager layoutManager) {

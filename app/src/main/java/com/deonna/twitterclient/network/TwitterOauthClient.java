@@ -57,9 +57,7 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String KEY_SCREEN_NAME = "screen_name";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
-    public static final String STATUS_UPDATE_ENDPOINT = "statuses/update.json";
     public static final String KEY_ID = "id";
-    public static final String KEY_STATUS = "status";
     private static final String KEY_TEXT = "text";
 
     public TwitterOauthClient(Context context) {
@@ -89,52 +87,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
         super.clearAccessToken();
     }
 
-    public void sendNewTweet(String newTweet, TweetSentCallback callback) {
-
-        String apiUrl = getApiUrl(STATUS_UPDATE_ENDPOINT);
-
-        RequestParams params = new RequestParams();
-        params.put(KEY_STATUS, newTweet);
-
-        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                callback.onTweetSent(newTweet);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onTweetSentFailed();
-            }
-        });
-    }
-
-    public void favoriteTweet(long id, FavoriteCallback callback) {
-
-        FavoriteRequest request = FavoriteRequest.builder()
-                .apiUrl(FAVORITES_CREATE_ENDPOINT)
-                .id(id)
-                .callback(callback)
-                .build();
-
-        request.execute();
-    }
-    public void unfavoriteTweet(long id, FavoriteCallback callback) {
-
-        FavoriteRequest request = FavoriteRequest.builder()
-                .apiUrl(FAVORITES_DESTROY_ENDPOINT)
-                .id(id)
-                .callback(callback)
-                .build();
-
-        request.execute();
-    }
-
     public void retweet(long id, RetweetCallback callback) {
 
         String apiUrl = getApiUrl("statuses/retweet/" + id + ".json");
@@ -160,30 +112,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 callback.onRetweetFailed();
             }
         });
-    }
-
-    public void getFollowersList(String screenName, Long cursor, UsersListCallback callback) {
-
-        UsersListRequest request = UsersListRequest.builder()
-                .apiUrl(SHOW_FOLLOWERS_PATH)
-                .cursor(cursor)
-                .screenName(screenName)
-                .callback(callback)
-                .build();
-
-        request.execute();
-    }
-
-    public void getFollowingList(String screenName, Long cursor, UsersListCallback callback) {
-
-        UsersListRequest request = UsersListRequest.builder()
-                .apiUrl(SHOW_FOLLOWING_PATH)
-                .cursor(cursor)
-                .screenName(screenName)
-                .callback(callback)
-                .build();
-
-        request.execute();
     }
 
     public void getSearchResults(String hashtag, Long maxId, SearchResultsCallback callback) {

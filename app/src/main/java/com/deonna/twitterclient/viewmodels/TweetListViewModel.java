@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.deonna.twitterclient.network.FavoriteRequest;
 import com.deonna.twitterclient.network.UserInfoRequest;
 import com.deonna.twitterclient.views.activities.ProfileActivity;
 import com.deonna.twitterclient.views.activities.SearchResultsActivity;
@@ -18,6 +19,8 @@ import com.deonna.twitterclient.models.User;
 
 import org.parceler.Parcels;
 
+import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
+import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
 import static com.deonna.twitterclient.network.UserInfoRequest.SHOW_USER_PATH;
 
 public class TweetListViewModel extends TweetViewModel {
@@ -64,7 +67,7 @@ public class TweetListViewModel extends TweetViewModel {
 
     public void favorite(long id, int position, ImageView ivFavoriteIcon, TextView tvFavoriteCount) {
 
-        client.favoriteTweet(id, new FavoriteCallback() {
+        FavoriteCallback callback = new FavoriteCallback() {
             @Override
             public void onFavorite(Tweet newTweet) {
 
@@ -88,12 +91,19 @@ public class TweetListViewModel extends TweetViewModel {
             public void onFavoriteFailed() {
 
             }
-        });
+        };
+
+        FavoriteRequest.builder()
+                .apiUrl(FAVORITES_CREATE_ENDPOINT)
+                .id(id)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     public void unfavorite(long id, int position, ImageView ivFavoriteIcon, TextView tvFavoriteCount) {
 
-        client.unfavoriteTweet(id, new FavoriteCallback() {
+        FavoriteCallback callback = new FavoriteCallback() {
             @Override
             public void onFavorite(Tweet newTweet) {
 
@@ -111,7 +121,14 @@ public class TweetListViewModel extends TweetViewModel {
             public void onFavoriteFailed() {
 
             }
-        });
+        };
+
+        FavoriteRequest.builder()
+                .apiUrl(FAVORITES_DESTROY_ENDPOINT)
+                .id(id)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     public void openProfileForUser(String screenName) {
