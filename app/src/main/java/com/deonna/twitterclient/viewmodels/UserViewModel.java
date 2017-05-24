@@ -6,11 +6,15 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.deonna.twitterclient.R;
+import com.deonna.twitterclient.network.FollowRequest;
 import com.deonna.twitterclient.views.adapters.UsersListAdapter;
 import com.deonna.twitterclient.events.FollowCallback;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.network.TwitterOauthClient;
 import com.deonna.twitterclient.utilities.TwitterApplication;
+
+import static com.deonna.twitterclient.network.FollowRequest.FOLLOW_PATH;
+import static com.deonna.twitterclient.network.FollowRequest.UNFOLLOW_PATH;
 
 public class UserViewModel {
 
@@ -68,9 +72,9 @@ public class UserViewModel {
         }
     }
 
-    public void unfollow(String screenName, int position, ImageView ivIsFollowingIcon) {
+    public void unfollow(String screenName, ImageView ivIsFollowingIcon) {
 
-        client.unfollow(screenName, new FollowCallback() {
+        FollowCallback callback = new FollowCallback() {
 
 
             @Override
@@ -86,12 +90,19 @@ public class UserViewModel {
             public void onFollowFailed() {
 
             }
-        });
+        };
+
+        FollowRequest.builder()
+                .apiUrl(UNFOLLOW_PATH)
+                .screenName(screenName)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
-    public void follow(String screenName, int position, ImageView ivIsFollowingIcon) {
+    public void follow(String screenName, ImageView ivIsFollowingIcon) {
 
-        client.follow(screenName, new FollowCallback() {
+        FollowCallback callback = new FollowCallback() {
 
             @Override
             public void onFollow(User followedUser) {
@@ -106,6 +117,14 @@ public class UserViewModel {
             public void onFollowFailed() {
 
             }
-        });
+        };
+
+        FollowRequest.builder()
+                .apiUrl(FOLLOW_PATH)
+                .screenName(screenName)
+                .follow(true)
+                .callback(callback)
+                .build()
+                .execute();
     }
 }

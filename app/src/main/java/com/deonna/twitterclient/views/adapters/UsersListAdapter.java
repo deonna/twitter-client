@@ -66,9 +66,11 @@ public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         userBinding.ivIsFollowing.setOnClickListener((view) -> {
             if (user.isFollowing) {
-                userViewModel.unfollow(user.screenName, position, userBinding.ivIsFollowing);
+                userViewModel.unfollow(user.screenName, userBinding.ivIsFollowing);
+                user.isFollowing = false;
             } else {
-                userViewModel.follow(user.screenName, position, userBinding.ivIsFollowing);
+                userViewModel.follow(user.screenName, userBinding.ivIsFollowing);
+                user.isFollowing = true;
             }
         });
     }
