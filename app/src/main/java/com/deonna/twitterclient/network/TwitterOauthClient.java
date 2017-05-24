@@ -33,6 +33,8 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_CREATE_ENDPOINT;
+import static com.deonna.twitterclient.network.FavoriteRequest.FAVORITES_DESTROY_ENDPOINT;
 import static com.deonna.twitterclient.network.TimelineRequest.FAVORITES_TIMELINE_PATH;
 import static com.deonna.twitterclient.network.TimelineRequest.HOME_TIMELINE_PATH;
 import static com.deonna.twitterclient.network.TimelineRequest.MENTIONS_TIMELINE_PATH;
@@ -55,8 +57,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String KEY_SCREEN_NAME = "screen_name";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
-    public static final String FAVORITES_CREATE_ENDPOINT = "favorites/create.json";
-    public static final String FAVORITES_DESTROY_ENDPOINT = "favorites/destroy.json";
     public static final String STATUS_UPDATE_ENDPOINT = "statuses/update.json";
     public static final String KEY_ID = "id";
     public static final String KEY_STATUS = "status";
@@ -73,6 +73,15 @@ public class TwitterOauthClient extends OAuthBaseClient {
                 getApiUrl(request.getPath()),
                 request.getParams(),
                 request.getHandler()
+        );
+    }
+
+    protected void post(TwitterRequest request) {
+
+        getClient().post(
+            getApiUrl(request.getPath()),
+            request.getParams(),
+            request.getHandler()
         );
     }
 
@@ -230,41 +239,24 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void favoriteTweet(long id, FavoriteCallback callback) {
 
-        sendToFavoritesEndpoint(id, FAVORITES_CREATE_ENDPOINT, callback);
+        FavoriteRequest request = FavoriteRequest.builder()
+                .apiUrl(FAVORITES_CREATE_ENDPOINT)
+                .id(id)
+                .callback(callback)
+                .build();
 
+        request.execute();
     }
     public void unfavoriteTweet(long id, FavoriteCallback callback) {
 
-        sendToFavoritesEndpoint(id, FAVORITES_DESTROY_ENDPOINT, callback);
+        FavoriteRequest request = FavoriteRequest.builder()
+                .apiUrl(FAVORITES_DESTROY_ENDPOINT)
+                .id(id)
+                .callback(callback)
+                .build();
+
+        request.execute();
     }
-
-    private void sendToFavoritesEndpoint(long id, String url, FavoriteCallback callback) {
-
-        String apiUrl = getApiUrl(url);
-
-        RequestParams params = new RequestParams();
-        params.put(KEY_ID, id);
-
-        getClient().post(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                Tweet tweet = Tweet.fromJsonSingle(response);
-
-                callback.onFavorite(tweet);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onFavoriteFailed();
-            }
-        });
-    }
-
 
     public void retweet(long id, RetweetCallback callback) {
 
