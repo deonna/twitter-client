@@ -39,6 +39,8 @@ import static com.deonna.twitterclient.network.TimelineRequest.MENTIONS_TIMELINE
 import static com.deonna.twitterclient.network.TimelineRequest.USER_TIMELINE_PATH;
 import static com.deonna.twitterclient.network.UserInfoRequest.SHOW_USER_PATH;
 import static com.deonna.twitterclient.network.UserInfoRequest.VERIFY_CREDENTIALS_PATH;
+import static com.deonna.twitterclient.network.UsersListRequest.SHOW_FOLLOWERS_PATH;
+import static com.deonna.twitterclient.network.UsersListRequest.SHOW_FOLLOWING_PATH;
 
 public class TwitterOauthClient extends OAuthBaseClient {
 
@@ -50,20 +52,14 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     private static final String KEY_COUNT = "count";
     private static final String KEY_MAX_ID = "max_id";
-    private static final String KEY_SINCE_ID = "since_id";
-    private static final String KEY_ENTITIES = "include_entities";
     private static final String KEY_SCREEN_NAME = "screen_name";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
-    private static final int DEFAULT_SINCE_ID = 1;
     public static final String FAVORITES_CREATE_ENDPOINT = "favorites/create.json";
     public static final String FAVORITES_DESTROY_ENDPOINT = "favorites/destroy.json";
     public static final String STATUS_UPDATE_ENDPOINT = "statuses/update.json";
     public static final String KEY_ID = "id";
     public static final String KEY_STATUS = "status";
-    public static final String KEY_SKIP_STATUS = "skip_status";
-    public static final String KEY_INCLUDE_EMAIL = "include_email";
-    private static final String KEY_CURSOR = "cursor";
     private static final String KEY_TEXT = "text";
 
     public TwitterOauthClient(Context context) {
@@ -299,88 +295,26 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void getFollowersList(String screenName, Long cursor, UsersListCallback callback) {
 
-        String apiUrl = getApiUrl("followers/list.json");
+        UsersListRequest request = UsersListRequest.builder()
+                .apiUrl(SHOW_FOLLOWERS_PATH)
+                .cursor(cursor)
+                .screenName(screenName)
+                .callback(callback)
+                .build();
 
-        RequestParams params = new RequestParams();
-
-        if (cursor != null) {
-            params.put("cursor", cursor);
-        }
-
-        params.put("screen_name", screenName.toLowerCase());
-        params.put("skip_status", true);
-        params.put("include_user_entities", false);
-
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                try {
-
-                    JSONArray usersArray = response.getJSONArray("users");
-                    Long nextCursor = response.getLong("next_cursor");
-
-                    List<User> users = User.fromJsonMultiple(usersArray);
-
-                    callback.onUsersReceived(users, nextCursor);
-
-                } catch (JSONException e) {
-
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-        });
+        request.execute();
     }
 
     public void getFollowingList(String screenName, Long cursor, UsersListCallback callback) {
 
-        String apiUrl = getApiUrl("friends/list.json");
+        UsersListRequest request = UsersListRequest.builder()
+                .apiUrl(SHOW_FOLLOWING_PATH)
+                .cursor(cursor)
+                .screenName(screenName)
+                .callback(callback)
+                .build();
 
-        RequestParams params = new RequestParams();
-
-        if (cursor != null) {
-            params.put("cursor", cursor);
-        }
-
-        params.put("screen_name", screenName.toLowerCase());
-        params.put("skip_status", true);
-        params.put("include_user_entities", false);
-
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                try {
-
-                    JSONArray usersArray = response.getJSONArray("users");
-                    Long nextCursor = response.getLong("next_cursor");
-
-                    List<User> users = User.fromJsonMultiple(usersArray);
-
-                    callback.onUsersReceived(users, nextCursor);
-
-                } catch (JSONException e) {
-
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onUsersReceivedError();
-            }
-        });
+        request.execute();
     }
 
     public void getSearchResults(String hashtag, Long maxId, SearchResultsCallback callback) {
