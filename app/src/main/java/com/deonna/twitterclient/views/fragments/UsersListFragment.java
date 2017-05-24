@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.deonna.twitterclient.R;
 import com.deonna.twitterclient.databinding.FragmentUsersListBinding;
 import com.deonna.twitterclient.models.User;
 import com.deonna.twitterclient.utilities.EndlessRecyclerViewScrollListener;
+import com.deonna.twitterclient.utilities.Fonts;
 import com.deonna.twitterclient.viewmodels.UsersListViewModel;
 
 import org.parceler.Parcels;
@@ -85,5 +87,13 @@ public class UsersListFragment extends DialogFragment {
         EndlessRecyclerViewScrollListener scrollListener = usersListViewModel.initializeEndlessScrollListener(layoutManager);
 
         binding.rvUsers.addOnScrollListener(scrollListener);
+    }
+
+    protected void addStylingToTitle(String title) {
+
+        binding.tvTitle.setTypeface(Fonts.fontBold);
+        binding.tvTitle.setGravity(Gravity.CENTER);
+        binding.tvTitle.setText(title);
+        binding.tvTitle.setPadding(0, 20, 0, 20);
     }
 }

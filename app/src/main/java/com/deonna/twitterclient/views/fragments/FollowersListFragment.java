@@ -34,24 +34,15 @@ public class FollowersListFragment extends UsersListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
-        addStylingToTitle();
-
         User user = getUser();
 
         setupViewModel(new FollowersListViewModel(getActivity(), user));
 
         setupBindings(inflater, parent);
+
+        addStylingToTitle(TITLE);
         setupUsersListView();
 
         return binding.getRoot();
-    }
-
-    private void addStylingToTitle() {
-
-        TextView tvTitle = (TextView) getDialog().findViewById(android.R.id.title);
-        tvTitle.setTypeface(Fonts.fontBold);
-        tvTitle.setGravity(Gravity.CENTER);
-        tvTitle.setText(TITLE);
-        tvTitle.setPadding(0, 20, 0, 20);
     }
 }
