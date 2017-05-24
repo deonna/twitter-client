@@ -33,6 +33,13 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.deonna.twitterclient.network.TimelineRequest.FAVORITES_TIMELINE_PATH;
+import static com.deonna.twitterclient.network.TimelineRequest.HOME_TIMELINE_PATH;
+import static com.deonna.twitterclient.network.TimelineRequest.MENTIONS_TIMELINE_PATH;
+import static com.deonna.twitterclient.network.TimelineRequest.USER_TIMELINE_PATH;
+import static com.deonna.twitterclient.network.UserInfoRequest.SHOW_USER_PATH;
+import static com.deonna.twitterclient.network.UserInfoRequest.VERIFY_CREDENTIALS_PATH;
+
 public class TwitterOauthClient extends OAuthBaseClient {
 
 	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
@@ -46,11 +53,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
     private static final String KEY_SINCE_ID = "since_id";
     private static final String KEY_ENTITIES = "include_entities";
     private static final String KEY_SCREEN_NAME = "screen_name";
-
-    private static final String HOME_TIMELINE_PATH = "statuses/home_timeline.json";
-    private static final String MENTIONS_TIMELINE_PATH = "statuses/mentions_timeline.json";
-    private static final String USER_TIMELINE_PATH = "statuses/user_timeline.json";
-    private static final String FAVORITES_TIMELINE_PATH = "favorites/list.json";
 
     private static final int NUM_TWEETS_PER_FETCH = 25;
     private static final int DEFAULT_SINCE_ID = 1;
@@ -67,6 +69,15 @@ public class TwitterOauthClient extends OAuthBaseClient {
     public TwitterOauthClient(Context context) {
 
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
+    }
+
+    protected void fetch(TwitterRequest request) {
+
+        getClient().get(
+                getApiUrl(request.getPath()),
+                request.getParams(),
+                request.getHandler()
+        );
     }
 
     public void logOut() {
@@ -174,69 +185,26 @@ public class TwitterOauthClient extends OAuthBaseClient {
         request.execute();
     }
 
-    public void fetchTimeline(TwitterRequest request) {
+	public void getLoggedInUserInfo(UserInfoCallback callback) {
 
-        getClient().get(
-            getApiUrl(request.getPath()),
-            request.getParams(),
-            request.getHandler()
-        );
+        UserInfoRequest request = UserInfoRequest.builder()
+                .apiUrl(VERIFY_CREDENTIALS_PATH)
+                .skipStatus(true)
+                .callback(callback)
+                .build();
+
+        request.execute();
     }
 
-	public void getLoggedInUserInfo(UserInfoCallback callback ) {
+	public void getUserInfo(String screenName, UserInfoCallback callback) {
 
-        String apiUrl = getApiUrl("account/verify_credentials.json");
+        UserInfoRequest request = UserInfoRequest.builder()
+                .apiUrl(SHOW_USER_PATH)
+                .screenName(screenName)
+                .callback(callback)
+                .build();
 
-        RequestParams params = new RequestParams();
-        params.put(KEY_SKIP_STATUS, true);
-        params.put(KEY_INCLUDE_EMAIL, true);
-
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                User user = User.fromJsonSingle(response);
-
-                callback.onUserInfoReceived(user);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onUserInfoError();
-            }
-        });
-    }
-
-	public void getUserInfo(String screenName, UserInfoCallback callback ) {
-
-        String apiUrl = getApiUrl("users/show.json");
-
-        RequestParams params = new RequestParams();
-        params.put(KEY_SCREEN_NAME, screenName);
-        params.put(KEY_INCLUDE_EMAIL, true);
-
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                User user = User.fromJsonSingle(response);
-
-                callback.onUserInfoReceived(user);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onUserInfoError();
-            }
-        });
+        request.execute();
     }
 
     public void sendNewTweet(String newTweet, TweetSentCallback callback) {

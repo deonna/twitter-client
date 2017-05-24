@@ -15,6 +15,11 @@ import cz.msebera.android.httpclient.Header;
 
 public class TimelineRequest implements TwitterRequest {
 
+    public static final String HOME_TIMELINE_PATH = "statuses/home_timeline.json";
+    public static final String MENTIONS_TIMELINE_PATH = "statuses/mentions_timeline.json";
+    public static final String USER_TIMELINE_PATH = "statuses/user_timeline.json";
+    public static final String FAVORITES_TIMELINE_PATH = "favorites/list.json";
+
     private static final int DEFAULT_SINCE_ID = 1;
     private static final int NUM_TWEETS_PER_FETCH = 25;
 
@@ -29,7 +34,7 @@ public class TimelineRequest implements TwitterRequest {
 
     private RequestParams params;
 
-    public TimelineRequest() {
+    private TimelineRequest() {
 
         params = new RequestParams();
 
@@ -74,39 +79,39 @@ public class TimelineRequest implements TwitterRequest {
         };
     }
 
-    public void setNumTweetsPerFetch(int numTweetsPerFetch) {
+    public void execute() {
+
+        TwitterApplication.getRestClient().fetch(this);
+    }
+
+    private void setNumTweetsPerFetch(int numTweetsPerFetch) {
 
         params.put(KEY_COUNT, numTweetsPerFetch);
     }
 
-    public void setApiUrl(String apiUrl) {
+    private void setApiUrl(String apiUrl) {
 
         this.apiUrl = apiUrl;
     }
 
-    public void setScreenName(String screenName) {
+    private void setScreenName(String screenName) {
 
         params.put(KEY_SCREEN_NAME, screenName);
     }
 
-    public void setMaxId(Long maxId) {
+    private void setMaxId(Long maxId) {
 
         params.put(KEY_MAX_ID, maxId);
     }
 
-    public void setSinceId(Long sinceId) {
+    private void setSinceId(Long sinceId) {
 
         params.put(KEY_SINCE_ID, sinceId);
     }
 
-    public void setIncludeEntities(Boolean includeEntities) {
+    private void setIncludeEntities(Boolean includeEntities) {
 
         params.put(KEY_INCLUDE_ENTITIES, includeEntities);
-    }
-
-    public void execute() {
-
-        TwitterApplication.getRestClient().fetchTimeline(this);
     }
 
     /* Builder */
