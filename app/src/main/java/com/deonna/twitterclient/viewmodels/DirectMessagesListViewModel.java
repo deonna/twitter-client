@@ -33,8 +33,6 @@ public class DirectMessagesListViewModel implements ViewModel {
 
     @Override
     public void onCreate() {
-
-//        getDirectMessages();
     }
 
     public DirectMessagesAdapter getAdapter() {
@@ -42,26 +40,6 @@ public class DirectMessagesListViewModel implements ViewModel {
         return adapter;
     }
 
-//    public void getDirectMessages() {
-//
-//        client.getDirectMessages(maxId, new DirectMessagesCallback() {
-//
-//            @Override
-//            public void onDirectMessagesReceived(List<DirectMessage> messages) {
-//
-//                directMessages.addAll(messages);
-//                adapter.notifyDataSetChanged();
-//
-//                maxId = getMaxIdForNextFetch(messages);
-//            }
-//
-//            @Override
-//            public void onDirectMessagesError() {
-//
-//            }
-//        });
-//    }
-//
     protected Long getMaxIdForNextFetch(List<DirectMessage> directMessages) {
 
         if (!directMessages.isEmpty()) {

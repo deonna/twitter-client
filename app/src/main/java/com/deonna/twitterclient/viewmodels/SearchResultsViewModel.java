@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
 import com.deonna.twitterclient.events.SearchResultsCallback;
+import com.deonna.twitterclient.network.requests.SearchResultsRequest;
 import com.deonna.twitterclient.views.fragments.TweetsListFragment;
 import com.deonna.twitterclient.models.Tweet;
 
@@ -25,7 +26,7 @@ public class SearchResultsViewModel extends TweetsTimelineViewModel {
 
     public void getSearchResults() {
 
-        client.getSearchResults(searchTerm, null, new SearchResultsCallback() {
+        SearchResultsCallback callback = new SearchResultsCallback() {
 
             @Override
             public void onSearchResultsReceived(List<Tweet> results) {
@@ -42,13 +43,20 @@ public class SearchResultsViewModel extends TweetsTimelineViewModel {
             public void onSearchResultsError() {
 
             }
-        });
+        };
+
+        SearchResultsRequest.builder()
+                .maxId(maxId)
+                .query(searchTerm)
+                .callback(callback)
+                .build()
+                .execute();
     }
 
     @Override
     protected void getNextOldestTweets() {
 
-        client.getSearchResults(searchTerm, maxId, new SearchResultsCallback() {
+        SearchResultsCallback callback = new SearchResultsCallback() {
 
             @Override
             public void onSearchResultsReceived(List<Tweet> results) {
@@ -63,6 +71,13 @@ public class SearchResultsViewModel extends TweetsTimelineViewModel {
             public void onSearchResultsError() {
 
             }
-        });
+        };
+
+        SearchResultsRequest.builder()
+                .maxId(maxId)
+                .query(searchTerm)
+                .callback(callback)
+                .build()
+                .execute();
     }
 }

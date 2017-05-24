@@ -4,23 +4,10 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.deonna.twitterclient.BuildConfig;
-import com.deonna.twitterclient.events.RetweetCallback;
-import com.deonna.twitterclient.events.SearchResultsCallback;
-import com.deonna.twitterclient.models.Tweet;
-import com.deonna.twitterclient.network.requests.RetweetRequest;
 import com.deonna.twitterclient.network.requests.TwitterRequest;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
-
-import java.util.List;
-
-import cz.msebera.android.httpclient.Header;
 
 public class TwitterOauthClient extends OAuthBaseClient {
 
@@ -29,11 +16,6 @@ public class TwitterOauthClient extends OAuthBaseClient {
 	public static final String REST_CONSUMER_KEY = BuildConfig.API_KEY;       // Change this
 	public static final String REST_CONSUMER_SECRET = BuildConfig.API_SECRET; // Change this
 	public static final String REST_CALLBACK_URL = "oauth://deonnatwitterclient"; // Change this (here and in manifest)
-
-    private static final String KEY_COUNT = "count";
-    private static final String KEY_MAX_ID = "max_id";
-
-    private static final int NUM_TWEETS_PER_FETCH = 25;
 
     public TwitterOauthClient(Context context) {
 
@@ -60,45 +42,5 @@ public class TwitterOauthClient extends OAuthBaseClient {
 
     public void logOut() {
         super.clearAccessToken();
-    }
-
-    public void getSearchResults(String hashtag, Long maxId, SearchResultsCallback callback) {
-
-        String apiUrl = getApiUrl("search/tweets.json");
-
-        RequestParams params = new RequestParams();
-        params.put("q", hashtag);
-        params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
-
-        if (maxId != null) {
-            params.put(KEY_MAX_ID, maxId);
-        }
-
-        getClient().get(apiUrl, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                try {
-
-                    JSONArray tweetsArray = response.getJSONArray("statuses");
-
-                    List<Tweet> tweets = Tweet.fromJsonMultiple(tweetsArray);
-
-                    callback.onSearchResultsReceived(tweets);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                callback.onSearchResultsError();
-            }
-        });
     }
 }

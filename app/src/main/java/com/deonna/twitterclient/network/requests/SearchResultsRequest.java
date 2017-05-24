@@ -1,37 +1,40 @@
 package com.deonna.twitterclient.network.requests;
 
-import com.deonna.twitterclient.events.DirectMessagesCallback;
-import com.deonna.twitterclient.models.DirectMessage;
+import com.deonna.twitterclient.events.SearchResultsCallback;
+import com.deonna.twitterclient.models.Tweet;
 import com.deonna.twitterclient.utilities.TwitterApplication;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class DirectMessagesRequest implements TwitterRequest {
+public class SearchResultsRequest implements TwitterRequest {
 
-    public static final int NUM_TWEETS_PER_FETCH = 25;
+    private static final String KEY_COUNT = "count";
+    private static final String KEY_MAX_ID = "max_id";
+    private static final String KEY_QUERY = "q";
 
-    public static final String KEY_MAX_ID = "max_id";
-    public static final String KEY_COUNT = "count";
+    private static final int NUM_TWEETS_PER_FETCH = 25;
 
-    public static final String RECIEVED_DIRECT_MESSAGES_PATH = "direct_messages.json";
-    public static final String SENT_DIRECT_MESSAGES_PATH = "direct_messages/sent.json";
+    public static final String SEARCH_PATH = "search/tweets.json";
 
     private String apiUrl;
-    private DirectMessagesCallback callback;
+    private SearchResultsCallback callback;
 
     private RequestParams params;
 
-    private DirectMessagesRequest() {
+    private SearchResultsRequest() {
 
         params = new RequestParams();
         params.put(KEY_COUNT, NUM_TWEETS_PER_FETCH);
+
+        apiUrl = SEARCH_PATH;
     }
 
     @Override
@@ -52,24 +55,29 @@ public class DirectMessagesRequest implements TwitterRequest {
         return new JsonHttpResponseHandler() {
 
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                List<DirectMessage> directMessages = DirectMessage.fromJsonMultiple(response);
+                try {
 
-                callback.onDirectMessagesReceived(directMessages);
+                    JSONArray tweetsArray = response.getJSONArray("statuses");
+
+                    List<Tweet> tweets = Tweet.fromJsonMultiple(tweetsArray);
+
+                    callback.onSearchResultsReceived(tweets);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
 
-                callback.onDirectMessagesError();
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+
+                callback.onSearchResultsError();
             }
         };
-    }
-
-    private void setApiUrl(String apiUrl) {
-
-        this.apiUrl = apiUrl;
     }
 
     private void setMaxId(Long maxId) {
@@ -78,6 +86,11 @@ public class DirectMessagesRequest implements TwitterRequest {
             params.remove(KEY_MAX_ID);
             params.put(KEY_MAX_ID, maxId);
         }
+    }
+
+    private void setQuery(String query) {
+
+        params.put(KEY_QUERY, query);
     }
 
     public void execute() {
@@ -89,16 +102,16 @@ public class DirectMessagesRequest implements TwitterRequest {
 
     public static Builder builder() {
 
-        return new DirectMessagesRequest.Builder();
+        return new SearchResultsRequest.Builder();
     }
 
     public static class Builder {
 
-        private DirectMessagesRequest request = new DirectMessagesRequest();
+        private SearchResultsRequest request = new SearchResultsRequest();
 
-        public Builder apiUrl(String apiUrl) {
+        public Builder query(String query) {
 
-            request.setApiUrl(apiUrl);
+            request.setQuery(query);
 
             return this;
         }
@@ -110,14 +123,14 @@ public class DirectMessagesRequest implements TwitterRequest {
             return this;
         }
 
-        public Builder callback(DirectMessagesCallback callback) {
+        public Builder callback(SearchResultsCallback callback) {
 
             request.callback = callback;
 
             return this;
         }
 
-        public DirectMessagesRequest build() {
+        public SearchResultsRequest build() {
 
             return request;
         }

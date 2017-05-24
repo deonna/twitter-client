@@ -102,6 +102,7 @@ public class TimelineRequest implements TwitterRequest {
 
     private void setMaxId(Long maxId) {
 
+        params.remove(KEY_MAX_ID);
         params.put(KEY_MAX_ID, maxId);
     }
 
